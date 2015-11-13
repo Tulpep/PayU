@@ -1,0 +1,10 @@
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.exe.config
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.exe
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.pdb
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Tulpep.PayU.Library.dll
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Newtonsoft.Json.dll
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Tulpep.PayU.Library.pdb
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\bin\Debug\Newtonsoft.Json.xml
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.csprojResolveAssemblyReference.cache
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.exe
+C:\Users\JuanHernandez\documents\visual studio 2015\Projects\Tulpep.PayU.Library\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.pdb
