@@ -1,4 +1,5 @@
 ﻿using System;
+using Tulpep.PayU.Library.Models.Request.Cross;
 
 namespace Tulpep.PayU.Library.Models.Request.PayUPayments.CreditCard
 {
