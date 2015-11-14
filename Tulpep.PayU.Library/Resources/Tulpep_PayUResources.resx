@@ -136,18 +136,21 @@
     <value>500238</value>
   </data>
   <data name="APIKey" xml:space="preserve">
-    <value>0kzhe907m8jE0nInkJwgZpAA2W</value>
+    <value>5ck1kmok44ko09lqnni384ev58</value>
   </data>
   <data name="APILogin" xml:space="preserve">
-    <value>jdX6oONZO8485i1</value>
+    <value>6bf6d64e593f136</value>
   </data>
   <data name="AccountId" xml:space="preserve">
-    <value>551311</value>
+    <value>510410</value>
   </data>
   <data name="DefaultProductionPaymentsConnectionUrl" xml:space="preserve">
     <value>https://api.payulatam.com/payments-api/4.0/service.cgi</value>
   </data>
   <data name="DefaultTestPaymentsConnectionUrl" xml:space="preserve">
     <value>https://184.72.122.69/payments-api/4.0/service.cgi</value>
+  </data>
+  <data name="MerchantId" xml:space="preserve">
+    <value>509269</value>
   </data>
 </root>

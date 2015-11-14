@@ -22,14 +22,14 @@ namespace Tulpep.PayU.Library.Services
             {
                 var jsonObject = new RootPayUPaymentCreditCardRequest()
                 {
-                    command = "SUBMIT_TRANSACTION",
-                    language = "es",
+                    command = Constants.SUBMIT_TRANSACTION,
+                    language = Constants.es,
                     merchant = new Merchant()
                     {
-                        apiKey = rm.GetString(Constants.TestAPIKey),
-                        apiLogin = rm.GetString(Constants.TestAPILogin)
+                        apiKey = rm.GetString(Constants.APIKey),
+                        apiLogin = rm.GetString(Constants.APILogin)
                     },
-                    test = true,
+                    test = false,
                     transaction = new Transaction()
                     {
                         cookie = "pt1t38347bs6jc9ruv2ecpv7o2",
@@ -48,7 +48,7 @@ namespace Tulpep.PayU.Library.Services
                         ipAddress = "127.0.0.1",
                         order = new Order()
                         {
-                            accountId = int.Parse(rm.GetString(Constants.TestAccountId)),
+                            accountId = int.Parse(rm.GetString(Constants.AccountId)),
                             additionalValues = new AdditionalValues()
                             {
                                 TX_VALUE = new TXVALUE()
@@ -76,10 +76,11 @@ namespace Tulpep.PayU.Library.Services
                                 }
                             },
                             description = "payment test",
-                            language = "es",
+                            language = Constants.es,
                             notifyUrl = "http://www.tes.com/confirmation",
                             referenceCode = "payment_test_00000001",
-                            signature = "82c8f95480266da7fae0e84312b67a69",
+                            signature = CreateSignature.GenerateHash(rm.GetString(Constants.APIKey)+"~"+rm.GetString(Constants.MerchantId)+
+                            "~payment_test_00000001~10000~COP", "Payment"),
                             shippingAddress = new Address()
                             {
                                 street1 = "Viamonte",
@@ -90,7 +91,29 @@ namespace Tulpep.PayU.Library.Services
                                 postalCode = "000000",
                                 state = "Antioquia"
                             }
-                        }
+                        },
+                        payer = new Payer()
+                        {
+                            billingAddress = new Address()
+                            {
+                                city = "Bogota",
+                                country = "CO",
+                                phone = "7563126",
+                                postalCode = "000000",
+                                state = "Bogota DC",
+                                street1 = "calle 93",
+                                street2 = "125544"
+                            },
+                            contactPhone = "7563126",
+                            dniNumber= "5415668464654",
+                            emailAddress = "payer_test@test.com",
+                            fullName = "First name and second payer name",
+                            merchantPayerId = "1"
+                        },
+                        paymentCountry = "CO",
+                        paymentMethod = "VISA",
+                        type = Constants.AUTHORIZATION_AND_CAPTURE,
+                        userAgent = "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0"
                     }
                 };
 
@@ -98,10 +121,11 @@ namespace Tulpep.PayU.Library.Services
                 try
                 {
                     // Create an HttpClient instance 
-                    var client = new HttpClient(new HttpClientHandler
-                    {
-                        ClientCertificateOptions = ClientCertificateOption.Automatic
-                    });
+                    //var client = new HttpClient(new HttpClientHandler
+                    //{
+                    //    ClientCertificateOptions = ClientCertificateOption.Automatic
+                    //});
+                    var client = new HttpClient();
                     client.BaseAddress = new Uri(rm.GetString(Constants.DefaultProductionPaymentsConnectionUrl));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));

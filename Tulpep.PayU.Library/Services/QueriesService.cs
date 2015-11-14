@@ -16,14 +16,14 @@ namespace Tulpep.PayU.Library.Services
         public bool pingPayU()
         {
             ResourceManager rm = new ResourceManager(typeof(Resources.Tulpep_PayUResources));
-            var url = rm.GetString(Constants.DefaultTestQueriesConnectionUrl);
+            var url = rm.GetString(Constants.DefaultProductionQueriesConnectionUrl);
             if (url != null)
             {
                 var query = new RootPayUQueriesPingRequest()
                 {
                     test = true,
-                    language = "es",
-                    command = "PING",
+                    language = Constants.es,
+                    command = Constants.PING,
                     merchant = new Merchant()
                     {
                         apiKey = rm.GetString(Constants.APIKey),
@@ -45,7 +45,7 @@ namespace Tulpep.PayU.Library.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string res = response.Content.ReadAsStringAsync().Result;
-                        var des = JsonConvert.DeserializeObject<RootPayUQueriesPingResponse>(res);
+                        RootPayUQueriesPingResponse des = JsonConvert.DeserializeObject<RootPayUQueriesPingResponse>(res);
                         if (des.code.Equals("SUCCESS"))
                         {
                             return true;

@@ -1,6 +1,6 @@
 ﻿namespace Tulpep.PayU.Library.Models.Request.Tokenization.QueriesWithApi
 {
-    class CreditCardTokenInformation
+    public class CreditCardTokenInformation
     {
         public string payerId { get; set; }
         public string creditCardTokenId { get; set; }

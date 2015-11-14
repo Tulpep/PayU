@@ -19,7 +19,7 @@ namespace Tulpep.PayU.Library.Models.Request.PayUPayments.Cash
             }
             set
             {
-                if (value.Length == 32)
+                if (value.Length < 32)
                 {
                     Type = value;
                 }
@@ -40,7 +40,7 @@ namespace Tulpep.PayU.Library.Models.Request.PayUPayments.Cash
             }
             set
             {
-                if (value.Length == 32)
+                if (value.Length < 32)
                 {
                     PaymentMethod = value;
                 }

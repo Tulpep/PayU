@@ -15,7 +15,7 @@ namespace Tulpep.PayU.Library.Models.Request.PayUPayments.BankTransfer
             }
             set
             {
-                if (value.Length == 32)
+                if (value.Length < 32)
                 {
                     PaymentMethod = value;
                 }

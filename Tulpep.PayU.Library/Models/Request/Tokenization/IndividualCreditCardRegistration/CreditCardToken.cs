@@ -78,7 +78,7 @@ namespace Tulpep.PayU.Library.Models.Request.Tokenization.IndividualCreditCardRe
             }
             set
             {
-                if (value.Length == 32)
+                if (value.Length < 32)
                 {
                     PaymentMethod = value;
                 }

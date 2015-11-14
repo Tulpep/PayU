@@ -61,7 +61,7 @@ namespace Tulpep.PayU.Library.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 551311.
+        ///   Looks up a localized string similar to 510410.
         /// </summary>
         internal static string AccountId {
             get {
@@ -70,7 +70,7 @@ namespace Tulpep.PayU.Library.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0kzhe907m8jE0nInkJwgZpAA2W.
+        ///   Looks up a localized string similar to 5ck1kmok44ko09lqnni384ev58.
         /// </summary>
         internal static string APIKey {
             get {
@@ -79,7 +79,7 @@ namespace Tulpep.PayU.Library.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to jdX6oONZO8485i1.
+        ///   Looks up a localized string similar to 6bf6d64e593f136.
         /// </summary>
         internal static string APILogin {
             get {
@@ -120,6 +120,15 @@ namespace Tulpep.PayU.Library.Resources {
         internal static string DefaultTestQueriesConnectionUrl {
             get {
                 return ResourceManager.GetString("DefaultTestQueriesConnectionUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 509269.
+        /// </summary>
+        internal static string MerchantId {
+            get {
+                return ResourceManager.GetString("MerchantId", resourceCulture);
             }
         }
         
