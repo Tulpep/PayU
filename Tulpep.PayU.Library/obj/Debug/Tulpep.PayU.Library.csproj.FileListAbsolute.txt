@@ -48,3 +48,26 @@ C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayU.Library\bin\Debug\Validation.dll
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayU.Library\bin\Debug\PCLCrypto.xml
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayU.Library\bin\Debug\Validation.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\Tulpep.PayU.Library.dll.config
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\Tulpep.PayU.Library.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\Tulpep.PayU.Library.pdb
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\Newtonsoft.Json.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.IO.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.Extensions.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.Primitives.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Runtime.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Threading.Tasks.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\Newtonsoft.Json.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.IO.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.Extensions.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Net.Http.Primitives.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Runtime.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\bin\Debug\System.Threading.Tasks.xml
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.csproj.App.config
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.csprojResolveAssemblyReference.cache
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.Resources.Tulpep_PayUResources.resources
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.csproj.GenerateResource.Cache
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.dll
+E:\Tulpep\PayU\Tulpep.PayU.Library\obj\Debug\Tulpep.PayU.Library.pdb

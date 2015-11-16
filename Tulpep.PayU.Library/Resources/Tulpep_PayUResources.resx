@@ -121,7 +121,7 @@
     <value>https://api.payulatam.com/reports-api/4.0/service.cgi</value>
   </data>
   <data name="DefaultTestQueriesConnectionUrl" xml:space="preserve">
-    <value>https://184.72.122.69/reports-api/4.0/service.cgi</value>
+    <value>https://stg.api.payulatam.com/reports-api/4.0/service.cgi</value>
   </data>
   <data name="TestAccountId" xml:space="preserve">
     <value>500538</value>
@@ -148,7 +148,7 @@
     <value>https://api.payulatam.com/payments-api/4.0/service.cgi</value>
   </data>
   <data name="DefaultTestPaymentsConnectionUrl" xml:space="preserve">
-    <value>https://184.72.122.69/payments-api/4.0/service.cgi</value>
+    <value>https://stg.api.payulatam.com/payments-api/4.0/service.cgi</value>
   </data>
   <data name="MerchantId" xml:space="preserve">
     <value>509269</value>

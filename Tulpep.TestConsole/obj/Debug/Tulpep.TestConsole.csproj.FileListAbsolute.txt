@@ -22,3 +22,13 @@ C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.TestConsole\bin\Debug\Validation.dll
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.TestConsole\bin\Debug\PCLCrypto.xml
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.TestConsole\bin\Debug\Validation.xml
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.exe.config
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.exe
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Tulpep.TestConsole.pdb
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Tulpep.PayU.Library.dll
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Newtonsoft.Json.dll
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Tulpep.PayU.Library.pdb
+E:\Tulpep\PayU\Tulpep.TestConsole\bin\Debug\Newtonsoft.Json.xml
+E:\Tulpep\PayU\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.csprojResolveAssemblyReference.cache
+E:\Tulpep\PayU\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.exe
+E:\Tulpep\PayU\Tulpep.TestConsole\obj\Debug\Tulpep.TestConsole.pdb

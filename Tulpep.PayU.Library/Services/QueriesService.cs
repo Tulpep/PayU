@@ -16,7 +16,7 @@ namespace Tulpep.PayU.Library.Services
         public bool pingPayU()
         {
             ResourceManager rm = new ResourceManager(typeof(Resources.Tulpep_PayUResources));
-            var url = rm.GetString(Constants.DefaultProductionQueriesConnectionUrl);
+            var url = rm.GetString(Constants.DefaultTestQueriesConnectionUrl);
             if (url != null)
             {
                 var query = new RootPayUQueriesPingRequest()
@@ -36,7 +36,7 @@ namespace Tulpep.PayU.Library.Services
                 {
                     // Create an HttpClient instance 
                     var client = new HttpClient();
-                    client.BaseAddress = new Uri(rm.GetString(Constants.DefaultProductionQueriesConnectionUrl));
+                    client.BaseAddress = new Uri(rm.GetString(Constants.DefaultTestQueriesConnectionUrl));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));
                     client.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue("es"));

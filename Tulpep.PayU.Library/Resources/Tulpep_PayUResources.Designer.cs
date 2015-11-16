@@ -106,7 +106,7 @@ namespace Tulpep.PayU.Library.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://184.72.122.69/payments-api/4.0/service.cgi.
+        ///   Looks up a localized string similar to https://stg.api.payulatam.com/payments-api/4.0/service.cgi.
         /// </summary>
         internal static string DefaultTestPaymentsConnectionUrl {
             get {
@@ -115,7 +115,7 @@ namespace Tulpep.PayU.Library.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://184.72.122.69/reports-api/4.0/service.cgi.
+        ///   Looks up a localized string similar to https://stg.api.payulatam.com/reports-api/4.0/service.cgi.
         /// </summary>
         internal static string DefaultTestQueriesConnectionUrl {
             get {
