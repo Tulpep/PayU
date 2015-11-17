@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F545D679-B702-4FAC-A88A-B1C399584600}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tulpep.PayULibrary</RootNamespace>
+    <AssemblyName>Tulpep.PayULibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cross\Address.cs" />
+    <Compile Include="Cross\Constants.cs" />
+    <Compile Include="Cross\Merchant.cs" />
+    <Compile Include="Models\Request\Request_Cross\Request_AdditionalValues.cs" />
+    <Compile Include="Models\Request\Request_Cross\Request_ExtraParameters.cs" />
+    <Compile Include="Models\Request\Request_Cross\Request_TXTAX.cs" />
+    <Compile Include="Models\Request\Request_Cross\Request_TXTAXRETURNBASE.cs" />
+    <Compile Include="Models\Request\Request_Cross\Request_TXVALUE.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_BankListInformation.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Buyer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Order.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Payer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\RootPayUPaymentBankListRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\RootPayUPaymentBankTransferRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Transaction.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_AdditionalValue.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_AdditionalValues.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_Entry.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_Order.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_Payer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\RootPayUPaymentBankRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Bank\Request_Bank_Transaction.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Cash\Request_Cash_Buyer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Cash\Request_Cash_Order.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Cash\RootPayUPaymentCashRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\Cash\Request_Cash_Transaction.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\Request_CreditCard_Buyer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\Request_CreditCard_CreditCard.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\Request_CreditCard_Order.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\Request_CreditCard_Payer.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\RootPayUPaymentCreditCardRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\CreditCard\Request_CreditCard_Transaction.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\Ping\RootPayUQueriesPingRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\QueryOrderByIdentifier\Request_QueryOrderByIdentifier_Details.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\QueryOrderByIdentifier\RootPayUQueryOrderByIdRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\QueryOrderByReference\Request_QueryOrderByReference_Details.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\QueryOrderByReference\RootPayUQueryOrderByRefRequest.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\TransactionResponseQuery\Request_TransactionResponseQuery_Details.cs" />
+    <Compile Include="Models\Request\Request_PayUQueries\TransactionResponseQuery\RootPayUTransactionResponseQueryRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Creation\RootPayUPlanCreationRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Creation\Request_Plan_Creation_AdditionalValue.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Update\Request_Plan_Update_AdditionalValue.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Update\RootPayUPlanUpdateRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualCreditCardRegistration\Request_IndividualCreditCardRegistration_CreditCardToken.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualCreditCardRegistration\RootPayUIndividualCreditCardRegistrationRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\Request_IndividualPaymentWithToken_Buyer.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\Request_IndividualPaymentWithToken_Order.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\Request_IndividualPaymentWithToken_Payer.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\RootPayUIndividualPaymentWithTokenRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\Request_IndividualPaymentWithToken_Transaction.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\MassiveCreditCardRegistration\RootPayUMassiveCreditCardRegistrationRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\MassivePaymentsWithToken\RootPayUMassivePaymentsWithTokenRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\QueriesWithApi\Request_QueriesWithApi_CreditCardTokenInformation.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\QueriesWithApi\RootPayUQueriesWithApiRequest.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\TokenRemoval\Request_TokenRemoval_RemoveCreditCardToken.cs" />
+    <Compile Include="Models\Request\Request_Tokenization\TokenRemoval\RootPayUTokenRemovalRequest.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_AdditionalValues.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_Entry.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_ExtraParameters.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMADDITIONALVALUE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMADMINISTRATIVEFEE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMNETWORKVALUE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMTAX.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMTAXADMINISTRATIVEFEE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMTAXADMINISTRATIVEFEERETURNBASE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMTAXRETURNBASE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_PMVALUE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXADDITIONALVALUE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXADMINISTRATIVEFEE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXNETWORKVALUE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXTAX.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXTAXADMINISTRATIVEFEE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXTAXADMINISTRATIVEFEERETURNBASE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXTAXRETURNBASE.cs" />
+    <Compile Include="Models\Response\Response_Cross\Response_TXVALUE.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\Response_BankTransfer_Bank.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\RootPayUPaymentBankListResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\RootPayUPaymentBankTransferResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\Response_BankTransfer_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\Bank\RootPayUPaymentBankResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\Bank\Response_Bank_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\Cash\RootPayUPaymentCashResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\Cash\Response_Cash_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\CreditCard\RootPayUPaymentCreditCardResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\CreditCard\Response_CreditCard_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\Ping\RootPayUQueriesPingResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Buyer.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_CreditCard.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Payer.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Payload.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Result.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\RootPayUQueryOrderByIdResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Transaction.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_Buyer.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_CreditCard.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_Payer.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_Payload.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_Result.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\RootPayUQueryOrderByRefResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_Transaction.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByReference\Response_QueryOrderByReference_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Payload.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Result.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\RootPayUTransactionResponseQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\IndividualCreditCardRegistration\Response_IndividualCreditCardRegistration_CreditCardToken.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\IndividualCreditCardRegistration\RootPayUIndividualCreditCardRegistrationResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\IndividualPaymentWithToken\RootPayUIndividualPaymentWithTokenResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\IndividualPaymentWithToken\Response_IndividualPaymentWithToken_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\MassiveCreditCardRegistration\RootPayUMassiveCreditCardRegistrationResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\MassivePaymentsWithToken\RootPayUMassivePaymentsWithTokenResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\QueriesWithApi\Response_QueriesWithApi_CreditCardTokenList.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\QueriesWithApi\RootPayUQueriesWithApiResponse.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\TokenRemoval\Response_TokenRemoval_CreditCardToken.cs" />
+    <Compile Include="Models\Response\Response_Tokenization\TokenRemoval\RootPayUTokenRemovalResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PaymentsService\PaymentsService.cs" />
+    <Compile Include="Services\ServicesHelpers\MD5Helper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="_CreateNewNuGetPackage\Config.ps1" />
+    <None Include="_CreateNewNuGetPackage\DoNotModify\CreateNuGetPackage.ps1" />
+    <None Include="_CreateNewNuGetPackage\DoNotModify\New-NuGetPackage.ps1" />
+    <None Include="_CreateNewNuGetPackage\DoNotModify\UploadNuGetPackage.ps1" />
+    <None Include="_CreateNewNuGetPackage\RunMeToUploadNuGetPackage.cmd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM Create a NuGet package for this project and place the .nupkg file in the project's output directory.
+REM If you see this in Visual Studio's Error List window, check the Output window's Build tab for the actual error.
+ECHO Creating NuGet package in Post-Build event...
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "&amp; '$(ProjectDir)_CreateNewNuGetPackage\DoNotModify\CreateNuGetPackage.ps1' -ProjectFilePath '$(ProjectPath)' -OutputDirectory '$(TargetDir)' -BuildConfiguration '$(ConfigurationName)' -BuildPlatform '$(PlatformName)'"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
