@@ -2,7 +2,7 @@
 {
     public class Response_PMTAX
     {
-        public int value { get; set; }
+        public double value { get; set; }
         public string currency { get; set; }
     }
 }

@@ -32,11 +32,15 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             req.Accept = "application/json";
             req.Method = httpMethod.ToString();
 
-            byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
-            req.ContentLength = bytes.Length;
-            System.IO.Stream os = req.GetRequestStream();
-            os.Write(bytes, 0, bytes.Length);
-            os.Close();
+            if (httpMethod == HttpMethod.POST)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
+                req.ContentLength = bytes.Length;
+                System.IO.Stream os = req.GetRequestStream();
+                os.Write(bytes, 0, bytes.Length);
+                os.Close();
+            }
+            
             return (HttpWebResponse)req.GetResponse();
         }
     }

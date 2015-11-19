@@ -2,7 +2,7 @@
 {
     public class Response_TXNETWORKVALUE
     {
-        public int value { get; set; }
+        public double value { get; set; }
         public string currency { get; set; }
     }
 }

@@ -15,13 +15,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 101)
+                if (value != null)
                 {
-                    Street1 = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of street1 is 100 MIN 1");
+                    if (value.Length > 0 && value.Length < 101)
+                    {
+                        Street1 = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of street1 is 100 MIN 1");
+                    }
                 }
             }
         }
@@ -36,13 +39,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 101)
+                if (value != null)
                 {
-                    Street2 = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of street2 is 100 MIN 1");
+                    if (value.Length > 0 && value.Length < 101)
+                    {
+                        Street2 = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of street2 is 100 MIN 1");
+                    }
                 }
             }
         }
@@ -57,13 +63,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 51)
+                if (value != null)
                 {
-                    City = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of city is 50 MIN 1");
+                    if (value.Length > 0 && value.Length < 51)
+                    {
+                        City = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of city is 50 MIN 1");
+                    }
                 }
             }
         }
@@ -79,13 +88,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 41)
+                if (value != null)
                 {
-                    State = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of state is 40 MIN 1");
+                    if (value.Length > 0 && value.Length < 41)
+                    {
+                        State = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of state is 40 MIN 1");
+                    }
                 }
             }
         }
@@ -100,13 +112,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length == 2)
+                if (value != null)
                 {
-                    Country = value;
-                }
-                else
-                {
-                    throw new Exception("The length of country is 2");
+                    if (value.Length == 2)
+                    {
+                        Country = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The length of country is 2");
+                    }
                 }
             }
         }
@@ -121,13 +136,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 9)
+                if (value != null)
                 {
-                    PostalCode = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of postalCode is 8 MIN 1");
+                    if (value.Length > 0 && value.Length < 9)
+                    {
+                        PostalCode = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of postalCode is 8 MIN 1");
+                    }
                 }
             }
         }
@@ -142,13 +160,16 @@ namespace Tulpep.PayULibrary.Cross
             }
             set
             {
-                if (value.Length > 0 && value.Length < 12)
+                if (value != null)
                 {
-                    Phone = value;
-                }
-                else
-                {
-                    throw new Exception("The MAX length of phone is 11 MIN 1");
+                    if (value.Length > 0 && value.Length < 12)
+                    {
+                        Phone = value;
+                    }
+                    else
+                    {
+                        throw new Exception("The MAX length of phone is 11 MIN 1");
+                    }
                 }
             }
         }

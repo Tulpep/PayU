@@ -12,7 +12,7 @@ using Tulpep.PayULibrary.Services.ServicesHelpers;
 
 namespace Tulpep.PayULibrary.Services.PaymentsService
 {
-    public class PaymentsService
+    public static class PaymentsService
     {
         /// <summary>
         /// 
@@ -43,7 +43,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguaje, string productionOrTestApiKey,
+        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguaje, string productionOrTestApiKey,
             string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId, Request_CreditCard_CreditCard pCreditCard,
             Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer, Address pOrderShippingAddress, Request_CreditCard_Payer pPayer,
             Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
@@ -144,7 +144,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pPaymentMethod"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguaje,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod,
             string productionOrTestUrl)
         {
