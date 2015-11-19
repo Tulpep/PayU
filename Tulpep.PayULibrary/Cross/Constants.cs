@@ -284,15 +284,15 @@
         ///<summary>
         ///English
         ///</summary>
-        public const string en = "en";
+        public const string LANGUAGE_EN = "en";
         ///<summary>
         ///Spanish
         ///</summary>
-        public const string es = "es";
+        public const string LANGUAGE_ES = "es";
         ///<summary>
         ///Portuguese
         ///</summary>
-        public const string pt = "pt";
+        public const string LANGUAGE_PT = "pt";
         #endregion
 
         #region  Payment method
@@ -301,175 +301,175 @@
         ///. Panama
         ///Only VISA MASTERCARD
         ///</summary>
-        public const string VISA = "VISA";
+        public const string PAYMENT_METHOD_VISA = "VISA";
         ///<summary>
         ///Common for all countries
         ///. Panama
         ///Only VISA MASTERCARD
         ///</summary>
-        public const string MASTERCARD = "MASTERCARD";
+        public const string PAYMENT_METHOD_MASTERCARD = "MASTERCARD";
         ///<summary>
         ///Common
         ///</summary>
-        public const string AMEX = "AMEX";
+        public const string PAYMENT_METHOD_AMEX = "AMEX";
         ///<summary>
         ///Common 
         ///</summary>
-        public const string DINERS = "DINERS";
+        public const string PAYMENT_METHOD_DINERS = "DINERS";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string PAGOFACIL = "PAGOFACIL";
+        public const string PAYMENT_METHOD_PAGOFACIL = "PAGOFACIL";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string CABAL = "CABAL";
+        public const string PAYMENT_METHOD_CABAL = "CABAL";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string NARANJA = "NARANJA";
+        public const string PAYMENT_METHOD_NARANJA = "NARANJA";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string SHOPPING = "SHOPPING";
+        public const string PAYMENT_METHOD_SHOPPING = "SHOPPING";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string COBRO_EXPRESS = "COBRO_EXPRESS";
+        public const string PAYMENT_METHOD_COBRO_EXPRESS = "COBRO_EXPRESS";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string RAPIPAGO = "RAPIPAGO";
+        public const string PAYMENT_METHOD_RAPIPAGO = "RAPIPAGO";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string CENCOSUD = "CENCOSUD";
+        public const string PAYMENT_METHOD_CENCOSUD = "CENCOSUD";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string ARGENCARD = "ARGENCARD";
+        public const string PAYMENT_METHOD_ARGENCARD = "ARGENCARD";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string BAPRO = "BAPRO";
+        public const string PAYMENT_METHOD_BAPRO = "BAPRO";
         ///<summary>
         ///Argentina
         ///</summary>
-        public const string RIPSA = "RIPSA";
+        public const string PAYMENT_METHOD_RIPSA = "RIPSA";
         ///<summary>
         /// Brazil
         ///</summary>
-        public const string BOLETO_BANCARIO = "BOLETO_BANCARIO";
+        public const string PAYMENT_METHOD_BOLETO_BANCARIO = "BOLETO_BANCARIO";
         ///<summary>
         /// Brazil
         ///</summary>
-        public const string ELO = "ELO";
+        public const string PAYMENT_METHOD_ELO = "ELO";
         ///<summary>
         /// Brazil
         ///</summary>
-        public const string HIPERCARD = "HIPERCARD";
+        public const string PAYMENT_METHOD_HIPERCARD = "HIPERCARD";
         ///<summary>
         ///Chile
         ///</summary>
-        public const string TRANSBANK = "TRANSBANK";
+        public const string PAYMENT_METHOD_TRANSBANK = "TRANSBANK";
         ///<summary>
         /// Colombia
         ///</summary>
-        public const string BALOTO = "BALOTO";
+        public const string PAYMENT_METHOD_BALOTO = "BALOTO";
         ///<summary>
         /// Colombia
         ///</summary>
-        public const string BANK_REFERENCED = "BANK_REFERENCED";
+        public const string PAYMENT_METHOD_BANK_REFERENCED = "BANK_REFERENCED";
         ///<summary>
         /// Colombia
         ///</summary>
-        public const string PSE = "PSE";
+        public const string PAYMENT_METHOD_PSE = "PSE";
         ///<summary>
         /// Colombia
         ///</summary>
-        public const string EFECTY = "EFECTY";
+        public const string PAYMENT_METHOD_EFECTY = "EFECTY";
         ///<summary>
         /// México
         ///</summary>
-        public const string SANTANDER = "SANTANDER";
+        public const string PAYMENT_METHOD_SANTANDER = "SANTANDER";
         ///<summary>
         /// México
         ///</summary>
-        public const string BANCOMER = "BANCOMER";
+        public const string PAYMENT_METHOD_BANCOMER = "BANCOMER";
         ///<summary>
         /// México
         ///</summary>
-        public const string IXE = "IXE";
+        public const string PAYMENT_METHOD_IXE = "IXE";
         ///<summary>
         /// México
         ///</summary>
-        public const string SCOTIABANK = "SCOTIABANK";
+        public const string PAYMENT_METHOD_SCOTIABANK = "SCOTIABANK";
         ///<summary>
         /// México
         ///</summary>
-        public const string BANAMEX = "BANAMEX";
+        public const string PAYMENT_METHOD_BANAMEX = "BANAMEX";
         ///<summary>
         /// México
         ///</summary>
-        public const string OXXO = "OXXO";
+        public const string PAYMENT_METHOD_OXXO = "OXXO";
         ///<summary>
         /// México
         ///</summary>
-        public const string SEVEN_ELEVEN = "SEVEN_ELEVEN";
+        public const string PAYMENT_METHOD_SEVEN_ELEVEN = "SEVEN_ELEVEN";
         ///<summary>
         /// Peru
         ///</summary>
-        public const string BCP = "BCP";
+        public const string PAYMENT_METHOD_BCP = "BCP";
         #endregion
 
         #region Countries of payment
         ///<summary>
         /// Brazil
         ///</summary>
-        public const string BR = "BR";
+        public const string COUNTRY_BR = "BR";
         ///<summary>
         /// Argentina
         ///</summary>
-        public const string AR = "AR";
+        public const string COUNTRY_AR = "AR";
         ///<summary>
         ///Colombia
         ///</summary>
-        public const string CO = "CO";
+        public const string COUNTRY_CO = "CO";
         ///<summary>
         /// Mexico
         ///</summary>
-        public const string MX = "BR";
+        public const string COUNTRY_MX = "MX";
         ///<summary>
         /// Panama
         ///</summary>
-        public const string PA = "PA";
+        public const string COUNTRY_PA = "PA";
         ///<summary>
         /// Peru
         ///</summary>
-        public const string PE = "PE";
+        public const string COUNTRY_PE = "PE";
         #endregion
 
         #region Transaction types
         ///<summary>
         /// Authorization transaction
         ///</summary>
-        public const string AUTHORIZATION = "AUTHORIZATION";
+        public const string TRANSACTION_TYPE_AUTHORIZATION = "AUTHORIZATION";
         ///<summary>
         /// Authorization and capture transaction
         ///</summary>
-        public const string AUTHORIZATION_AND_CAPTURE = "AUTHORIZATION_AND_CAPTURE";
+        public const string TRANSACTION_TYPE_AUTHORIZATION_AND_CAPTURE = "AUTHORIZATION_AND_CAPTURE";
         ///<summary>
         /// Capture Transaction
         ///</summary>
-        public const string CAPTURE = "CAPTURE";
+        public const string TRANSACTION_TYPE_CAPTURE = "CAPTURE";
         ///<summary>
         /// Cancellation transaction of an authorization
         ///</summary>
-        public const string VOID = "VOID";
+        public const string TRANSACTION_TYPE_VOID = "VOID";
         ///<summary>
         /// Refund transaction or cancellation of a capture
         ///</summary>
-        public const string REFUND = "REFUND";
+        public const string TRANSACTION_TYPE_REFUND = "REFUND";
         #endregion
     }
 }
