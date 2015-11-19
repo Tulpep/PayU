@@ -8,7 +8,7 @@ namespace Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Additional
     /// Description Adds extra charges to the respective invoice for the current period.{subscriptionId} : 
     /// Identification of the subscription
     /// </summary>
-    class RootPayUAdditionalChargesCreationRequest
+    public class RootPayUAdditionalChargesCreationRequest
     {
         public string description { get; set; }
         public List<Request_Recurring_AdditionalValue> additionalValues { get; set; }

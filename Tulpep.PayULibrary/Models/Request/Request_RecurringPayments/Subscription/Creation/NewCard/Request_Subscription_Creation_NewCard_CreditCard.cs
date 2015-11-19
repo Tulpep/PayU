@@ -2,7 +2,7 @@
 
 namespace Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.Creation.NewCard
 {
-    class Request_Subscription_Creation_NewCard_CreditCard
+    public class Request_Subscription_Creation_NewCard_CreditCard
     {
         public string name { get; set; }
         public string document { get; set; }

@@ -8,7 +8,7 @@
     /// 
     /// Only updates a credit card of a registered subscription
     /// </summary>
-class RootPayUSubscriptionUpdateRequest
+    public class RootPayUSubscriptionUpdateRequest
     {
         public string creditCardToken { get; set; }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tulpep.PayULibrary.Models.Response.Response_PayUPayments.BankTransfer
 {
-    class RootPayUPaymentBankListResponse
+    public class RootPayUPaymentBankListResponse
     {
         //Format: Alphanumeric Size:
         //Description: The overall response code. ERROR, SUCCESS.

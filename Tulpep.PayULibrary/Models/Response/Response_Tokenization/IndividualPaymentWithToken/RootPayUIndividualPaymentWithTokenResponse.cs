@@ -1,6 +1,6 @@
 ﻿namespace Tulpep.PayULibrary.Models.Response.Response_Tokenization.IndividualPaymentWithToken
 {
-    class RootPayUIndividualPaymentWithTokenResponse
+    public class RootPayUIndividualPaymentWithTokenResponse
     {
         public string code { get; set; }
         public string error { get; set; }

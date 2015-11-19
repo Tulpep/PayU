@@ -1,6 +1,6 @@
 ﻿namespace Tulpep.PayULibrary.Models.Response.Response_PayUPayments.Bank
 {
-    class RootPayUPaymentBankResponse
+    public class RootPayUPaymentBankResponse
     {
         //Format: Alphanumeric Size:
         //Description: The overall response code. ERROR, SUCCESS.
