@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using Tulpep.PayULibrary.Cross;
@@ -12,19 +11,21 @@ using Tulpep.PayULibrary.Services.ServicesHelpers;
 
 namespace Tulpep.PayULibrary.Services.PaymentsService
 {
-    class PaymentsService
+    public class PaymentsService
     {
-        public RootPayUPaymentCreditCardResponse MakeAPayment(bool isTest, string pCookie, string pDeviceSessionId,
-            Request_CreditCard_CreditCard pCreditCard, string pCommand, string pLanguaje, Request_TXVALUE pTX_VALUE,
-            Request_CreditCard_Buyer pBuyer, Address pOrderShippingAddress, Request_CreditCard_Payer pPayer, string pPaymentCountry, string pPaymentMethod,
-            string pType, string pUserAgent, Request_ExtraParameters pExtraParameters, string pIpAddress, string pDescription,
-            string pNotifyUrl, string pReferenceCode)
+        public RootPayUPaymentCreditCardResponse MakeAPayment(bool isTest, string pCommand, string pLanguaje, string productionOrTestApiKey,
+            string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId, Request_CreditCard_CreditCard pCreditCard, 
+            Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer, Address pOrderShippingAddress, Request_CreditCard_Payer pPayer,
+            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
+            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress,
+            string productionOrTestUrl)
         {
 
-            var url = Constants.DefaultProductionPaymentsConnectionUrl;
+            var url = productionOrTestUrl;
             if (url != null)
             {
-                string source = Constants.APIKey + "~" + Constants.MerchantId + "~" + pReferenceCode + "~" + pTX_VALUE.value + "~" + pTX_VALUE.currency;
+                string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" + 
+                    pTX_VALUE.value + "~" + pTX_VALUE.currency;
                 MD5 md5Hash = MD5.Create();
                 string pSignature = MD5Helper.GetMd5Hash(md5Hash, source);
 
@@ -34,8 +35,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     language = pLanguaje,
                     merchant = new Merchant()
                     {
-                        apiKey = Constants.APIKey,
-                        apiLogin = Constants.APILogin
+                        apiKey = productionOrTestApiKey,
+                        apiLogin = productionOrTestApiLogIn
                     },
                     test = isTest,
                     transaction = new Request_CreditCard_Transaction()
@@ -47,7 +48,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                         ipAddress = pIpAddress,
                         order = new Request_CreditCard_Order()
                         {
-                            accountId = int.Parse(Constants.AccountId),
+                            accountId = productionOrTestAccountId,
                             additionalValues = new Request_AdditionalValues()
                             {
                                 TX_VALUE = pTX_VALUE
@@ -69,22 +70,36 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 };
 
                 string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                Console.Write(requestJson);
                 try
                 {
-                    //Create an HttpClient instance
-                    var client = new HttpClient();
-                    client.BaseAddress = new Uri(Constants.DefaultProductionPaymentsConnectionUrl);
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));
-                    client.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue("es"));
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                    ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                    //Add these, as we're doing a POST
+                    req.ContentType = "application/json; charset=utf-8";
+                    req.Accept = "application/json";
+                    req.Method = "POST";
+                    //We need to count how many bytes we're sending. 
+                    //Post'ed Faked Forms should be name=value&
+                    byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
+                    req.ContentLength = bytes.Length;
+                    System.IO.Stream os = req.GetRequestStream();
+                    os.Write(bytes, 0, bytes.Length); //Push it out there
+                    os.Close();
+                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    if (resp == null)
+                        return null;
 
-                    var response = client.PostAsync("", new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
-                    if (response.IsSuccessStatusCode)
+                    if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        string res = response.Content.ReadAsStringAsync().Result;
+
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
                         var des = JsonConvert.DeserializeObject<RootPayUPaymentCreditCardResponse>(res);
                         if (des.code.Equals(Constants.SUCCESS))
                         {
+                            Console.Write(res);
                             return des;
                         }
                     }

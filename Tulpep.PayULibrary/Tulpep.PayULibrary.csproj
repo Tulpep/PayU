@@ -86,10 +86,33 @@
     <Compile Include="Models\Request\Request_PayUQueries\QueryOrderByReference\RootPayUQueryOrderByRefRequest.cs" />
     <Compile Include="Models\Request\Request_PayUQueries\TransactionResponseQuery\Request_TransactionResponseQuery_Details.cs" />
     <Compile Include="Models\Request\Request_PayUQueries\TransactionResponseQuery\RootPayUTransactionResponseQueryRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\AdditionalCharges\Creation\RootPayUAdditionalChargesCreationRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\AdditionalCharges\Update\RootPayUAdditionalChargesUpdateRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\CreditCard\Creation\RootPayUCreditCardCreationRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\CreditCard\Update\RootPayUCreditCardUpdateRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Cross\Request_Recurring_AdditionalValue.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Cross\Request_Recurring_Address.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Customer\Creation\RootPayUCustomerCreationRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Customer\Update\RootPayUCustomerUpdateRequest.cs" />
     <Compile Include="Models\Request\Request_RecurringPayments\Plan\Creation\RootPayUPlanCreationRequest.cs" />
-    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Creation\Request_Plan_Creation_AdditionalValue.cs" />
-    <Compile Include="Models\Request\Request_RecurringPayments\Plan\Update\Request_Plan_Update_AdditionalValue.cs" />
     <Compile Include="Models\Request\Request_RecurringPayments\Plan\Update\RootPayUPlanUpdateRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllExistingElements\Request_Subscription_Creation_AllExistingElements_CreditCard.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllExistingElements\Request_Subscription_Creation_AllExistingElements_Customer.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllExistingElements\Request_Subscription_Creation_AllExistingElements_Plan.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllExistingElements\RootPayUSubscriptionCreationAllExistingElementsRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllNewItems\Request_Subscription_Creation_AllNewItems_CreditCard.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllNewItems\Request_Subscription_Creation_AllNewItems_Customer.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllNewItems\Request_Subscription_Creation_AllNewItems_Plan.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\AllNewItems\RootPayUSubscriptionCreationAllNewRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewCard\Request_Subscription_Creation_NewCard_Customer.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewCard\Request_Subscription_Creation_NewCard_Plan.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewCard\Request_Subscription_Creation_NewCard_CreditCard.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewCard\RootPayUSubscriptionCreationNewCardRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewPlan\Request_Subscription_Creation_NewPlan_CreditCard.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewPlan\Request_Subscription_Creation_NewPlan_Customer.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewPlan\Request_Subscription_Creation_NewPlan_Plan.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Creation\NewPlan\RootPayUSubscriptionCreationNewPlanRequest.cs" />
+    <Compile Include="Models\Request\Request_RecurringPayments\Subscription\Update\RootPayUSubscriptionUpdateRequest.cs" />
     <Compile Include="Models\Request\Request_Tokenization\IndividualCreditCardRegistration\Request_IndividualCreditCardRegistration_CreditCardToken.cs" />
     <Compile Include="Models\Request\Request_Tokenization\IndividualCreditCardRegistration\RootPayUIndividualCreditCardRegistrationRequest.cs" />
     <Compile Include="Models\Request\Request_Tokenization\IndividualPaymentWithToken\Request_IndividualPaymentWithToken_Buyer.cs" />
@@ -152,6 +175,22 @@
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Payload.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Result.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\RootPayUTransactionResponseQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Creation\RootPayUCreditCardCreationResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Delete\RootPayUCreditCardDeleteResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Query\RootPayUCreditCardQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Update\RootPayUCreditCardUpdateResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Cross\Response_Recurring_AdditionalValue.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Cross\Response_Recurring_Address.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Creation\RootPayUCustomerCreationResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Delete\RootPayUCustomerDeleteResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Query\Request_Customer_Query_CreditCard.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Query\Request_Customer_Query_Plan.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Query\Request_Customer_Query_Subscription.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Query\RootPayUCustomerQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Customer\Update\RootPayUCustomerUpdateResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Plan\Creation\RootPayUPlanCreationResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Plan\Query\RootPayUPlanQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Plan\Update\RootPayUPlanUpdateResponse.cs" />
     <Compile Include="Models\Response\Response_Tokenization\IndividualCreditCardRegistration\Response_IndividualCreditCardRegistration_CreditCardToken.cs" />
     <Compile Include="Models\Response\Response_Tokenization\IndividualCreditCardRegistration\RootPayUIndividualCreditCardRegistrationResponse.cs" />
     <Compile Include="Models\Response\Response_Tokenization\IndividualPaymentWithToken\RootPayUIndividualPaymentWithTokenResponse.cs" />
@@ -176,6 +215,9 @@
     <None Include="_CreateNewNuGetPackage\DoNotModify\New-NuGetPackage.ps1" />
     <None Include="_CreateNewNuGetPackage\DoNotModify\UploadNuGetPackage.ps1" />
     <None Include="_CreateNewNuGetPackage\RunMeToUploadNuGetPackage.cmd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Response\Response_RecurringPayments\Subscription\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

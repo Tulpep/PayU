@@ -3,8 +3,8 @@
     public static class Constants
     {
         #region Infraestructure Strings
-        public const string DefaultTestQueriesConnectionUrl = "https:///stg.api.payulatam.com/reports-api/4.0/service.cgi";
-        public const string DefaultProductionQueriesConnectionUrl = "https:///api.payulatam.com/reports-api/4.0/service.cgi";
+        public const string DefaultTestQueriesConnectionUrl = "https://stg.api.payulatam.com/reports-api/4.0/service.cgi";
+        public const string DefaultProductionQueriesConnectionUrl = "https://api.payulatam.com/reports-api/4.0/service.cgi";
         public const string TestAPILogin = "11959c415b33d0c";
         public const string TestAPIKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
         public const string TestMerchantId = "500238";
@@ -12,8 +12,8 @@
         public const string APIKey = "5ck1kmok44ko09lqnni384ev58";
         public const string APILogin = "6bf6d64e593f136";
         public const string TestAccountId = "500538";
-        public const string DefaultProductionPaymentsConnectionUrl = "https:///api.payulatam.com/payments-api/4.0/service.cgi";
-        public const string DefaultTestPaymentsConnectionUrl = "https:///stg.api.payulatam.com/payments-api/4.0/service.cgi";
+        public const string DefaultProductionPaymentsConnectionUrl = "https://api.payulatam.com/payments-api/4.0/service.cgi";
+        public const string DefaultTestPaymentsConnectionUrl = "https://stg.api.payulatam.com/payments-api/4.0/service.cgi";
         public const string AccountId = "510410";
         #endregion
 
