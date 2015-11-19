@@ -233,6 +233,7 @@
     <Compile Include="Models\Response\Response_Tokenization\TokenRemoval\RootPayUTokenRemovalResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PaymentsService\PaymentsService.cs" />
+    <Compile Include="Services\ServicesHelpers\HtttpWebRequestHelper.cs" />
     <Compile Include="Services\ServicesHelpers\MD5Helper.cs" />
   </ItemGroup>
   <ItemGroup>

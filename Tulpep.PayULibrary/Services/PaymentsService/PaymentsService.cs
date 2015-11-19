@@ -2,7 +2,6 @@
 using System;
 using System.Net;
 using System.Security.Cryptography;
-using System.Text;
 using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_Cross;
 using Tulpep.PayULibrary.Models.Request.Request_PayUPayments.BankTransfer;
@@ -104,22 +103,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                 try
                 {
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                    /// <completionlist cref="SSL">
-                    /// Add here the SSL certificate 
-                    /// </completionlist>
-                    ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
 
-                    req.ContentType = "application/json; charset=utf-8";
-                    req.Accept = "application/json";
-                    req.Method = "POST";
-
-                    byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
-                    req.ContentLength = bytes.Length;
-                    System.IO.Stream os = req.GetRequestStream();
-                    os.Write(bytes, 0, bytes.Length);
-                    os.Close();
-                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                     if (resp == null)
                         return null;
 
@@ -159,8 +144,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pPaymentMethod"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguaje, 
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod, 
+        public RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguaje,
+            string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod,
             string productionOrTestUrl)
         {
 
@@ -189,22 +174,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                 try
                 {
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                    /// <completionlist cref="SSL">
-                    /// Add here the SSL certificate 
-                    /// </completionlist>
-                    ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                    req.ContentType = "application/json; charset=utf-8";
-                    req.Accept = "application/json";
-                    req.Method = "POST";
-
-                    byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
-                    req.ContentLength = bytes.Length;
-                    System.IO.Stream os = req.GetRequestStream();
-                    os.Write(bytes, 0, bytes.Length);
-                    os.Close();
-                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
