@@ -10,3 +10,4 @@ C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayULibrary\bin\Debug\Tulpep.PayULibrary.pdb
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayULibrary\bin\Debug\Newtonsoft.Json.dll
 C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayULibrary\bin\Debug\Newtonsoft.Json.xml
+C:\Users\JuanHernandez\Documents\Visual Studio 2015\Projects\Tulpep.PayU.Library\PayU\Tulpep.PayULibrary\obj\Debug\Tulpep.PayULibrary.csprojResolveAssemblyReference.cache

@@ -4,6 +4,6 @@
     {
         public string code { get; set; }
         public string error { get; set; }
-        public object transactionResponse { get; set; }
+        public Response_QueryPing_Payload result { get; set; }
     }
 }

@@ -164,6 +164,7 @@
     <Compile Include="Models\Response\Response_PayUPayments\Cash\Response_Cash_TransactionResponse.cs" />
     <Compile Include="Models\Response\Response_PayUPayments\CreditCard\RootPayUPaymentCreditCardResponse.cs" />
     <Compile Include="Models\Response\Response_PayUPayments\CreditCard\Response_CreditCard_TransactionResponse.cs" />
+    <Compile Include="Models\Response\Response_PayUQueries\Ping\Response_QueryPing_Payload.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\Ping\RootPayUQueriesPingResponse.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_Buyer.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\QueryOrderByIdentifier\Response_QueryOrderByIdentifier_CreditCard.cs" />
