@@ -20,13 +20,13 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// Using this feature you can register a customer’s credit card data and get a token sequential number.
         /// </summary>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <param name="pCreditCard"></param>
         /// <returns></returns>
-        public static RootPayUIndividualCreditCardRegistrationResponse IndividualCreditCardRegistration(string pCommand, string pLanguaje,
+        public static RootPayUIndividualCreditCardRegistrationResponse IndividualCreditCardRegistration(string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
             Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
         {
@@ -37,7 +37,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 var jsonObject = new RootPayUIndividualCreditCardRegistrationRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -51,7 +51,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -90,13 +90,13 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// The file must not have more than 10,000 registers.
         /// </summary>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <param name="pContentFilePath"></param>
         /// <returns></returns>
-        public static RootPayUMassiveCreditCardRegistrationResponse MassiveCreditCardRegistration(string pCommand, string pLanguaje,
+        public static RootPayUMassiveCreditCardRegistrationResponse MassiveCreditCardRegistration(string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
             string pContentFilePath)
         {
@@ -107,7 +107,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 var jsonObject = new RootPayUMassiveCreditCardRegistrationRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -121,7 +121,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -155,7 +155,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestAccountId"></param>
@@ -178,7 +178,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguaje, 
+        public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage, 
             string productionOrTestApiKey, string productionOrTestApiLogIn, int productionOrTestAccountId, 
             string productionOrTestMerchantId, string pCreditCardTokenId, Request_TXVALUE pTX_VALUE, 
             Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress, 
@@ -192,12 +192,12 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
                    pTX_VALUE.value + "~" + pTX_VALUE.currency;
                 MD5 md5Hash = MD5.Create();
-                string pSignature = MD5Helper.GetMd5Hash(md5Hash, source);
+                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
                 var jsonObject = new RootPayUIndividualPaymentWithTokenRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -219,7 +219,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                             accountId = productionOrTestAccountId,
                             buyer = pBuyer,
                             description = pDescription,
-                            language = pLanguaje,
+                            language = pLanguage,
                             notifyUrl = pNotifyUrl,
                             referenceCode = pReferenceCode,
                             shippingAddress = pOrderShippingAddress,
@@ -239,7 +239,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 

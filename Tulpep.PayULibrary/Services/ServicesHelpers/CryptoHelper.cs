@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Tulpep.PayULibrary.Services.ServicesHelpers
 {
-    public static class MD5Helper
+    public static class CryptoHelper
     {
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {
@@ -24,6 +24,13 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
 
             // Return the hexadecimal string.
             return sBuilder.ToString();
+        }
+
+        public static string GetBase64Hash(string input)
+        {
+            // Convert the input string to a byte array and compute the hash.
+            var plainTextBytes = Encoding.UTF8.GetBytes(input);
+            return System.Convert.ToBase64String(plainTextBytes);
         }
     }
 }

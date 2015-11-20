@@ -21,12 +21,12 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
         {
 
@@ -36,7 +36,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                 var jsonObject = new RootPayUQueriesPingRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -49,7 +49,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 try
                 {
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -77,7 +77,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
             return null;
         }
 
-        public static RootPayUQueryOrderByIdResponse GetOrderById(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUQueryOrderByIdResponse GetOrderById(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, int pOrderId, string productionOrTestUrl)
         {
             var url = productionOrTestUrl;
@@ -86,7 +86,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                 var jsonObject = new RootPayUQueryOrderByIdRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -103,7 +103,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 try
                 {
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -136,13 +136,13 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pOrderReferenceCode"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUQueryOrderByRefResponse GetOrderByReferenceCode(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUQueryOrderByRefResponse GetOrderByReferenceCode(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pOrderReferenceCode, string productionOrTestUrl)
         {
             var url = productionOrTestUrl;
@@ -151,7 +151,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                 var jsonObject = new RootPayUQueryOrderByRefRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -168,7 +168,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 try
                 {
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -197,7 +197,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         }
 
 
-        public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pTransactionId, string productionOrTestUrl)
         {
             var url = productionOrTestUrl;
@@ -206,7 +206,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                 var jsonObject = new RootPayUTransactionResponseQueryRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -223,7 +223,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 try
                 {
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 

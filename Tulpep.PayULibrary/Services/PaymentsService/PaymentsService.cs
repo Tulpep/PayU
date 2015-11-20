@@ -21,7 +21,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// </summary>
         /// <param name="isTest">Defines if the transaction will be sent as test mode</param>
         /// <param name="pCommand">Defines the command that will be aplied to the API, use Tulpep.PayULibrary.Cross.Constants to set it.</param>
-        /// <param name="pLanguaje">Defines the languaje wich will be used in the API to generate the responses to the user, 
+        /// <param name="pLanguage">Defines the languaje wich will be used in the API to generate the responses to the user, 
         /// use Tulpep.PayULibrary.Cross.Constants to set it.</param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
@@ -45,7 +45,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguaje, string productionOrTestApiKey,
+        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage, string productionOrTestApiKey,
             string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId, Request_CreditCard_CreditCard pCreditCard,
             Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer, Address pOrderShippingAddress, Request_CreditCard_Payer pPayer,
             Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
@@ -59,12 +59,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
                     pTX_VALUE.value + "~" + pTX_VALUE.currency;
                 MD5 md5Hash = MD5.Create();
-                string pSignature = MD5Helper.GetMd5Hash(md5Hash, source);
+                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
                 var jsonObject = new RootPayUPaymentCreditCardRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -87,7 +87,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                             },
                             buyer = pBuyer,
                             description = pDescription,
-                            language = pLanguaje,
+                            language = pLanguage,
                             notifyUrl = pNotifyUrl,
                             referenceCode = pReferenceCode,
                             signature = pSignature,
@@ -105,7 +105,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                 try
                 {
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
 
                     if (resp == null)
                         return null;
@@ -139,7 +139,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestAccountId"></param>
@@ -163,7 +163,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPaymentBankTransferResponse MakeABankTransferPayment(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUPaymentBankTransferResponse MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
            string productionOrTestApiKey, string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId,
            Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer, 
            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, 
@@ -177,12 +177,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
                     pTX_VALUE.value + "~" + pTX_VALUE.currency;
                 MD5 md5Hash = MD5.Create();
-                string pSignature = MD5Helper.GetMd5Hash(md5Hash, source);
+                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
                 var jsonObject = new RootPayUPaymentBankTransferRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     test = isTest,
                     merchant = new Merchant()
                     {
@@ -208,7 +208,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                             },
                             buyer = pBuyer,
                             description = pDescription,
-                            language = pLanguaje,
+                            language = pLanguage,
                             notifyUrl = pNotifyUrl,
                             referenceCode = pReferenceCode,
                             signature = pSignature
@@ -221,7 +221,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -254,14 +254,14 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pPaymentCountry"></param>
         /// <param name="pPaymentMethod"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod,
             string productionOrTestUrl)
         {
@@ -273,7 +273,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 var jsonObject = new RootPayUPaymentBankListRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     bankListInformation = new Request_BankTransfer_BankListInformation()
                     {
                         paymentMethod = pPaymentMethod,
@@ -292,7 +292,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -325,12 +325,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// </summary>
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
-        /// <param name="pLanguaje"></param>
+        /// <param name="pLanguage"></param>
         /// <param name="productionOrTestApiKey"></param>
         /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguaje,
+        public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
         {
 
@@ -341,7 +341,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 var jsonObject = new RootPayUActivePaymentMethodRequest()
                 {
                     command = pCommand,
-                    language = pLanguaje,
+                    language = pLanguage,
                     merchant = new Merchant()
                     {
                         apiKey = productionOrTestApiKey,
@@ -355,7 +355,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 try
                 {
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 

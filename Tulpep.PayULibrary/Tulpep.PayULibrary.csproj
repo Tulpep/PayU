@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cross\Address.cs" />
-    <Compile Include="Cross\Constants.cs" />
+    <Compile Include="Cross\PayU_Constants.cs" />
     <Compile Include="Cross\Merchant.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_AdditionalValues.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_ExtraParameters.cs" />
@@ -244,8 +244,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PaymentsService\PaymentsService.cs" />
     <Compile Include="Services\QueriesService\QueriesService.cs" />
+    <Compile Include="Services\RecurringPaymentsService\RecurringPaymentsService.cs" />
     <Compile Include="Services\ServicesHelpers\HtttpWebRequestHelper.cs" />
-    <Compile Include="Services\ServicesHelpers\MD5Helper.cs" />
+    <Compile Include="Services\ServicesHelpers\CryptoHelper.cs" />
     <Compile Include="Services\TokenizationService\TokenizationService.cs" />
   </ItemGroup>
   <ItemGroup>
