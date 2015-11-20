@@ -55,6 +55,7 @@
     <Compile Include="Models\Request\Request_Cross\Request_TXTAX.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_TXTAXRETURNBASE.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_TXVALUE.cs" />
+    <Compile Include="Models\Request\Request_PayUPayments\ActivePaymentMethodsQuery\RootPayUActivePaymentMethodRequest.cs" />
     <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_BankListInformation.cs" />
     <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Buyer.cs" />
     <Compile Include="Models\Request\Request_PayUPayments\BankTransfer\Request_BankTransfer_Order.cs" />
@@ -151,6 +152,8 @@
     <Compile Include="Models\Response\Response_Cross\Response_TXTAXADMINISTRATIVEFEERETURNBASE.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_TXTAXRETURNBASE.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_TXVALUE.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\ActivePaymentMethodsQuery\Response_ActiveMethod_PaymentMethod.cs" />
+    <Compile Include="Models\Response\Response_PayUPayments\ActivePaymentMethodsQuery\RootPayUActivePaymentMethodResponse.cs" />
     <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\Response_BankTransfer_Bank.cs" />
     <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\RootPayUPaymentBankListResponse.cs" />
     <Compile Include="Models\Response\Response_PayUPayments\BankTransfer\RootPayUPaymentBankTransferResponse.cs" />
@@ -242,6 +245,7 @@
     <Compile Include="Services\QueriesService\QueriesService.cs" />
     <Compile Include="Services\ServicesHelpers\HtttpWebRequestHelper.cs" />
     <Compile Include="Services\ServicesHelpers\MD5Helper.cs" />
+    <Compile Include="Services\TokenizationService\TokenizationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="_CreateNewNuGetPackage\DoNotModify\NuGet.exe" />

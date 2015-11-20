@@ -1,4 +1,6 @@
-﻿namespace Tulpep.PayULibrary.Cross
+﻿using System.ComponentModel;
+
+namespace Tulpep.PayULibrary.Cross
 {
     public static class Constants
     {
@@ -470,6 +472,67 @@
         /// Refund transaction or cancellation of a capture
         ///</summary>
         public const string TRANSACTION_TYPE_REFUND = "REFUND";
+        #endregion
+
+        #region PSE USER DOCUMENT TYPE
+        /// <summary>
+        /// Citizenship card.
+        /// </summary>
+        [Description("Cédula de ciudadanía.")]
+        public const string DOCUMENT_TYPE_CC = "CC";
+        /// <summary>
+        /// Foreign citizenship card.
+        /// </summary>
+        [Description("Cédula de extranjería.")]
+        public const string DOCUMENT_TYPE_CE = "CE";
+        /// <summary>
+        /// For a company.
+        /// </summary>
+        [Description("N.I.T.")]
+        public const string DOCUMENT_TYPE_NIT = "NIT";
+        /// <summary>
+        /// Identity Card.
+        /// </summary>
+        [Description("Tarjeta de Identidad.")]
+        public const string DOCUMENT_TYPE_TI = "TI";
+        /// <summary>
+        /// Passport.
+        /// </summary>
+        [Description("Pasaporte.")]
+        public const string DOCUMENT_TYPE_PP = "PP";
+        /// <summary>
+        /// Client´s unique identifier, in the case of unique customer / utility consumer ID's.
+        /// </summary>
+        [Description("Identificador único de cliente.")]
+        public const string DOCUMENT_TYPE_IDC = "IDC";
+        /// <summary>
+        /// When identified by the mobile line.
+        /// </summary>
+        [Description("Número móvil.")]
+        public const string DOCUMENT_TYPE_CEL = "CEL";
+        /// <summary>
+        /// Birth certificate.
+        /// </summary>
+        [Description("Registro civil de nacimiento.")]
+        public const string DOCUMENT_TYPE_RC = "RC";
+        /// <summary>
+        /// Foreign identification document.
+        /// </summary>
+        [Description("Documento de identificación extranjero.")]
+        public const string DOCUMENT_TYPE_DE = "DE";
+        #endregion
+
+        #region PSE USER TYPE
+        /// <summary>
+        /// whether he is a "natural person" (N).
+        /// </summary>
+        [Description("Natural.")]
+        public const string USER_TYPE_NARUTAL_PERSON = "N";
+        /// <summary>
+        /// whether he is a "legal person” (J).
+        /// </summary>
+        [Description("Legal.")]
+        public const string USER_TYPE_LEGAL_PERSON = "J";
         #endregion
     }
 }

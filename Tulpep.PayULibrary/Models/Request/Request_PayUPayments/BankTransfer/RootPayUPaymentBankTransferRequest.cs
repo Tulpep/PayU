@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Tulpep.PayULibrary.Cross;
 
 namespace Tulpep.PayULibrary.Models.Request.Request_PayUPayments.BankTransfer
