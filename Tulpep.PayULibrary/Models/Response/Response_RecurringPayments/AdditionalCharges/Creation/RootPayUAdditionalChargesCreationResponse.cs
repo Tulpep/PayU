@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Cross;
 
-namespace Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscription.AdditionalCharges.Query.ByIdOfExtraCharge
+namespace Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Creation
 {
-    public class RootPayUAdditionalChargesQueryByIdResponse
+    public class RootPayUAdditionalChargesCreationResponse
     {
         public string id { get; set; }
         public string description { get; set; }

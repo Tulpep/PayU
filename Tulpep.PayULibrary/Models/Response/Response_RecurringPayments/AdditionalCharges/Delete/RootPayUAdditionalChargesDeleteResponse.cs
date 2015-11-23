@@ -1,4 +1,4 @@
-﻿namespace Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscription.AdditionalCharges.Delete
+﻿namespace Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Delete
 {
     public class RootPayUAdditionalChargesDeleteResponse
     {
