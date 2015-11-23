@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+#region Tulpep PayU Library
 using Tulpep.PayULibrary.Cross;
+using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.AdditionalCharges.Creation;
+using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.AdditionalCharges.Update;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.CreditCard.Creation;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.CreditCard.Update;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Cross;
@@ -16,6 +19,11 @@ using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.C
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.Creation.NewPlan;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.Update;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Creation;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Delete;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Query.ByDescriptionOfExtraCharge;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Query.ByIdOfExtraCharge;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Query.BySubscription;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Update;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Creation;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Delete;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Query;
@@ -35,6 +43,7 @@ using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscription
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscription.Query;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscription.Update;
 using Tulpep.PayULibrary.Services.ServicesHelpers;
+#endregion
 
 namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 {
@@ -1297,16 +1306,330 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
         #region Additional charges
 
-
-        public static RootPayUAdditionalChargesCreationResponse CreateAnAdditionalCharge(string productionOrTestUrl)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pSubscriptionId"></param>
+        /// <param name="pDescription"></param>
+        /// <param name="pAdditionalValues"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesCreationResponse CreateAnAdditionalCharge(string pLanguage, string productionOrTestApiKey,
+            string productionOrTestApiLogIn, string pSubscriptionId, string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues,
+            string productionOrTestUrl)
         {
-            if (!string.IsNullOrWhiteSpace())
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
             {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultSubscriptionRecurringPaymentsUrl + pSubscriptionId
+                    + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl;
 
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                var jsonObject = new RootPayUAdditionalChargesCreationRequest()
+                {
+                    description = pDescription,
+                    additionalValues = pAdditionalValues
+                };
+
+                string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                        pLanguage, pBse64, HttpMethod.POST);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                    else if (resp.StatusCode == HttpStatusCode.Created)
+                    {
+
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (WebException e)
+                {
+                    if (e.Status == WebExceptionStatus.ProtocolError)
+                    {
+                        return new RootPayUAdditionalChargesCreationResponse()
+                        {
+                            id = "You have registered it before",
+                        };
+                    }
+                    throw;
+                }
             }
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pSubscriptionId"></param>
+        /// <param name="pDescription"></param>
+        /// <param name="pAdditionalValues"></param>
+        /// <param name="pRecurringBillItemId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesUpdateResponse UpdateAnAdditionalCharge(string pLanguage, string productionOrTestApiKey,
+            string productionOrTestApiLogIn, string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues,
+            string pRecurringBillItemId, string productionOrTestUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+            {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl + pRecurringBillItemId;
+
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                var jsonObject = new RootPayUAdditionalChargesUpdateRequest()
+                {
+                    description = pDescription,
+                    additionalValues = pAdditionalValues
+                };
+
+                string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                       pLanguage, pBse64, HttpMethod.PUT);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesUpdateResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pRecurringBillItemId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesQueryByIdResponse GetAnAdditionalChargeById(string pLanguage, string productionOrTestApiKey,
+           string productionOrTestApiLogIn, string pRecurringBillItemId, string productionOrTestUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+            {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl + pRecurringBillItemId;
+
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                       pLanguage, pBse64, HttpMethod.GET);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByIdResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pDescription"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesQueryByDtnResponse GetAnAdditionalChargeByDescription(string pLanguage, string productionOrTestApiKey,
+           string productionOrTestApiLogIn, string pDescription, string productionOrTestUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+            {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl +
+                    PayU_Constants.DefaultAdditionalChargesRecurringPaymentsDescriptionParam + pDescription;
+
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                       pLanguage, pBse64, HttpMethod.GET);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByDtnResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pSubscriptionId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesQueryBySbtnResponse GetAnAdditionalChargeBySubscriptionId(string pLanguage, string productionOrTestApiKey,
+           string productionOrTestApiLogIn, string pSubscriptionId, string productionOrTestUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+            {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl +
+                    PayU_Constants.DefaultAdditionalChargesRecurringPaymentsSubscriptionParam + pSubscriptionId;
+
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                       pLanguage, pBse64, HttpMethod.GET);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryBySbtnResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pRecurringBillItemId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
+        public static RootPayUAdditionalChargesDeleteResponse DeleteAnAdditionalCharge(string pLanguage, string productionOrTestApiKey,
+           string productionOrTestApiLogIn, string pRecurringBillItemId, string productionOrTestUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+            {
+                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultAdditionalChargesRecurringPaymentsUrl + pRecurringBillItemId;
+
+                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                try
+                {
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                       pLanguage, pBse64, HttpMethod.DELETE);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        string res = sr.ReadToEnd();
+                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesDeleteResponse>(res);
+                        if (des != null)
+                        {
+                            return des;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return null;
+        }
         #endregion
     }
 }
