@@ -11,7 +11,7 @@
       <description>PayU Integration Library.</description>
       <summary>PayU Integration Library.</summary>
       <releaseNotes />
-  	  <tags>WPF Active Directory Dialog WinForms Windows Forms Picker</tags>
+  	  <tags>MVC Web Net45</tags>
       <frameworkAssemblies>
           <frameworkAssembly assemblyName="System.Windows.Forms" />
       </frameworkAssemblies>
