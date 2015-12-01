@@ -53,14 +53,31 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
             string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress,
             string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+
+                if (string.IsNullOrWhiteSpace(productionOrTestMerchantId))
+                {
+                    productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
+                }
+
+                if (productionOrTestAccountId > 0)
+                {
+                    productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -180,14 +197,31 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, 
            string pIpAddress, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+
+                if (string.IsNullOrWhiteSpace(productionOrTestMerchantId))
+                {
+                    productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
+                }
+
+                if (productionOrTestAccountId > 0)
+                {
+                    productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -284,14 +318,21 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod,
             string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -361,14 +402,22 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                throw;
             }
 
             var url = productionOrTestUrl;

@@ -30,14 +30,21 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -87,17 +94,35 @@ namespace Tulpep.PayULibrary.Services.QueriesService
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isTest"></param>
+        /// <param name="pCommand"></param>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pOrderId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
         public static RootPayUQueryOrderByIdResponse GetOrderById(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, int pOrderId, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -165,14 +190,21 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUQueryOrderByRefResponse GetOrderByReferenceCode(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pOrderReferenceCode, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
@@ -226,18 +258,35 @@ namespace Tulpep.PayULibrary.Services.QueriesService
             return null;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isTest"></param>
+        /// <param name="pCommand"></param>
+        /// <param name="pLanguage"></param>
+        /// <param name="productionOrTestApiKey"></param>
+        /// <param name="productionOrTestApiLogIn"></param>
+        /// <param name="pTransactionId"></param>
+        /// <param name="productionOrTestUrl"></param>
+        /// <returns></returns>
         public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pTransactionId, string productionOrTestUrl)
         {
-            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            try
             {
-                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-            }
+                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                {
+                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+                }
 
-            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+                {
+                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                }
+            }
+            catch (Exception)
             {
-                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+                throw;
             }
 
             var url = productionOrTestUrl;
