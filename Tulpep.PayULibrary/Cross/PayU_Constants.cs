@@ -40,14 +40,12 @@ namespace Tulpep.PayULibrary.Cross
         public const string DefaultAdditionalChargesRecurringPaymentsUrl = "/recurringBillItems/";
         public const string DefaultAdditionalChargesRecurringPaymentsDescriptionParam = "?description=";
         public const string DefaultAdditionalChargesRecurringPaymentsSubscriptionParam = "?subscriptionId=";
+
+
         public const string TestAPILogin = "11959c415b33d0c";
         public const string TestAPIKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
         public const string TestMerchantId = "500238";
-        public const string MerchantId = "509269";
-        public const string APIKey = "5ck1kmok44ko09lqnni384ev58";
-        public const string APILogin = "6bf6d64e593f136";
         public const string TestAccountId = "500538";
-        public const string AccountId = "510410";
         #endregion
 
         #region common Status
