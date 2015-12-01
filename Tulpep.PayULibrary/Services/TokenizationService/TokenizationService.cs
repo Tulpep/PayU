@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.Net;
 using System.Security.Cryptography;
 using Tulpep.PayULibrary.Cross;
@@ -30,6 +31,16 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
             Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {
@@ -100,6 +111,16 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
             string pContentFilePath)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {
@@ -186,6 +207,16 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
             string pPaymentMethod, string pType, string pUserAgent, string pDescription, string pNotifyUrl, string pReferenceCode, 
             string pCookie, string pDeviceSessionId, string pIpAddress, string productionOrTestUrl)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.Net;
 using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_PayUQueries.Ping;
@@ -29,6 +30,15 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
 
             var url = productionOrTestUrl;
             if (url != null)
@@ -80,6 +90,16 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUQueryOrderByIdResponse GetOrderById(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, int pOrderId, string productionOrTestUrl)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {
@@ -145,6 +165,16 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUQueryOrderByRefResponse GetOrderByReferenceCode(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pOrderReferenceCode, string productionOrTestUrl)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {
@@ -200,6 +230,16 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguage,
             string productionOrTestApiKey, string productionOrTestApiLogIn, string pTransactionId, string productionOrTestUrl)
         {
+            if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+            {
+                productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+            }
+
+            if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
+            {
+                productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+            }
+
             var url = productionOrTestUrl;
             if (url != null)
             {
