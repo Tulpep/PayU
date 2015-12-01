@@ -17,7 +17,7 @@
       </frameworkAssemblies>
     </metadata>
     <files>
-      <file src="..\bin\Release\Tulpep.PayULibrary.dll" target="lib\net45\Tulpep.PayULibrary.dll" />
-      <file src="..\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+      <file src="..\Tulpep.PayULibrary\bin\Release\Tulpep.PayULibrary.dll" target="lib\net45\Tulpep.PayULibrary.dll" />
+      <file src="..\Tulpep.PayULibrary\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
     </files>
 </package>
