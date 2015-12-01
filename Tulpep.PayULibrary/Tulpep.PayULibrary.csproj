@@ -251,9 +251,6 @@
     <Compile Include="Services\TokenizationService\TokenizationService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="appveyor.yml" />
-    <None Include="Nuget\Build.ps1" />
-    <None Include="Nuget\specs.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
