@@ -214,7 +214,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
             {
                 throw;
             }
-            
+
             return null;
         }
 
@@ -224,54 +224,39 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pTransactionId"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguage,
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string pTransactionId, string productionOrTestUrl)
+            string pTransactionId, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-                var jsonObject = new RootPayUTransactionResponseQueryRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+                    var jsonObject = new RootPayUTransactionResponseQueryRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    test = isTest,
-                    details = new Request_TransactionResponseQuery_Details()
-                    {
-                        transactionId = pTransactionId
-                    }
-                };
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
+                        {
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        test = isTest,
+                        details = new Request_TransactionResponseQuery_Details()
+                        {
+                            transactionId = pTransactionId
+                        }
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
@@ -292,11 +277,12 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return null;
         }
     }

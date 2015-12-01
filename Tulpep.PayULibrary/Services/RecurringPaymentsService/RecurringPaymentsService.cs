@@ -56,9 +56,6 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestAccountId"></param>
         /// <param name="pDescription"></param>
         /// <param name="pInterval"></param>
         /// <param name="pIntervalCount"></param>
@@ -67,57 +64,40 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pPlanCode"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPlanCreationResponse CreateAPlan(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string productionOrTestAccountId,
+        public static RootPayUPlanCreationResponse CreateAPlan(string pLanguage,
             string pDescription, string pInterval, string pIntervalCount, string pMaxPaymentsAllowed,
             string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues,
             string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestAccountId = ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                if (string.IsNullOrWhiteSpace(productionOrTestAccountId))
-                {
-                    productionOrTestAccountId = ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    var jsonObject = new RootPayUPlanCreationRequest()
+                    {
+                        accountId = productionOrTestAccountId,
+                        description = pDescription,
+                        interval = pInterval,
+                        intervalCount = pIntervalCount,
+                        maxPaymentsAllowed = pMaxPaymentsAllowed,
+                        paymentAttemptsDelay = pPaymentAttemptsDelay,
+                        planCode = pPlanCode,
+                        additionalValues = pAdditionalValues
+                    };
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl;
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
-
-                var jsonObject = new RootPayUPlanCreationRequest()
-                {
-                    accountId = productionOrTestAccountId,
-                    description = pDescription,
-                    interval = pInterval,
-                    intervalCount = pIntervalCount,
-                    maxPaymentsAllowed = pMaxPaymentsAllowed,
-                    paymentAttemptsDelay = pPaymentAttemptsDelay,
-                    planCode = pPlanCode,
-                    additionalValues = pAdditionalValues
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
@@ -151,17 +131,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
+                    return new RootPayUPlanCreationResponse()
                     {
-                        return new RootPayUPlanCreationResponse()
-                        {
-                            id = "You have registered it before",
-                        };
-                    }
-                    throw;
+                        id = "You have registered it before",
+                    };
                 }
+                throw;
             }
             return null;
         }
@@ -170,8 +150,6 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pDescription"></param>
         /// <param name="pMaxPendingPayments"></param>
         /// <param name="pMaxPaymentAttempts"></param>
@@ -180,49 +158,36 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pAdditionalValues"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPlanUpdateResponse UpdateAPlan(string pLanguage, string productionOrTestApiKey,
-           string productionOrTestApiLogIn, string pDescription, string pMaxPendingPayments, string pMaxPaymentAttempts,
+        public static RootPayUPlanUpdateResponse UpdateAPlan(string pLanguage, string pDescription, string pMaxPendingPayments,
+            string pMaxPaymentAttempts,
            string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues,
            string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
+                    var jsonObject = new RootPayUPlanUpdateRequest()
+                    {
+                        description = pDescription,
+                        paymentAttemptsDelay = pPaymentAttemptsDelay,
+                        planCode = pPlanCode,
+                        additionalValues = pAdditionalValues,
+                        maxPaymentAttempts = pMaxPaymentAttempts,
+                        maxPendingPayments = pMaxPendingPayments
+                    };
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                var jsonObject = new RootPayUPlanUpdateRequest()
-                {
-                    description = pDescription,
-                    paymentAttemptsDelay = pPaymentAttemptsDelay,
-                    planCode = pPlanCode,
-                    additionalValues = pAdditionalValues,
-                    maxPaymentAttempts = pMaxPaymentAttempts,
-                    maxPendingPayments = pMaxPendingPayments
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
@@ -256,17 +221,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
+            }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
+                    return new RootPayUPlanUpdateResponse()
                     {
-                        return new RootPayUPlanUpdateResponse()
-                        {
-                            id = "there might be a problem please try again.",
-                        };
-                    }
-                    throw;
+                        id = "there might be a problem please try again.",
+                    };
                 }
+                throw;
             }
             return null;
         }
@@ -275,42 +240,26 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pPlanCode"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPlanQueryResponse GetAPlan(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pPlanCode, string productionOrTestUrl)
+        public static RootPayUPlanQueryResponse GetAPlan(string pLanguage, string pPlanCode, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
-
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
-                        pLanguage, pBse64, HttpMethod.GET);
+                                           pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
                         return null;
@@ -331,11 +280,12 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return null;
         }
 
@@ -343,40 +293,25 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pPlanCode"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static bool DeleteAPlan(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pPlanCode, string productionOrTestUrl)
+        public static bool DeleteAPlan(string pLanguage, string pPlanCode, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultPlanRecurringPaymentsUrl + pPlanCode;
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
@@ -392,11 +327,12 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return false;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return false;
         }
         #endregion
@@ -407,49 +343,34 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerCreationResponse CreateACustomer(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pEnail, string pFullName, string productionOrTestUrl)
+        public static RootPayUCustomerCreationResponse CreateACustomer(string pLanguage, string pEnail, string pFullName,
+            string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl;
+                    var jsonObject = new RootPayUCustomerCreationRequest()
+                    {
+                        email = pEnail,
+                        fullName = pFullName
+                    };
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                var jsonObject = new RootPayUCustomerCreationRequest()
-                {
-                    email = pEnail,
-                    fullName = pFullName
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
@@ -483,18 +404,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        return new RootPayUCustomerCreationResponse()
-                        {
-                            id = "You have registered it before",
-                        };
-                    }
-                    throw;
-                }
             }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return new RootPayUCustomerCreationResponse()
+                    {
+                        id = "You have registered it before",
+                    };
+                }
+                throw;
+            }
+
             return null;
         }
 
@@ -502,49 +424,34 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerUpdateResponse UpdateACustomer(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pCustomerId, string pEnail, string pFullName, string productionOrTestUrl)
+        public static RootPayUCustomerUpdateResponse UpdateACustomer(string pLanguage, string pCustomerId,
+            string pEnail, string pFullName, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
+                    var jsonObject = new RootPayUCustomerUpdateRequest()
+                    {
+                        email = pEnail,
+                        fullName = pFullName
+                    };
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                var jsonObject = new RootPayUCustomerUpdateRequest()
-                {
-                    email = pEnail,
-                    fullName = pFullName
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
@@ -578,18 +485,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        return new RootPayUCustomerUpdateResponse()
-                        {
-                            id = "there migth be a problem please try again later",
-                        };
-                    }
-                    throw;
-                }
             }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return new RootPayUCustomerUpdateResponse()
+                    {
+                        id = "there migth be a problem please try again later",
+                    };
+                }
+                throw;
+            }
+
             return null;
         }
 
@@ -597,40 +505,25 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         ///
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pCustomerId"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerQueryResponse GetACustomer(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pCustomerId, string productionOrTestUrl)
+        public static RootPayUCustomerQueryResponse GetACustomer(string pLanguage, string pCustomerId, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.GET);
 
@@ -653,11 +546,12 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return null;
         }
 
@@ -665,40 +559,25 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// 
         /// </summary>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pCustomerId"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerDeleteResponse DeleteACustomer(string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, string pCustomerId, string productionOrTestUrl)
+        public static RootPayUCustomerDeleteResponse DeleteACustomer(string pLanguage, string pCustomerId, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId;
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
@@ -721,11 +600,12 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            
             return null;
         }
         #endregion
@@ -735,8 +615,6 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestApiKey"></param>
         /// <param name="pLanguage"></param>
         /// <param name="pDocument"></param>
         /// <param name="pExpMonth"></param>
@@ -748,50 +626,37 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCustomerId"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardCreationResponse CreateACreditCard(string productionOrTestApiLogIn, string productionOrTestApiKey,
+        public static RootPayUCreditCardCreationResponse CreateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame, string pNumber, string pType,
             Request_Recurring_Address pAddress, string pCustomerId, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId +
+                        PayU_Constants.DefaultCreditCardRecurringPaymentsUrl;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId +
-                    PayU_Constants.DefaultCreditCardRecurringPaymentsUrl;
+                    var jsonObject = new RootPayUCreditCardCreationRequest()
+                    {
+                        document = pDocument,
+                        expMonth = pExpMonth,
+                        expYear = pExpYearm,
+                        name = pMame,
+                        number = pNumber,
+                        type = pType,
+                        address = pAddress
+                    };
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                var jsonObject = new RootPayUCreditCardCreationRequest()
-                {
-                    document = pDocument,
-                    expMonth = pExpMonth,
-                    expYear = pExpYearm,
-                    name = pMame,
-                    number = pNumber,
-                    type = pType,
-                    address = pAddress
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
@@ -825,26 +690,25 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        return new RootPayUCreditCardCreationResponse()
-                        {
-                            token = "You have registered it before",
-                        };
-                    }
-                    throw;
-                }
             }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return new RootPayUCreditCardCreationResponse()
+                    {
+                        token = "You have registered it before",
+                    };
+                }
+                throw;
+            }
+            
             return null;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestApiKey"></param>
         /// <param name="pLanguage"></param>
         /// <param name="pDocument"></param>
         /// <param name="pExpMonth"></param>
@@ -854,47 +718,34 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCreditCardToken"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardUpdateResponse UpdateACreditCard(string productionOrTestApiLogIn, string productionOrTestApiKey,
+        public static RootPayUCreditCardUpdateResponse UpdateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame,
             Request_Recurring_Address pAddress, string pCreditCardToken, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCreditCardRecurringPaymentsUrl + pCreditCardToken;
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-            if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
-            {
-                productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCreditCardRecurringPaymentsUrl + pCreditCardToken;
+                    var jsonObject = new RootPayUCreditCardUpdateRequest()
+                    {
+                        document = pDocument,
+                        expMonth = pExpMonth,
+                        expYear = pExpYearm,
+                        name = pMame,
+                        address = pAddress,
+                    };
 
-                string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
-                string pBse64 = CryptoHelper.GetBase64Hash(source);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                var jsonObject = new RootPayUCreditCardUpdateRequest()
-                {
-                    document = pDocument,
-                    expMonth = pExpMonth,
-                    expYear = pExpYearm,
-                    name = pMame,
-                    address = pAddress,
-                };
-
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
@@ -928,18 +779,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         return null;
                     }
                 }
-                catch (WebException e)
-                {
-                    if (e.Status == WebExceptionStatus.ProtocolError)
-                    {
-                        return new RootPayUCreditCardUpdateResponse()
-                        {
-                            token = "there migth be a problem please try again",
-                        };
-                    }
-                    throw;
-                }
             }
+            catch (WebException e)
+            {
+                if (e.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return new RootPayUCreditCardUpdateResponse()
+                    {
+                        token = "there migth be a problem please try again",
+                    };
+                }
+                throw;
+            }
+            
             return null;
         }
 
