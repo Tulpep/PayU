@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+      <id>Tulpep.PayULibrary</id>
+      <version>$version$</version>
+      <title>PayU Integration Library</title>
+      <authors>Tulpep</authors>
+      <licenseUrl>https://raw.githubusercontent.com/Tulpep/PayU/master/LICENSE</licenseUrl>
+      <projectUrl>https://github.com/Tulpep/PayU</projectUrl>
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <description>PayU Integration Library.</description>
+      <summary>PayU Integration Library.</summary>
+      <releaseNotes />
+  	  <tags>WPF Active Directory Dialog WinForms Windows Forms Picker</tags>
+      <frameworkAssemblies>
+          <frameworkAssembly assemblyName="System.Windows.Forms" />
+      </frameworkAssemblies>
+    </metadata>
+    <files>
+      <file src="..\bin\Release\Tulpep.PayULibrary.dll" target="lib\net45\Tulpep.PayULibrary.dll" />
+      <file src="..\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+    </files>
+</package>

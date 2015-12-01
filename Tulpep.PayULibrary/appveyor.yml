@@ -1,0 +1,27 @@
+﻿# http://www.appveyor.com/docs/appveyor-yml
+
+# version format
+version: 1.0.{build}
+
+# Fix line endings in Windows. (runs before repo cloning)
+init:
+  - git config --global core.autocrlf input
+
+
+# Assembly Info
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+#Build Relase instead of Debug
+configuration: Release
+
+artifacts:
+  - path: '**\Tulpep.PayULibrary*.nupkg'
+    name: Tulpep.PayULibrary.nupkg
+
+after_test:
+  - ps: .\Nuget\build.ps1
