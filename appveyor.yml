@@ -20,7 +20,7 @@ assembly_info:
 configuration: Release
 
 artifacts:
-  - path: '**\payu\Tulpep.PayULibrary*.nupkg'
+  - path: '**\Tulpep.PayULibrary*.nupkg'
     name: Tulpep.PayULibrary.nupkg
 
 after_test:
