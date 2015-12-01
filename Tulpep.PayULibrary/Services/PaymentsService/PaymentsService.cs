@@ -24,10 +24,6 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pCommand">Defines the command that will be aplied to the API, use Tulpep.PayULibrary.Cross.Constants to set it.</param>
         /// <param name="pLanguage">Defines the languaje wich will be used in the API to generate the responses to the user, 
         /// use Tulpep.PayULibrary.Cross.Constants to set it.</param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestAccountId"></param>
-        /// <param name="productionOrTestMerchantId"></param>
         /// <param name="pCreditCard"></param>
         /// <param name="pTX_VALUE"></param>
         /// <param name="pBuyer"></param>
@@ -46,92 +42,74 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage, string productionOrTestApiKey,
-            string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId, Request_CreditCard_CreditCard pCreditCard,
-            Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer, Address pOrderShippingAddress, Request_CreditCard_Payer pPayer,
-            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
-            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress,
+        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage,
+            Request_CreditCard_CreditCard pCreditCard, Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer,
+            Address pOrderShippingAddress, Request_CreditCard_Payer pPayer, Request_ExtraParameters pExtraParameters,
+            string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, string pDescription,
+            string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress,
             string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestMerchantId))
-                {
-                    productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
-                }
+                string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
-                if (productionOrTestAccountId > 0)
-                {
-                    productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-                string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                    pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                MD5 md5Hash = MD5.Create();
-                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
-                var jsonObject = new RootPayUPaymentCreditCardRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
+                        pTX_VALUE.value + "~" + pTX_VALUE.currency;
+                    MD5 md5Hash = MD5.Create();
+                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+
+                    var jsonObject = new RootPayUPaymentCreditCardRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    test = isTest,
-                    transaction = new Request_CreditCard_Transaction()
-                    {
-                        cookie = pCookie,
-                        creditCard = pCreditCard,
-                        deviceSessionId = pDeviceSessionId,
-                        extraParameters = pExtraParameters,
-                        ipAddress = pIpAddress,
-                        order = new Request_CreditCard_Order()
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
                         {
-                            accountId = productionOrTestAccountId,
-                            additionalValues = new Request_AdditionalValues()
-                            {
-                                TX_VALUE = pTX_VALUE
-                            },
-                            buyer = pBuyer,
-                            description = pDescription,
-                            language = pLanguage,
-                            notifyUrl = pNotifyUrl,
-                            referenceCode = pReferenceCode,
-                            signature = pSignature,
-                            shippingAddress = pOrderShippingAddress
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
                         },
-                        payer = pPayer,
-                        paymentCountry = pPaymentCountry,
-                        paymentMethod = pPaymentMethod,
-                        type = pType,
-                        userAgent = pUserAgent
-                    }
-                };
+                        test = isTest,
+                        transaction = new Request_CreditCard_Transaction()
+                        {
+                            cookie = pCookie,
+                            creditCard = pCreditCard,
+                            deviceSessionId = pDeviceSessionId,
+                            extraParameters = pExtraParameters,
+                            ipAddress = pIpAddress,
+                            order = new Request_CreditCard_Order()
+                            {
+                                accountId = productionOrTestAccountId,
+                                additionalValues = new Request_AdditionalValues()
+                                {
+                                    TX_VALUE = pTX_VALUE
+                                },
+                                buyer = pBuyer,
+                                description = pDescription,
+                                language = pLanguage,
+                                notifyUrl = pNotifyUrl,
+                                referenceCode = pReferenceCode,
+                                signature = pSignature,
+                                shippingAddress = pOrderShippingAddress
+                            },
+                            payer = pPayer,
+                            paymentCountry = pPaymentCountry,
+                            paymentMethod = pPaymentMethod,
+                            type = pType,
+                            userAgent = pUserAgent
+                        }
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
 
                     if (resp == null)
@@ -153,10 +131,10 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return null;
         }
@@ -167,10 +145,6 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestAccountId"></param>
-        /// <param name="productionOrTestMerchantId"></param>
         /// <param name="pTX_VALUE"></param>
         /// <param name="pBuyer"></param>
         /// <param name="pPayer"></param>
@@ -191,88 +165,68 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPaymentBankTransferResponse MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
-           string productionOrTestApiKey, string productionOrTestApiLogIn, int productionOrTestAccountId, string productionOrTestMerchantId,
-           Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer, 
-           Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, 
-           string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, 
+           Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer,
+           Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
+           string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId,
            string pIpAddress, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestMerchantId))
-                {
-                    productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
-                }
+                string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
-                if (productionOrTestAccountId > 0)
-                {
-                    productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-                string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                    pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                MD5 md5Hash = MD5.Create();
-                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
-
-                var jsonObject = new RootPayUPaymentBankTransferRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    test = isTest,
-                    merchant = new Merchant()
+                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
+                        pTX_VALUE.value + "~" + pTX_VALUE.currency;
+                    MD5 md5Hash = MD5.Create();
+                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+
+                    var jsonObject = new RootPayUPaymentBankTransferRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    transaction = new Request_BankTransfer_Transaction()
-                    {
-                        cookie = pCookie,
-                        extraParameters = pExtraParameters,
-                        ipAddress = pIpAddress,
-                        payer = pPayer,
-                        paymentCountry = pPaymentCountry,
-                        paymentMethod = pPaymentMethod,
-                        type = pType,
-                        userAgent = pUserAgent,
-                        order = new Request_BankTransfer_Order()
+                        command = pCommand,
+                        language = pLanguage,
+                        test = isTest,
+                        merchant = new Merchant()
                         {
-                            accountId = productionOrTestAccountId,
-                            additionalValues = new Request_AdditionalValues()
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        transaction = new Request_BankTransfer_Transaction()
+                        {
+                            cookie = pCookie,
+                            extraParameters = pExtraParameters,
+                            ipAddress = pIpAddress,
+                            payer = pPayer,
+                            paymentCountry = pPaymentCountry,
+                            paymentMethod = pPaymentMethod,
+                            type = pType,
+                            userAgent = pUserAgent,
+                            order = new Request_BankTransfer_Order()
                             {
-                                TX_VALUE = pTX_VALUE
-                            },
-                            buyer = pBuyer,
-                            description = pDescription,
-                            language = pLanguage,
-                            notifyUrl = pNotifyUrl,
-                            referenceCode = pReferenceCode,
-                            signature = pSignature
+                                accountId = productionOrTestAccountId,
+                                additionalValues = new Request_AdditionalValues()
+                                {
+                                    TX_VALUE = pTX_VALUE
+                                },
+                                buyer = pBuyer,
+                                description = pDescription,
+                                language = pLanguage,
+                                notifyUrl = pNotifyUrl,
+                                referenceCode = pReferenceCode,
+                                signature = pSignature
+                            }
                         }
-                    }
-                };
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -294,10 +248,10 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return null;
         }
@@ -308,58 +262,41 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="pPaymentCountry"></param>
         /// <param name="pPaymentMethod"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguage,
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string pPaymentCountry, string pPaymentMethod,
-            string productionOrTestUrl)
+            string pPaymentCountry, string pPaymentMethod, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-
-                var jsonObject = new RootPayUPaymentBankListRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    bankListInformation = new Request_BankTransfer_BankListInformation()
+
+                    var jsonObject = new RootPayUPaymentBankListRequest()
                     {
-                        paymentMethod = pPaymentMethod,
-                        paymentCountry = pPaymentCountry
-                    },
-                    merchant = new Merchant()
-                    {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    test = isTest
-                };
+                        command = pCommand,
+                        language = pLanguage,
+                        bankListInformation = new Request_BankTransfer_BankListInformation()
+                        {
+                            paymentMethod = pPaymentMethod,
+                            paymentCountry = pPaymentCountry
+                        },
+                        merchant = new Merchant()
+                        {
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        test = isTest
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
-
-                try
-                {
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -381,10 +318,10 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return null;
         }
@@ -395,51 +332,35 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage,
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl)
+            string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-
-                var jsonObject = new RootPayUActivePaymentMethodRequest()
-                {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+                    var jsonObject = new RootPayUActivePaymentMethodRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    test = isTest
-                };
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
+                        {
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        test = isTest
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -461,10 +382,10 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return null;
         }
