@@ -23,10 +23,8 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguage,
-            string productionOrTestUrl)
+        public static RootPayUQueriesPingResponse PingTheApi(bool isTest, string pCommand, string pLanguage)
         {
             try
             {
@@ -34,6 +32,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionQueriesConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -88,10 +87,9 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
         /// <param name="pOrderId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUQueryOrderByIdResponse GetOrderById(bool isTest, string pCommand, string pLanguage,
-            int pOrderId, string productionOrTestUrl)
+            int pOrderId)
         {
             try
             {
@@ -99,6 +97,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionQueriesConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -157,16 +156,17 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
         /// <param name="pOrderReferenceCode"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUQueryOrderByRefResponse GetOrderByReferenceCode(bool isTest, string pCommand, string pLanguage,
-            string pOrderReferenceCode, string productionOrTestUrl)
+            string pOrderReferenceCode)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionQueriesConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -225,16 +225,17 @@ namespace Tulpep.PayULibrary.Services.QueriesService
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
         /// <param name="pTransactionId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUTransactionResponseQueryResponse GetTransactionResponse(bool isTest, string pCommand, string pLanguage,
-            string pTransactionId, string productionOrTestUrl)
+            string pTransactionId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionQueriesConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)

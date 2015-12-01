@@ -5,12 +5,9 @@ namespace Tulpep.PayULibrary.Cross
     public static class PayU_Constants
     {
         #region Infraestructure Strings
-        public const string DefaultTestQueriesConnectionUrl = "https://stg.api.payulatam.com/reports-api/4.0/service.cgi";
-        public const string DefaultProductionQueriesConnectionUrl = "https://api.payulatam.com/reports-api/4.0/service.cgi";
-        public const string DefaultProductionPaymentsConnectionUrl = "https://api.payulatam.com/payments-api/4.0/service.cgi";
-        public const string DefaultTestPaymentsConnectionUrl = "https://stg.api.payulatam.com/payments-api/4.0/service.cgi";
-        public const string DefaultProductionRecurringPaymentsConnectionUrl = "https://api.payulatam.com/payments-api/rest/v4.3";
-        public const string DefaultTestRecurringPaymentsConnectionUrl = "https://stg.api.payulatam.com/payments-api/rest/v4.3";
+        public const string DefaultProductionQueriesConnectionUrl = "/reports-api/4.0/service.cgi";
+        public const string DefaultProductionPaymentsConnectionUrl = "/payments-api/4.0/service.cgi";
+        public const string DefaultProductionRecurringPaymentsConnectionUrl = "/payments-api/rest/v4.3";
         /// <summary>
         /// POST use DefaultTestRecurringPaymentsConnectionUrl OR DefaultProductionRecurringPaymentsConnectionUrl + DefaultPlanRecurringPaymentsUrl
         /// GET, PUT, DELETE  use DefaultTestRecurringPaymentsConnectionUrl OR DefaultProductionRecurringPaymentsConnectionUrl + DefaultPlanRecurringPaymentsUrl + {planCode}

@@ -62,12 +62,10 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pMaxPaymentsAllowed"></param>
         /// <param name="pPaymentAttemptsDelay"></param>
         /// <param name="pPlanCode"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPlanCreationResponse CreateAPlan(string pLanguage,
             string pDescription, string pInterval, string pIntervalCount, string pMaxPaymentsAllowed,
-            string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues,
-            string productionOrTestUrl)
+            string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
             try
             {
@@ -76,6 +74,8 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
                 string productionOrTestAccountId = ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -156,18 +156,18 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pPaymentAttemptsDelay"></param>
         /// <param name="pPlanCode"></param>
         /// <param name="pAdditionalValues"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPlanUpdateResponse UpdateAPlan(string pLanguage, string pDescription, string pMaxPendingPayments,
             string pMaxPaymentAttempts,
-           string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues,
-           string productionOrTestUrl)
+           string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -241,15 +241,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pPlanCode"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUPlanQueryResponse GetAPlan(string pLanguage, string pPlanCode, string productionOrTestUrl)
+        public static RootPayUPlanQueryResponse GetAPlan(string pLanguage, string pPlanCode)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -294,15 +295,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pPlanCode"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static bool DeleteAPlan(string pLanguage, string pPlanCode, string productionOrTestUrl)
+        public static bool DeleteAPlan(string pLanguage, string pPlanCode)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -345,16 +347,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerCreationResponse CreateACustomer(string pLanguage, string pEnail, string pFullName,
-            string productionOrTestUrl)
+        public static RootPayUCustomerCreationResponse CreateACustomer(string pLanguage, string pEnail, string pFullName)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -426,16 +428,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUCustomerUpdateResponse UpdateACustomer(string pLanguage, string pCustomerId,
-            string pEnail, string pFullName, string productionOrTestUrl)
+            string pEnail, string pFullName)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -506,15 +509,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pCustomerId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerQueryResponse GetACustomer(string pLanguage, string pCustomerId, string productionOrTestUrl)
+        public static RootPayUCustomerQueryResponse GetACustomer(string pLanguage, string pCustomerId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -560,15 +564,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pCustomerId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCustomerDeleteResponse DeleteACustomer(string pLanguage, string pCustomerId, string productionOrTestUrl)
+        public static RootPayUCustomerDeleteResponse DeleteACustomer(string pLanguage, string pCustomerId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -624,17 +629,18 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pType"></param>
         /// <param name="pAddress"></param>
         /// <param name="pCustomerId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUCreditCardCreationResponse CreateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame, string pNumber, string pType,
-            Request_Recurring_Address pAddress, string pCustomerId, string productionOrTestUrl)
+            Request_Recurring_Address pAddress, string pCustomerId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -716,17 +722,18 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pMame"></param>
         /// <param name="pAddress"></param>
         /// <param name="pCreditCardToken"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUCreditCardUpdateResponse UpdateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame,
-            Request_Recurring_Address pAddress, string pCreditCardToken, string productionOrTestUrl)
+            Request_Recurring_Address pAddress, string pCreditCardToken)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -800,15 +807,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardQueryResponse GetACreditCard(string pLanguage, string pCreditCardToken, string productionOrTestUrl)
+        public static RootPayUCreditCardQueryResponse GetACreditCard(string pLanguage, string pCreditCardToken)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -853,15 +861,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardDeleteResponse DeleteACreditCard(string pLanguage, string pCreditCardToken, string productionOrTestUrl)
+        public static RootPayUCreditCardDeleteResponse DeleteACreditCard(string pLanguage, string pCreditCardToken)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -914,19 +923,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pTrialDays"></param>
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUSubscriptionCreationAllNewResponse CreateASubscriptionAllMew(string pLanguage, string pInstallments,
             string pQuantity, string pTrialDays,
             Request_Subscription_Creation_AllNewItems_Customer pCustomer,
-            Request_Subscription_Creation_AllNewItems_Plan pPlan,
-            string productionOrTestUrl)
+            Request_Subscription_Creation_AllNewItems_Plan pPlan)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -985,19 +994,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pTrialDays"></param>
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUSubscriptionCreationAllExistingElementsResponse CreateASubscriptionAllExisting(string pLanguage,
             string pInstallments, string pQuantity, string pTrialDays,
             Request_Subscription_Creation_AllExistingElements_Customer pCustomer,
-            Request_Subscription_Creation_AllExistingElements_Plan pPlan,
-            string productionOrTestUrl)
+            Request_Subscription_Creation_AllExistingElements_Plan pPlan)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1056,19 +1065,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pTrialDays"></param>
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUSubscriptionCreationNewCardResponse CreateASubscriptionNewCard(string pLanguage,
             string pInstallments, string pQuantity, string pTrialDays,
             Request_Subscription_Creation_NewCard_Customer pCustomer,
-            Request_Subscription_Creation_NewCard_Plan pPlan,
-            string productionOrTestUrl)
+            Request_Subscription_Creation_NewCard_Plan pPlan)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1126,19 +1135,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pTrialDays"></param>
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUSubscriptionCreationNewPlanResponse CreateASubscriptionNewPlan(string pLanguage,
             string pInstallments, string pTrialDays,
             Request_Subscription_Creation_NewPlan_Customer pCustomer,
-            Request_Subscription_Creation_NewPlan_Plan pPlan,
-            string productionOrTestUrl)
+            Request_Subscription_Creation_NewPlan_Plan pPlan)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1193,16 +1202,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
         /// <param name="pSubscriptionId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUSubscriptionUpdateResponse UpdateASubscription(string pLanguage, string pCreditCardToken,
-            string pSubscriptionId, string productionOrTestUrl)
+            string pSubscriptionId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1253,16 +1263,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionQueryResponse GetASubscription(string pLanguage, string pSubscriptionId,
-            string productionOrTestUrl)
+        public static RootPayUSubscriptionQueryResponse GetASubscription(string pLanguage, string pSubscriptionId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1309,16 +1319,16 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionDeleteResponse DeleteASubscription(string pLanguage, string pSubscriptionId,
-           string productionOrTestUrl)
+        public static RootPayUSubscriptionDeleteResponse DeleteASubscription(string pLanguage, string pSubscriptionId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1369,17 +1379,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pSubscriptionId"></param>
         /// <param name="pDescription"></param>
         /// <param name="pAdditionalValues"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesCreationResponse CreateAnAdditionalCharge(string pLanguage,
-            string pSubscriptionId, string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues,
-            string productionOrTestUrl)
+            string pSubscriptionId, string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1453,17 +1463,18 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pDescription"></param>
         /// <param name="pAdditionalValues"></param>
         /// <param name="pRecurringBillItemId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesUpdateResponse UpdateAnAdditionalCharge(string pLanguage,
             string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues,
-            string pRecurringBillItemId, string productionOrTestUrl)
+            string pRecurringBillItemId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1511,16 +1522,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pRecurringBillItemId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesQueryByIdResponse GetAnAdditionalChargeById(string pLanguage,
-            string pRecurringBillItemId, string productionOrTestUrl)
+            string pRecurringBillItemId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1561,16 +1573,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pDescription"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesQueryByDtnResponse GetAnAdditionalChargeByDescription(string pLanguage,
-            string pDescription, string productionOrTestUrl)
+            string pDescription)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1612,16 +1625,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesQueryBySbtnResponse GetAnAdditionalChargeBySubscriptionId(string pLanguage,
-            string pSubscriptionId, string productionOrTestUrl)
+            string pSubscriptionId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1662,16 +1676,17 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// </summary>
         /// <param name="pLanguage"></param>
         /// <param name="pRecurringBillItemId"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUAdditionalChargesDeleteResponse DeleteAnAdditionalCharge(string pLanguage,
-            string pRecurringBillItemId, string productionOrTestUrl)
+            string pRecurringBillItemId)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {

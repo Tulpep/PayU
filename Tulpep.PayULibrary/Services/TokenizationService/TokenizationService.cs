@@ -22,17 +22,18 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// </summary>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <param name="pCreditCard"></param>
         /// <returns></returns>
         public static RootPayUIndividualCreditCardRegistrationResponse IndividualCreditCardRegistration(string pCommand, string pLanguage,
-            string productionOrTestUrl, Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
+            Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -94,11 +95,10 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// </summary>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <param name="pContentFilePath"></param>
         /// <returns></returns>
         public static RootPayUMassiveCreditCardRegistrationResponse MassiveCreditCardRegistration(string pCommand, string pLanguage,
-           string productionOrTestUrl, string pContentFilePath)
+            string pContentFilePath)
         {
             try
             {
@@ -106,6 +106,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -179,14 +180,13 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pCookie"></param>
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage,
             string pCreditCardTokenId, Request_TXVALUE pTX_VALUE,
             Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress,
             Request_IndividualPaymentWithToken_Payer pPayer, Request_ExtraParameters pExtraParameters, string pPaymentCountry,
             string pPaymentMethod, string pType, string pUserAgent, string pDescription, string pNotifyUrl, string pReferenceCode,
-            string pCookie, string pDeviceSessionId, string pIpAddress, string productionOrTestUrl)
+            string pCookie, string pDeviceSessionId, string pIpAddress)
         {
             try
             {
@@ -197,6 +197,8 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
                 int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)

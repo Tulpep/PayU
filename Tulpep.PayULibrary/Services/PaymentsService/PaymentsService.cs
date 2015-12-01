@@ -40,14 +40,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pCookie"></param>
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage,
             Request_CreditCard_CreditCard pCreditCard, Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer,
             Address pOrderShippingAddress, Request_CreditCard_Payer pPayer, Request_ExtraParameters pExtraParameters,
             string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, string pDescription,
-            string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress,
-            string productionOrTestUrl)
+            string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress)
         {
             try
             {
@@ -58,6 +56,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
                 int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
 
                 var url = productionOrTestUrl;
@@ -162,13 +162,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pCookie"></param>
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPaymentBankTransferResponse MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
            Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer,
            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId,
-           string pIpAddress, string productionOrTestUrl)
+           string pIpAddress)
         {
             try
             {
@@ -179,6 +178,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
                 int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -264,16 +265,17 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pPaymentCountry"></param>
         /// <param name="pPaymentMethod"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
         public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguage,
-            string pPaymentCountry, string pPaymentMethod, string productionOrTestUrl)
+            string pPaymentCountry, string pPaymentMethod)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
@@ -332,16 +334,16 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage,
-            string productionOrTestUrl)
+        public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage)
         {
             try
             {
                 string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionPaymentsConnectionUrl;
 
                 var url = productionOrTestUrl;
                 if (url != null)
