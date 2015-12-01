@@ -22,52 +22,36 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// </summary>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <param name="pCreditCard"></param>
         /// <returns></returns>
         public static RootPayUIndividualCreditCardRegistrationResponse IndividualCreditCardRegistration(string pCommand, string pLanguage,
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
-            Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
+            string productionOrTestUrl, Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-
-                var jsonObject = new RootPayUIndividualCreditCardRegistrationRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+
+                    var jsonObject = new RootPayUIndividualCreditCardRegistrationRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    creditCardToken =pCreditCard
-                };
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
+                        {
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        creditCardToken = pCreditCard
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -89,11 +73,12 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return null;
         }
 
@@ -109,52 +94,38 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// </summary>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <param name="pContentFilePath"></param>
         /// <returns></returns>
         public static RootPayUMassiveCreditCardRegistrationResponse MassiveCreditCardRegistration(string pCommand, string pLanguage,
-            string productionOrTestApiKey, string productionOrTestApiLogIn, string productionOrTestUrl,
-            string pContentFilePath)
+           string productionOrTestUrl, string pContentFilePath)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
 
-                var jsonObject = new RootPayUMassiveCreditCardRegistrationRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+
+                    var jsonObject = new RootPayUMassiveCreditCardRegistrationRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    contentFile = pContentFilePath
-                };
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
+                        {
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
+                        },
+                        contentFile = pContentFilePath
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
+
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -176,11 +147,12 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
             return null;
         }
 
@@ -191,10 +163,6 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="isTest"></param>
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
-        /// <param name="productionOrTestApiKey"></param>
-        /// <param name="productionOrTestApiLogIn"></param>
-        /// <param name="productionOrTestAccountId"></param>
-        /// <param name="productionOrTestMerchantId"></param>
         /// <param name="pCreditCardTokenId"></param>
         /// <param name="pTX_VALUE"></param>
         /// <param name="pBuyer"></param>
@@ -213,93 +181,73 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pIpAddress"></param>
         /// <param name="productionOrTestUrl"></param>
         /// <returns></returns>
-        public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage, 
-            string productionOrTestApiKey, string productionOrTestApiLogIn, int productionOrTestAccountId, 
-            string productionOrTestMerchantId, string pCreditCardTokenId, Request_TXVALUE pTX_VALUE, 
-            Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress, 
-            Request_IndividualPaymentWithToken_Payer pPayer, Request_ExtraParameters pExtraParameters, string pPaymentCountry, 
-            string pPaymentMethod, string pType, string pUserAgent, string pDescription, string pNotifyUrl, string pReferenceCode, 
+        public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage,
+            string pCreditCardTokenId, Request_TXVALUE pTX_VALUE,
+            Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress,
+            Request_IndividualPaymentWithToken_Payer pPayer, Request_ExtraParameters pExtraParameters, string pPaymentCountry,
+            string pPaymentMethod, string pType, string pUserAgent, string pDescription, string pNotifyUrl, string pReferenceCode,
             string pCookie, string pDeviceSessionId, string pIpAddress, string productionOrTestUrl)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productionOrTestApiKey))
-                {
-                    productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
-                }
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestApiLogIn))
-                {
-                    productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
-                }
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                if (string.IsNullOrWhiteSpace(productionOrTestMerchantId))
-                {
-                    productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
-                }
+                string productionOrTestMerchantId = ConfigurationManager.AppSettings["PAYU_API_MERCHANTID"];
 
-                if (productionOrTestAccountId > 0)
-                {
-                    productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                int productionOrTestAccountId = int.Parse(ConfigurationManager.AppSettings["PAYU_API_ACCOUNTID"]);
 
-            var url = productionOrTestUrl;
-            if (url != null)
-            {
-                string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                   pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                MD5 md5Hash = MD5.Create();
-                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
-
-                var jsonObject = new RootPayUIndividualPaymentWithTokenRequest()
+                var url = productionOrTestUrl;
+                if (url != null)
                 {
-                    command = pCommand,
-                    language = pLanguage,
-                    merchant = new Merchant()
+                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
+                       pTX_VALUE.value + "~" + pTX_VALUE.currency;
+                    MD5 md5Hash = MD5.Create();
+                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+
+                    var jsonObject = new RootPayUIndividualPaymentWithTokenRequest()
                     {
-                        apiKey = productionOrTestApiKey,
-                        apiLogin = productionOrTestApiLogIn
-                    },
-                    transaction = new Request_IndividualPaymentWithToken_Transaction()
-                    {
-                        cookie = pCookie,
-                        creditCardTokenId = pCreditCardTokenId,
-                        deviceSessionId = pDeviceSessionId,
-                        userAgent = pUserAgent,
-                        ipAddress = pIpAddress, 
-                        paymentCountry = pPaymentCountry,
-                        paymentMethod = pPaymentMethod,
-                        type = pType,
-                        payer = pPayer,
-                        order = new Request_IndividualPaymentWithToken_Order()
+                        command = pCommand,
+                        language = pLanguage,
+                        merchant = new Merchant()
                         {
-                            accountId = productionOrTestAccountId,
-                            buyer = pBuyer,
-                            description = pDescription,
-                            language = pLanguage,
-                            notifyUrl = pNotifyUrl,
-                            referenceCode = pReferenceCode,
-                            shippingAddress = pOrderShippingAddress,
-                            additionalValues = new Request_AdditionalValues()
-                            {
-                                TX_VALUE = pTX_VALUE,
-                            },
-                            signature = pSignature
+                            apiKey = productionOrTestApiKey,
+                            apiLogin = productionOrTestApiLogIn
                         },
-                        extraParameters = pExtraParameters
-                    },
-                    test = isTest
-                };
+                        transaction = new Request_IndividualPaymentWithToken_Transaction()
+                        {
+                            cookie = pCookie,
+                            creditCardTokenId = pCreditCardTokenId,
+                            deviceSessionId = pDeviceSessionId,
+                            userAgent = pUserAgent,
+                            ipAddress = pIpAddress,
+                            paymentCountry = pPaymentCountry,
+                            paymentMethod = pPaymentMethod,
+                            type = pType,
+                            payer = pPayer,
+                            order = new Request_IndividualPaymentWithToken_Order()
+                            {
+                                accountId = productionOrTestAccountId,
+                                buyer = pBuyer,
+                                description = pDescription,
+                                language = pLanguage,
+                                notifyUrl = pNotifyUrl,
+                                referenceCode = pReferenceCode,
+                                shippingAddress = pOrderShippingAddress,
+                                additionalValues = new Request_AdditionalValues()
+                                {
+                                    TX_VALUE = pTX_VALUE,
+                                },
+                                signature = pSignature
+                            },
+                            extraParameters = pExtraParameters
+                        },
+                        test = isTest
+                    };
 
-                string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                try
-                {
 
                     HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
@@ -321,10 +269,10 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                         return null;
                     }
                 }
-                catch (Exception)
-                {
-                    throw;
-                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             return null;
         }
