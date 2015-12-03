@@ -96,21 +96,15 @@ namespace TestPayU
 
             pAddirionalValues.Add(av3);
 
-            Console.WriteLine(QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje, PayU_Constants.TestAPIKey,
-                PayU_Constants.TestAPILogin, PayU_Constants.DefaultTestQueriesConnectionUrl).code);
-            Console.WriteLine(PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, PayU_Constants.TestAPIKey,
-            PayU_Constants.TestAPILogin, int.Parse(PayU_Constants.TestAccountId), PayU_Constants.TestMerchantId, pCreditCard,
+            Console.WriteLine(QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje).code);
+            Console.WriteLine(PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, pCreditCard,
             pTX_VALUE, pBuyer, pShippingAddress, pPayer, pExtraParameters, pPaymentCountry, pPaymentMethod, pType, pUserAgent,
-            pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress, PayU_Constants.DefaultTestPaymentsConnectionUrl).code);
-            Console.WriteLine(PaymentsService.GetAvailableBankList(pTest, PayU_Constants.COMMAND_GET_BANKS_LIST, pLanguaje, PayU_Constants.TestAPIKey, PayU_Constants.TestAPILogin,
-                PayU_Constants.COUNTRY_CO, PayU_Constants.PAYMENT_METHOD_PSE, PayU_Constants.DefaultTestPaymentsConnectionUrl).code);
-            Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, PayU_Constants.TestAPIKey,
-                PayU_Constants.TestAPILogin, pReferenceCode, PayU_Constants.DefaultTestQueriesConnectionUrl).code);
-            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, PayU_Constants.TestAPIKey, PayU_Constants.TestAPILogin,
-                PayU_Constants.TestAccountId, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "PHME_Premium_Plan", pAddirionalValues,
-                PayU_Constants.DefaultTestRecurringPaymentsConnectionUrl).id);
-            Console.WriteLine(RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, PayU_Constants.TestAPIKey, 
-                PayU_Constants.TestAPILogin, "PHOME_Premium_Plan", PayU_Constants.DefaultTestRecurringPaymentsConnectionUrl).id);
+            pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress).code);
+            Console.WriteLine(PaymentsService.GetAvailableBankList(pTest, PayU_Constants.COMMAND_GET_BANKS_LIST, pLanguaje,
+                PayU_Constants.COUNTRY_CO, PayU_Constants.PAYMENT_METHOD_PSE).code);
+            Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
+            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "PHME_Premium_Plan", pAddirionalValues).id);
+            Console.WriteLine(RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHOME_Premium_Plan").id);
 
             Console.WriteLine("Press any key to stop...");
             Console.ReadKey();
