@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPayU", "TestPayU\TestPayU.csproj", "{CAB35058-7D8F-4DE6-BD45-D8D01E48EC74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tulpep.PayULibrary", "..\Tulpep.PayULibrary\Tulpep.PayULibrary.csproj", "{F545D679-B702-4FAC-A88A-B1C399584600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CAB35058-7D8F-4DE6-BD45-D8D01E48EC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAB35058-7D8F-4DE6-BD45-D8D01E48EC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAB35058-7D8F-4DE6-BD45-D8D01E48EC74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F545D679-B702-4FAC-A88A-B1C399584600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F545D679-B702-4FAC-A88A-B1C399584600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F545D679-B702-4FAC-A88A-B1C399584600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F545D679-B702-4FAC-A88A-B1C399584600}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
