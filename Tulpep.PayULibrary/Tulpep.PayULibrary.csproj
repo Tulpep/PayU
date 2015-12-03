@@ -244,6 +244,7 @@
     <Compile Include="Models\Response\Response_Tokenization\TokenRemoval\Response_TokenRemoval_CreditCardToken.cs" />
     <Compile Include="Models\Response\Response_Tokenization\TokenRemoval\RootPayUTokenRemovalResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NotificationsService\NotificationsService.cs" />
     <Compile Include="Services\PaymentsService\PaymentsService.cs" />
     <Compile Include="Services\QueriesService\QueriesService.cs" />
     <Compile Include="Services\RecurringPaymentsService\RecurringPaymentsService.cs" />
