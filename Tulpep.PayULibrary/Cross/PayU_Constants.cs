@@ -560,5 +560,122 @@ namespace Tulpep.PayULibrary.Cross
         [Description("Legal.")]
         public const string USER_TYPE_LEGAL_PERSON = "J";
         #endregion
+
+        #region Response codes sent to the confirmation page
+        #region state_pol
+        /// <summary>
+        /// STATE THAT DEFINES AN APPROVED PAYMENT
+        /// </summary>
+        [Description("Approved")]
+        public const string STATE_POL_4 = "4";
+        /// <summary>
+        /// STATE THAT DEFINES AN DECLINED PAYMENT
+        /// </summary>
+        [Description("Declined")]
+        public const string STATE_POL_6 = "6";
+        /// <summary>
+        /// STATE THAT DEFINES AN EXPIRED PAYMENT
+        /// </summary>
+        [Description("EXPIRED")]
+        public const string STATE_POL_5 = "5";
+        #endregion
+
+        #region response_message_pol
+        public const string RESPONSE_MESSAGE_POL_APPROVED = "APPROVED";
+        public const string RESPONSE_MESSAGE_POL_PAYMENT_NETWORK_REJECTED = "PAYMENT_NETWORK_REJECTED";
+        public const string RESPONSE_MESSAGE_POL_ENTITY_DECLINED = "ENTITY_DECLINED";
+        public const string RESPONSE_MESSAGE_POL_INSUFFICIENT_FUNDS = "INSUFFICIENT_FUNDS";
+        public const string RESPONSE_MESSAGE_POL_INVALID_CARD = "INVALID_CARD";
+        public const string RESPONSE_MESSAGE_POL_CONTACT_THE_ENTITY = "CONTACT_THE_ENTITY";
+        public const string RESPONSE_MESSAGE_POL_BANK_ACCOUNT_ACTIVATION_ERROR = "BANK_ACCOUNT_ACTIVATION_ERROR";
+        public const string RESPONSE_MESSAGE_POL_BANK_ACCOUNT_NOT_AUTHORIZED_FOR_AUTOMATIC_DEBIT = "BANK_ACCOUNT_NOT_AUTHORIZED_FOR_AUTOMATIC_DEBIT";
+        public const string RESPONSE_MESSAGE_POL_INVALID_AGENCY_BANK_ACCOUNT = "INVALID_AGENCY_BANK_ACCOUNT";
+        public const string RESPONSE_MESSAGE_POL_INVALID_BANK_ACCOUNT = "INVALID_BANK_ACCOUNT";
+        public const string RESPONSE_MESSAGE_POL_INVALID_BANK = "INVALID_BANK";
+        public const string RESPONSE_MESSAGE_POL_EXPIRED_CARD = "EXPIRED_CARD";
+        public const string RESPONSE_MESSAGE_POL_RESTRICTED_CARD = "RESTRICTED_CARD";
+        public const string RESPONSE_MESSAGE_POL_INVALID_EXPIRATION_DATE_OR_SECURITY_CODE = "INVALID_EXPIRATION_DATE_OR_SECURITY_CODE";
+        public const string RESPONSE_MESSAGE_POL_REPEAT_TRANSACTION = "REPEAT_TRANSACTION";
+        public const string RESPONSE_MESSAGE_POL_INVALID_TRANSACTION = "INVALID_TRANSACTION";
+        public const string RESPONSE_MESSAGE_POL_EXCEEDED_AMOUNT = "EXCEEDED_AMOUNT";
+        public const string RESPONSE_MESSAGE_POL_ABANDONED_TRANSACTION = "ABANDONED_TRANSACTION";
+        public const string RESPONSE_MESSAGE_POL_CREDIT_CARD_NOT_AUTHORIZED_FOR_INTERNET_TRANSACTIONS = "CREDIT_CARD_NOT_AUTHORIZED_FOR_INTERNET_TRANSACTIONS";
+        public const string RESPONSE_MESSAGE_POL_ANTIFRAUD_REJECTED = "ANTIFRAUD_REJECTED";
+        public const string RESPONSE_MESSAGE_POL_DIGITAL_CERTIFICATE_NOT_FOUND = "DIGITAL_CERTIFICATE_NOT_FOUND";
+        public const string RESPONSE_MESSAGE_POL_BANK_UNREACHABLE = "BANK_UNREACHABLE";
+        public const string RESPONSE_MESSAGE_POL_PAYMENT_NETWORK_NO_CONNECTION = "PAYMENT_NETWORK_NO_CONNECTION";
+        public const string RESPONSE_MESSAGE_POL_PAYMENT_NETWORK_NO_RESPONSE = "PAYMENT_NETWORK_NO_RESPONSE";
+        public const string RESPONSE_MESSAGE_POL_ENTITY_MESSAGING_ERROR = "ENTITY_MESSAGING_ERROR";
+        public const string RESPONSE_MESSAGE_POL_NOT_ACCEPTED_TRANSACTION = "NOT_ACCEPTED_TRANSACTION";
+        public const string RESPONSE_MESSAGE_POL_INTERNAL_PAYMENT_PROVIDER_ERROR = "INTERNAL_PAYMENT_PROVIDER_ERROR";
+        public const string RESPONSE_MESSAGE_POL_INACTIVE_PAYMENT_PROVIDER = "INACTIVE_PAYMENT_PROVIDER";
+        public const string RESPONSE_MESSAGE_POL_ERROR = "ERROR";
+        public const string RESPONSE_MESSAGE_POL_ERROR_CONVERTING_TRANSACTION_AMOUNTS = "ERROR_CONVERTING_TRANSACTION_AMOUNTS";
+        public const string RESPONSE_MESSAGE_POL_FIX_NOT_REQUIRED = "FIX_NOT_REQUIRED";
+        public const string RESPONSE_MESSAGE_POL_AUTOMATICALLY_FIXED_AND_SUCCESS_REVERSAL = "AUTOMATICALLY_FIXED_AND_SUCCESS_REVERSAL";
+        public const string RESPONSE_MESSAGE_POL_AUTOMATICALLY_FIXED_AND_UNSUCCESS_REVERSAL = "AUTOMATICALLY_FIXED_AND_UNSUCCESS_REVERSAL";
+        public const string RESPONSE_MESSAGE_POL_AUTOMATIC_FIXED_NOT_SUPPORTED = "AUTOMATIC_FIXED_NOT_SUPPORTED";
+        public const string RESPONSE_MESSAGE_POL_NOT_FIXED_FOR_ERROR_STATE = "NOT_FIXED_FOR_ERROR_STATE";
+        public const string RESPONSE_MESSAGE_POL_ERROR_FIXING_AND_REVERSING = "ERROR_FIXING_AND_REVERSING";
+        public const string RESPONSE_MESSAGE_POL_ERROR_FIXING_INCOMPLETE_DATA = "ERROR_FIXING_INCOMPLETE_DATA";
+        public const string RESPONSE_MESSAGE_POL_PAYMENT_NETWORK_BAD_RESPONSE = "PAYMENT_NETWORK_BAD_RESPONSE";
+        public const string RESPONSE_MESSAGE_POL_EXPIRED_TRANSACTION = "EXPIRED_TRANSACTION";
+        #endregion
+
+        #region response_code_pol
+
+        public const string RESPONSE_CODE_POL_1 = "1";
+        public const string RESPONSE_CODE_POL_4 = "4";
+        public const string RESPONSE_CODE_POL_5 = "5";
+        public const string RESPONSE_CODE_POL_6 = "6";
+        public const string RESPONSE_CODE_POL_7 = "7";
+        public const string RESPONSE_CODE_POL_8 = "8";
+        public const string RESPONSE_CODE_POL_9 = "9";
+        public const string RESPONSE_CODE_POL_10 = "10";
+        public const string RESPONSE_CODE_POL_12 = "12";
+        public const string RESPONSE_CODE_POL_13 = "13";
+        public const string RESPONSE_CODE_POL_14 = "14";
+        public const string RESPONSE_CODE_POL_17 = "17";
+        public const string RESPONSE_CODE_POL_19 = "19";
+        public const string RESPONSE_CODE_POL_22 = "22";
+        public const string RESPONSE_CODE_POL_23 = "23";
+        public const string RESPONSE_CODE_POL_9995 = "9995";
+        public const string RESPONSE_CODE_POL_9996 = "9996";
+        public const string RESPONSE_CODE_POL_9997 = "9997";
+        public const string RESPONSE_CODE_POL_9998 = "9998";
+        public const string RESPONSE_CODE_POL_9999 = "9999";
+        public const string RESPONSE_CODE_POL_20 = "20";
+        #endregion
+
+        #region POL Description
+        /// <summary>
+        /// use POL_DESCRIPTION_[RESPONSE_CODE_POL_#] to get the code description
+        /// </summary>
+        public const string POL_DESCRIPTION_ = "POL_DESCRIPTION_";
+        public const string POL_DESCRIPTION_1 = "Transaction approved";
+        public const string POL_DESCRIPTION_4 = "Transaction rejected by financial institution";
+        public const string POL_DESCRIPTION_5 = "Transaction rejected by the bank";
+        public const string POL_DESCRIPTION_6 = "Insufficient funds";
+        public const string POL_DESCRIPTION_7 = "Invalid card";
+        public const string POL_DESCRIPTION_8 = "Contact the financial institution OR Automatic debit is not allowed";
+        public const string POL_DESCRIPTION_9 = "Expired card";
+        public const string POL_DESCRIPTION_10 = "Restricted card";
+        public const string POL_DESCRIPTION_12 = "Invalid expiration date or security code";
+        public const string POL_DESCRIPTION_13 = "Retry payment";
+        public const string POL_DESCRIPTION_14 = "Invalid transaction";
+        public const string POL_DESCRIPTION_17 = "The value exceeds the maximum allowed by the entity";
+        public const string POL_DESCRIPTION_19 = "Transaction abandoned by the payer";
+        public const string POL_DESCRIPTION_22 = "Card not authorized to buy online";
+        public const string POL_DESCRIPTION_23 = "Transaction refused because of suspected fraud";
+        public const string POL_DESCRIPTION_9995 = "Digital certificate not found";
+        public const string POL_DESCRIPTION_9996 = "Error trying to communicate with the bank OR Unable to communicate with the financial institution OR No response was received from the financial institution";
+        public const string POL_DESCRIPTION_9997 = "Error communicating with the financial institution";
+        public const string POL_DESCRIPTION_9998 = "Transaction not permitted";
+        public const string POL_DESCRIPTION_9999 = "Error";
+        public const string POL_DESCRIPTION_20 = "Expired transaction";
+
+        #endregion
+
+        #endregion
     }
 }
