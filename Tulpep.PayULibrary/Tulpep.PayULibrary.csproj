@@ -51,6 +51,7 @@
     <Compile Include="Cross\Address.cs" />
     <Compile Include="Cross\PayU_Constants.cs" />
     <Compile Include="Cross\Merchant.cs" />
+    <Compile Include="Models\Notification\RootPayUNotificationWebHookViewModel.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_AdditionalValues.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_ExtraParameters.cs" />
     <Compile Include="Models\Request\Request_Cross\Request_TXTAX.cs" />
