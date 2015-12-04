@@ -118,12 +118,15 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPaymentCreditCardResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPaymentCreditCardResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -236,12 +239,15 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPaymentBankTransferResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPaymentBankTransferResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -307,12 +313,15 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPaymentBankListResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPaymentBankListResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -371,12 +380,15 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUActivePaymentMethodResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUActivePaymentMethodResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else

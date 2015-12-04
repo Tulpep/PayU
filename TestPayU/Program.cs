@@ -96,15 +96,24 @@ namespace TestPayU
 
             pAddirionalValues.Add(av3);
 
+            Console.WriteLine("Making a ping to the Payu API");
             Console.WriteLine(QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje).code);
+            Console.WriteLine("Registering a Payment in the PayU system");
             Console.WriteLine(PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, pCreditCard,
             pTX_VALUE, pBuyer, pShippingAddress, pPayer, pExtraParameters, pPaymentCountry, pPaymentMethod, pType, pUserAgent,
             pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress).code);
+            Console.WriteLine("Getting available list of bank ready in the PayU system");
             Console.WriteLine(PaymentsService.GetAvailableBankList(pTest, PayU_Constants.COMMAND_GET_BANKS_LIST, pLanguaje,
                 PayU_Constants.COUNTRY_CO, PayU_Constants.PAYMENT_METHOD_PSE).code);
+            Console.WriteLine("Getting an order by reference code");
             Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
+            Console.WriteLine("creating a recurring plan in the PayU system");
             Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "PHME_Premium_Plan", pAddirionalValues).id);
+            Console.WriteLine("query that plan in the PayU system");
             Console.WriteLine(RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHOME_Premium_Plan").id);
+            Console.WriteLine("Getting an order by id code");
+            Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
+                             PayU_Constants.LANGUAGE_ES, 7665206).code);
 
             Console.WriteLine("Press any key to stop...");
             Console.ReadKey();

@@ -118,12 +118,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     else if (resp.StatusCode == HttpStatusCode.Created)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPlanCreationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPlanCreationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -208,12 +211,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     else if (resp.StatusCode == HttpStatusCode.Created)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPlanUpdateResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPlanUpdateResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -268,12 +274,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUPlanQueryResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUPlanQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -382,12 +391,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCustomerCreationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCustomerCreationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else if (resp.StatusCode == HttpStatusCode.Created)
@@ -464,12 +476,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCustomerUpdateResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCustomerUpdateResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else if (resp.StatusCode == HttpStatusCode.Created)
@@ -537,12 +552,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCustomerQueryResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCustomerQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -592,12 +610,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCustomerDeleteResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCustomerDeleteResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -672,12 +693,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCreditCardCreationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCreditCardCreationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else if (resp.StatusCode == HttpStatusCode.Created)
@@ -762,12 +786,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCreditCardUpdateResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCreditCardUpdateResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else if (resp.StatusCode == HttpStatusCode.Created)
@@ -834,12 +861,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCreditCardQueryResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCreditCardQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -889,12 +919,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUCreditCardDeleteResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUCreditCardDeleteResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -962,12 +995,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllNewResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllNewResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1033,12 +1069,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllExistingElementsResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllExistingElementsResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1104,12 +1143,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewCardResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewCardResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1173,12 +1215,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewPlanResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewPlanResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1235,12 +1280,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionUpdateResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionUpdateResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1291,12 +1339,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionQueryResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1346,12 +1397,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUSubscriptionDeleteResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionDeleteResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1416,23 +1470,29 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else if (resp.StatusCode == HttpStatusCode.Created)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -1499,12 +1559,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesUpdateResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesUpdateResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                 }
@@ -1550,12 +1613,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByIdResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByIdResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                 }
@@ -1602,12 +1668,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByDtnResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByDtnResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                 }
@@ -1653,12 +1722,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryBySbtnResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryBySbtnResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                 }
@@ -1704,12 +1776,15 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesDeleteResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesDeleteResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                 }

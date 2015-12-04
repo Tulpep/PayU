@@ -57,13 +57,15 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUQueriesPingResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUQueriesPingResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -126,13 +128,15 @@ namespace Tulpep.PayULibrary.Services.QueriesService
 
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
-
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUQueryOrderByIdResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUQueryOrderByIdResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -196,12 +200,15 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUQueryOrderByRefResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUQueryOrderByRefResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -265,12 +272,15 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUTransactionResponseQueryResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUTransactionResponseQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else

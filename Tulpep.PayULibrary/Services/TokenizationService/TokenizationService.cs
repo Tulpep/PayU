@@ -61,12 +61,15 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUIndividualCreditCardRegistrationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUIndividualCreditCardRegistrationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -135,12 +138,15 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUMassiveCreditCardRegistrationResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUMassiveCreditCardRegistrationResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
@@ -258,12 +264,15 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
-                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
-                        string res = sr.ReadToEnd();
-                        var des = JsonConvert.DeserializeObject<RootPayUIndividualPaymentWithTokenResponse>(res);
-                        if (des != null)
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            return des;
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUIndividualPaymentWithTokenResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
                         }
                     }
                     else
