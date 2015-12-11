@@ -74,7 +74,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -151,7 +151,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -277,7 +277,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }

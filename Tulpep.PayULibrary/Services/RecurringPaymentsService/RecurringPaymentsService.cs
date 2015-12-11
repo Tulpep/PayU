@@ -131,7 +131,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -224,7 +224,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -287,7 +287,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -415,7 +415,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -500,7 +500,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -565,7 +565,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -623,7 +623,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -717,7 +717,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -810,7 +810,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -874,7 +874,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -932,7 +932,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1008,7 +1008,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1082,7 +1082,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1156,7 +1156,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1228,7 +1228,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1293,7 +1293,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1352,7 +1352,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1410,7 +1410,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1497,7 +1497,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -1624,6 +1624,10 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                             }
                         }
                     }
+                    else
+                    {
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
+                    }
                 }
             }
             catch (Exception)
@@ -1679,6 +1683,10 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                             }
                         }
                     }
+                    else
+                    {
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
+                    }
                 }
             }
             catch (Exception)
@@ -1733,6 +1741,10 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                             }
                         }
                     }
+                    else
+                    {
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
+                    }
                 }
             }
             catch (Exception)
@@ -1786,6 +1798,10 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                                 return des;
                             }
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }

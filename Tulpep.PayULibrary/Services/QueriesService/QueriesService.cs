@@ -70,7 +70,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -141,7 +141,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
@@ -285,7 +285,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                     else
                     {
-                        return null;
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
                     }
                 }
             }
