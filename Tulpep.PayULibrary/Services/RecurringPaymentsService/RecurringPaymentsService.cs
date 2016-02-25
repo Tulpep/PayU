@@ -171,7 +171,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -258,7 +258,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -293,9 +293,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception("Plan does not exist in Payu" + ex.Message);
+                }
             }
 
             return null;
@@ -315,7 +327,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -341,9 +353,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    throw new Exception("Plan does not exist in Payu" + ex.Message);
+                }
             }
 
             return false;
@@ -367,7 +391,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -454,7 +478,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -539,7 +563,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -575,9 +599,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -597,7 +633,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -633,9 +669,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -667,7 +715,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -765,7 +813,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -854,7 +902,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -889,9 +937,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -911,7 +971,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -947,9 +1007,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -979,7 +1051,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1023,10 +1095,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1053,7 +1136,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1097,10 +1180,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1127,7 +1221,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1171,10 +1265,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1200,7 +1305,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1243,10 +1348,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1268,7 +1384,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1308,10 +1424,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1331,7 +1458,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1367,10 +1494,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1390,7 +1528,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1425,10 +1563,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1454,7 +1603,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1545,7 +1694,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1583,9 +1732,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1606,7 +1767,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1641,9 +1802,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1664,7 +1837,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1700,9 +1873,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1723,7 +1908,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1758,9 +1943,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
 
             return null;
@@ -1781,7 +1978,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
 
-                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"]+ PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
@@ -1816,9 +2013,21 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                throw;
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
             }
             return null;
         }

@@ -71,30 +71,28 @@ namespace TestPayU
 
             List<Request_Recurring_AdditionalValue> pAddirionalValues = new List<Request_Recurring_AdditionalValue>();
 
-            var av1 = new Request_Recurring_AdditionalValue()
+            var plan_Val = new Request_Recurring_AdditionalValue()
             {
                 name = "PLAN_VALUE",
-                value = "9900",
+                value = "6000",
                 currency = PayU_Constants.CURRENCY_COP
             };
-            var av2 = new Request_Recurring_AdditionalValue()
+            var plan_Tax = new Request_Recurring_AdditionalValue()
             {
                 name = "PLAN_TAX",
-                value = "800",
+                value = "160",
                 currency = PayU_Constants.CURRENCY_COP
             };
-            var av3 = new Request_Recurring_AdditionalValue()
+            var return_Base = new Request_Recurring_AdditionalValue()
             {
                 name = "PLAN_TAX_RETURN_BASE",
-                value = "4200",
+                value = "1000",
                 currency = PayU_Constants.CURRENCY_COP
             };
 
-            pAddirionalValues.Add(av1);
-
-            pAddirionalValues.Add(av2);
-
-            pAddirionalValues.Add(av3);
+            pAddirionalValues.Add(plan_Val);
+            pAddirionalValues.Add(plan_Tax);
+            pAddirionalValues.Add(return_Base);
 
             Console.WriteLine("Making a ping to the Payu API");
             Console.WriteLine(QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje).code);
@@ -110,7 +108,8 @@ namespace TestPayU
             Console.WriteLine("creating a recurring plan in the PayU system");
             Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "PHME_Premium_Plan", pAddirionalValues).id);
             Console.WriteLine("query that plan in the PayU system");
-            Console.WriteLine(RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHOME_Premium_Plan").id);
+            var planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "colombiaId");
+            Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
             Console.WriteLine("Getting an order by id code");
             Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
                              PayU_Constants.LANGUAGE_ES, 7665206).code);
