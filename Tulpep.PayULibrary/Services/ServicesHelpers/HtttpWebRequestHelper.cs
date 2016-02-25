@@ -32,7 +32,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             req.Accept = "application/json";
             req.Method = httpMethod.ToString();
 
-            if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT && requestJson != null)
+            if ((httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT) && requestJson != null)
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
                 req.ContentLength = bytes.Length;
@@ -63,7 +63,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             req.Headers[HttpRequestHeader.Authorization] = _cred;
             req.Method = httpMethod.ToString();
 
-            if (httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT && requestJson != null)
+            if ((httpMethod == HttpMethod.POST || httpMethod == HttpMethod.PUT) && requestJson != null)
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(requestJson);
                 req.ContentLength = bytes.Length;

@@ -1076,7 +1076,9 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         plan = pPlan
                     };
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1085,6 +1087,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
+                        {
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllNewResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
+                        }
+                    }
+                    else if (resp.StatusCode == HttpStatusCode.Created)
+                    {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
                             string res = sr.ReadToEnd();
@@ -1161,7 +1176,9 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         plan = pPlan
                     };
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1170,6 +1187,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
+                        {
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllExistingElementsResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
+                        }
+                    }
+                    else if (resp.StatusCode == HttpStatusCode.Created)
+                    {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
                             string res = sr.ReadToEnd();
@@ -1246,7 +1276,9 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         plan = pPlan
                     };
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1255,6 +1287,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
+                        {
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewCardResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
+                        }
+                    }
+                    else if (resp.StatusCode == HttpStatusCode.Created)
+                    {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
                             string res = sr.ReadToEnd();
@@ -1329,7 +1374,9 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         plan = pPlan
                     };
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
+
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1338,6 +1385,19 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
 
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
+                        {
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewPlanResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
+                        }
+                    }
+                    else if (resp.StatusCode == HttpStatusCode.Created)
+                    {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
                             string res = sr.ReadToEnd();

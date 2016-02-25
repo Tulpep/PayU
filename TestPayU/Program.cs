@@ -4,6 +4,7 @@ using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_Cross;
 using Tulpep.PayULibrary.Models.Request.Request_PayUPayments.CreditCard;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Cross;
+using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.Creation.NewCard;
 using Tulpep.PayULibrary.Services.PaymentsService;
 using Tulpep.PayULibrary.Services.QueriesService;
 using Tulpep.PayULibrary.Services.RecurringPaymentsService;
@@ -106,7 +107,7 @@ namespace TestPayU
             Console.WriteLine("Getting an order by reference code");
             Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
             Console.WriteLine("creating a recurring plan in the PayU system");
-            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1","1","1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
+            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "1", "1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
             Console.WriteLine("query that plan in the PayU system");
             var planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHME_Premium_Plan_1");
             Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
@@ -123,6 +124,36 @@ namespace TestPayU
             Console.WriteLine(costId);
             Console.WriteLine("Query costumer to payu");
             Console.WriteLine(RecurringPaymentsService.GetACustomer(PayU_Constants.LANGUAGE_ES, costId).fullName);
+            Console.WriteLine("Add New card to a subscription");
+            var planCreditCard = new Request_Subscription_Creation_NewCard_CreditCard()
+            {
+                number = "4916523740316159",
+                document = "103242915",
+                expMonth = "01",
+                expYear = "2018",
+                name = "test",
+                type = PayU_Constants.PAYMENT_METHOD_VISA,
+                address = new Request_Recurring_Address()
+                {
+                    line1 = "Calle 93 B 17 – 25",
+                    line2 = "Calle 93 B 17 – 25",
+                    line3 = "Calle 93 B 17 – 25",
+                    city = "Panama",
+                    state = "Panama",
+                    country = "CO",
+                    postalCode = "000000",
+                    phone = "5582254"
+                }
+            };
+            var planList = new List<Request_Subscription_Creation_NewCard_CreditCard>();
+            planList.Add(planCreditCard);
+            var planCustomer = new Request_Subscription_Creation_NewCard_Customer()
+            {
+                id = costId,
+                creditCards = planList
+            };
+            Console.WriteLine(RecurringPaymentsService.CreateASubscriptionNewCard(PayU_Constants.LANGUAGE_ES, "1", "1", "0", planCustomer,
+                new Request_Subscription_Creation_NewCard_Plan() { planCode = "PHME_Premium_Plan_1" }).id);
 
             Console.WriteLine("Press any key to stop...");
             Console.ReadKey();
