@@ -15,6 +15,9 @@ namespace Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Plan.Creat
         public string intervalCount { get; set; }
         public string maxPaymentsAllowed { get; set; }
         public string paymentAttemptsDelay { get; set; }
+        public string maxPaymentAttempts { get; set; }
+        public string maxPendingPayments { get; set; }
+        public string trialDays { get; set; }
         public List<Request_Recurring_AdditionalValue> additionalValues { get; set; }
     }
 }

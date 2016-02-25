@@ -106,9 +106,14 @@ namespace TestPayU
             Console.WriteLine("Getting an order by reference code");
             Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
             Console.WriteLine("creating a recurring plan in the PayU system");
-            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "PHME_Premium_Plan", pAddirionalValues).id);
+            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1","1","1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
             Console.WriteLine("query that plan in the PayU system");
-            var planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "colombiaId");
+            var planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHME_Premium_Plan_1");
+            Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
+            Console.WriteLine("updating a recurring plan in the PayU system");
+            Console.WriteLine(RecurringPaymentsService.UpdateAPlan(pLanguaje, "Larnia Premium Plan", "1", "1", "4", "PHME_Premium_Plan_1", pAddirionalValues).id);
+            Console.WriteLine("query updated plan in the PayU system");
+            planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHME_Premium_Plan_1");
             Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
             Console.WriteLine("Getting an order by id code");
             Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
