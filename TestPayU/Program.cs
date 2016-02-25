@@ -114,6 +114,11 @@ namespace TestPayU
             Console.WriteLine("Getting an order by id code");
             Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
                              PayU_Constants.LANGUAGE_ES, 7665206).code);
+            Console.WriteLine("Adding new costumer to payu");
+            var costId = RecurringPaymentsService.CreateACustomer(PayU_Constants.LANGUAGE_ES, "juan.hernandez@tulpep.com", "Juan Carlos Hernandez Ramos").id;
+            Console.WriteLine(costId);
+            Console.WriteLine("Query costumer to payu");
+            Console.WriteLine(RecurringPaymentsService.GetACustomer(PayU_Constants.LANGUAGE_ES, costId).fullName);
 
             Console.WriteLine("Press any key to stop...");
             Console.ReadKey();
