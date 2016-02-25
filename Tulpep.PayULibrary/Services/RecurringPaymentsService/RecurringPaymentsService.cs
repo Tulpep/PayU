@@ -313,7 +313,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                 }
                 else
                 {
-                    throw new Exception("Plan does not exist in Payu" + ex.Message);
+                    throw ex;
                 }
             }
 
