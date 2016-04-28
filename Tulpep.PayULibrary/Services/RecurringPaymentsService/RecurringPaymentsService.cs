@@ -147,10 +147,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    return new RootPayUPlanCreationResponse()
-                    {
-                        id = "You have registered it before",
-                    };
+                    throw;
                 }
                 throw;
             }
@@ -458,10 +455,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    return new RootPayUCustomerCreationResponse()
-                    {
-                        id = "You have registered it before",
-                    };
+                    throw;
                 }
                 throw;
             }
@@ -788,10 +782,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    return new RootPayUCreditCardCreationResponse()
-                    {
-                        token = "You have registered it before",
-                    };
+                    throw;
                 }
                 throw;
             }
@@ -1732,10 +1723,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    return new RootPayUAdditionalChargesCreationResponse()
-                    {
-                        id = "You have registered it before",
-                    };
+                    throw;
                 }
                 throw;
             }

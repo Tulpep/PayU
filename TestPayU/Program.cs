@@ -98,14 +98,15 @@ namespace TestPayU
             Console.WriteLine("Making a ping to the Payu API");
             Console.WriteLine(QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje).code);
             Console.WriteLine("Registering a Payment in the PayU system");
-            Console.WriteLine(PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, pCreditCard,
+            var payment = PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, pCreditCard,
             pTX_VALUE, pBuyer, pShippingAddress, pPayer, pExtraParameters, pPaymentCountry, pPaymentMethod, pType, pUserAgent,
-            pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress).code);
+            pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress);
+            Console.WriteLine(payment.code);
             Console.WriteLine("Getting available list of bank ready in the PayU system");
             Console.WriteLine(PaymentsService.GetAvailableBankList(pTest, PayU_Constants.COMMAND_GET_BANKS_LIST, pLanguaje,
                 PayU_Constants.COUNTRY_CO, PayU_Constants.PAYMENT_METHOD_PSE).code);
             Console.WriteLine("Getting an order by reference code");
-            Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
+            //Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
             Console.WriteLine("creating a recurring plan in the PayU system");
             Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "1", "1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
             Console.WriteLine("query that plan in the PayU system");
@@ -118,7 +119,7 @@ namespace TestPayU
             Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
             Console.WriteLine("Getting an order by id code");
             Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
-                             PayU_Constants.LANGUAGE_ES, 7665206).code);
+                             PayU_Constants.LANGUAGE_ES, payment.transactionResponse.orderId).code);
             Console.WriteLine("Adding new costumer to payu");
             var costId = RecurringPaymentsService.CreateACustomer(PayU_Constants.LANGUAGE_ES, "juan.hernandez@tulpep.com", "Juan Carlos Hernandez Ramos").id;
             Console.WriteLine(costId);
