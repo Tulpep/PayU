@@ -37,5 +37,15 @@ namespace Tulpep.PayULibrary.Models.Request.Request_Cross
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string PSE_REFERENCE3 { get; set; }
+
+        /// <summary>
+        /// Use this to send additional parameter to PayU API
+        /// </summary>
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int extra1 { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int extra2 { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public int extra3 { get; set; }
     }
 }
