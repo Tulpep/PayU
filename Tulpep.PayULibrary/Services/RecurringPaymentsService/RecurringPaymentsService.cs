@@ -700,14 +700,14 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pDocument"></param>
         /// <param name="pExpMonth"></param>
         /// <param name="pExpYearm"></param>
-        /// <param name="pMame"></param>
+        /// <param name="pName"></param>
         /// <param name="pNumber"></param>
         /// <param name="pType"></param>
         /// <param name="pAddress"></param>
         /// <param name="pCustomerId"></param>
         /// <returns></returns>
         public static RootPayUCreditCardCreationResponse CreateACreditCard(
-            string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame, string pNumber, string pType,
+            string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pName, string pNumber, string pType,
             Request_Recurring_Address pAddress, string pCustomerId)
         {
             try
@@ -731,7 +731,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         document = pDocument,
                         expMonth = pExpMonth,
                         expYear = pExpYearm,
-                        name = pMame,
+                        name = pName,
                         number = pNumber,
                         type = pType,
                         address = pAddress
@@ -797,12 +797,12 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pDocument"></param>
         /// <param name="pExpMonth"></param>
         /// <param name="pExpYearm"></param>
-        /// <param name="pMame"></param>
+        /// <param name="pName"></param>
         /// <param name="pAddress"></param>
         /// <param name="pCreditCardToken"></param>
         /// <returns></returns>
         public static RootPayUCreditCardUpdateResponse UpdateACreditCard(
-            string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pMame,
+            string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pName,
             Request_Recurring_Address pAddress, string pCreditCardToken)
         {
             try
@@ -825,7 +825,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         document = pDocument,
                         expMonth = pExpMonth,
                         expYear = pExpYearm,
-                        name = pMame,
+                        name = pName,
                         address = pAddress,
                     };
 
@@ -961,7 +961,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardDeleteResponse DeleteACreditCard(string pLanguage, string pCreditCardToken)
+        public static RootPayUCreditCardDeleteResponse DeleteACreditCard(string pLanguage, string pCustomerId, string pCreditCardToken)
         {
             try
             {
@@ -973,7 +973,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                 if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
                 {
-                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCreditCardRecurringPaymentsUrl + pCreditCardToken;
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultCustomerRecurringPaymentsUrl + pCustomerId + PayU_Constants.DefaultCreditCardRecurringPaymentsUrl + pCreditCardToken;
 
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);

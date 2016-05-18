@@ -5,9 +5,11 @@ using Tulpep.PayULibrary.Models.Request.Request_Cross;
 using Tulpep.PayULibrary.Models.Request.Request_PayUPayments.CreditCard;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.Subscription.Creation.NewCard;
+using Tulpep.PayULibrary.Models.Request.Request_Tokenization.IndividualPaymentWithToken;
 using Tulpep.PayULibrary.Services.PaymentsService;
 using Tulpep.PayULibrary.Services.QueriesService;
 using Tulpep.PayULibrary.Services.RecurringPaymentsService;
+using Tulpep.PayULibrary.Services.TokenizationService;
 
 namespace TestPayU
 {
@@ -105,10 +107,10 @@ namespace TestPayU
             Console.WriteLine("Getting available list of bank ready in the PayU system");
             Console.WriteLine(PaymentsService.GetAvailableBankList(pTest, PayU_Constants.COMMAND_GET_BANKS_LIST, pLanguaje,
                 PayU_Constants.COUNTRY_CO, PayU_Constants.PAYMENT_METHOD_PSE).code);
-            Console.WriteLine("Getting an order by reference code");
+            //Console.WriteLine("Getting an order by reference code");
             //Console.WriteLine(QueriesService.GetOrderByReferenceCode(pTest, PayU_Constants.COMMAND_ORDER_DETAIL_BY_REFERENCE_CODE, pLanguaje, pReferenceCode).code);
-            Console.WriteLine("creating a recurring plan in the PayU system");
-            Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "1", "1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
+            //Console.WriteLine("creating a recurring plan in the PayU system");
+            //Console.WriteLine(RecurringPaymentsService.CreateAPlan(pLanguaje, "PuntoHome Premium Plan", "YEAR", "1", "4", "1", "1", "1", "0", "PHME_Premium_Plan_1", pAddirionalValues).id);
             Console.WriteLine("query that plan in the PayU system");
             var planExist = RecurringPaymentsService.GetAPlan(PayU_Constants.LANGUAGE_ES, "PHME_Premium_Plan_1");
             Console.WriteLine(planExist != null ? planExist.id : "plan does not exist");
@@ -121,10 +123,10 @@ namespace TestPayU
             Console.WriteLine(QueriesService.GetOrderById(false, PayU_Constants.COMMAND_ORDER_DETAIL,
                              PayU_Constants.LANGUAGE_ES, payment.transactionResponse.orderId).code);
             Console.WriteLine("Adding new costumer to payu");
-            var costId = RecurringPaymentsService.CreateACustomer(PayU_Constants.LANGUAGE_ES, "juan.hernandez@tulpep.com", "Juan Carlos Hernandez Ramos").id;
-            Console.WriteLine(costId);
+            var costId = RecurringPaymentsService.CreateACustomer(PayU_Constants.LANGUAGE_ES, "juan.hernandez@tulpep.com", "Juan Carlos Hernandez Ramos");
+            Console.WriteLine(costId.id);
             Console.WriteLine("Query costumer to payu");
-            Console.WriteLine(RecurringPaymentsService.GetACustomer(PayU_Constants.LANGUAGE_ES, costId).fullName);
+            Console.WriteLine(RecurringPaymentsService.GetACustomer(PayU_Constants.LANGUAGE_ES, costId.id).fullName);
             Console.WriteLine("Add New card to a subscription");
             var planCreditCard = new Request_Subscription_Creation_NewCard_CreditCard()
             {
@@ -150,11 +152,46 @@ namespace TestPayU
             planList.Add(planCreditCard);
             var planCustomer = new Request_Subscription_Creation_NewCard_Customer()
             {
-                id = costId,
+                id = costId.id,
                 creditCards = planList
             };
             Console.WriteLine(RecurringPaymentsService.CreateASubscriptionNewCard(PayU_Constants.LANGUAGE_ES, "1", "1", "0", planCustomer,
                 new Request_Subscription_Creation_NewCard_Plan() { planCode = "PHME_Premium_Plan_1" }).id);
+            Console.WriteLine("Create a credit card token");
+            var createdCreditCard = RecurringPaymentsService.CreateACreditCard(PayU_Constants.LANGUAGE_ES, planCreditCard.document, planCreditCard.expMonth, planCreditCard.expYear,
+                planCreditCard.name, planCreditCard.number, planCreditCard.type, planCreditCard.address, costId.id);
+            Console.WriteLine(createdCreditCard.token);
+            Console.WriteLine("Query created credit card token");
+            var cQueryToken = RecurringPaymentsService.GetACreditCard(PayU_Constants.LANGUAGE_ES, createdCreditCard.token);
+            Console.WriteLine(cQueryToken.number);
+            Console.WriteLine("Make a payment with created credit card token");
+            var pBuyerT = new Request_IndividualPaymentWithToken_Buyer()
+            {
+                fullName = "APPROVED",
+                emailAddress = "test@payulatam.com",
+                dniNumber = "1155255887",
+                shippingAddress = new Address()
+                {
+                    street1 = "Calle 93 B 17 – 25",
+                    city = "Panama",
+                    state = "Panama",
+                    country = "CO",
+                    postalCode = "000000",
+                    phone = "5582254"
+                }
+            };
+            var pPayerT = new Request_IndividualPaymentWithToken_Payer()
+            {
+                fullName = "APPROVED",
+                emailAddress = "test@payulatam.com"
+            };
+            var payToken = TokenizationService.IndividualPaymentWithToken(false, PayU_Constants.COMMAND_SUBMIT_TRANSACTION, PayU_Constants.LANGUAGE_ES,
+                cQueryToken.token, pTX_VALUE, pBuyerT, pShippingAddress, pPayerT, pExtraParameters, PayU_Constants.COUNTRY_CO, cQueryToken.type,
+                PayU_Constants.TRANSACTION_TYPE_AUTHORIZATION_AND_CAPTURE, pUserAgent, pDescription, pNotifyUrl, pReferenceCode, pCookie,
+                pDeviceSessionId, pIpAddress);
+            Console.WriteLine(payToken.code);
+            Console.WriteLine("Delete created credit card");
+            var cdeleteToken = RecurringPaymentsService.DeleteACreditCard(PayU_Constants.LANGUAGE_ES, costId.id, createdCreditCard.token);
 
             Console.WriteLine("Press any key to stop...");
             Console.ReadKey();
