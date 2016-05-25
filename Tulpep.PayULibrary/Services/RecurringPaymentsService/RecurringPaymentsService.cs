@@ -68,7 +68,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <returns></returns>
         public static RootPayUPlanCreationResponse CreateAPlan(string pLanguage,
             string pDescription, string pInterval, string pIntervalCount, string pMaxPaymentsAllowed,
-            string pPaymentAttemptsDelay, string pMaxPaymentAttempts, string pMaxPendingPayments, string pTrialDays, string pPlanCode,
+            string pPaymentAttemptsDelay, string pPlanCode,
             List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
             try
@@ -97,10 +97,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         maxPaymentsAllowed = pMaxPaymentsAllowed,
                         paymentAttemptsDelay = pPaymentAttemptsDelay,
                         planCode = pPlanCode,
-                        additionalValues = pAdditionalValues,
-                        maxPaymentAttempts = pMaxPaymentAttempts,
-                        maxPendingPayments = pMaxPendingPayments,
-                        trialDays = pTrialDays
+                        additionalValues = pAdditionalValues
                     };
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
