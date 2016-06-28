@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Net;
+using System.Net.Security;
 using System.Text;
 
 namespace Tulpep.PayULibrary.Services.ServicesHelpers
@@ -54,7 +55,9 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             /// <completionlist cref="SSL">
             /// Add here the SSL certificate 
             /// </completionlist>
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(
+               delegate { return true; }
+            );
 
             req.ContentType = "application/json; charset=utf-8";
             req.Accept = "application/json";
