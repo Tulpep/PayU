@@ -1456,8 +1456,8 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         creditCardToken = pCreditCardToken
                     };
-
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    string requestJson = JsonConvert.SerializeObject(jsonObject);
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
