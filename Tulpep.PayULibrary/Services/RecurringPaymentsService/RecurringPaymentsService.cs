@@ -25,6 +25,7 @@ using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCh
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Query.ByIdOfExtraCharge;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Query.BySubscription;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.AdditionalCharges.Update;
+using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Bill.Query;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Creation;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Delete;
 using Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.CreditCard.Query;
@@ -2087,6 +2088,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
             }
             return null;
         }
+        
 
         /// <summary>
         /// 
@@ -2094,7 +2096,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesQueryBySbtnResponse GetARecurringBillBySubscriptionId(string pLanguage,
+        public static RootPayUBillQueryResponse GetARecurringBillBySubscriptionId(string pLanguage,
             string pSubscriptionId)
         {
             try
@@ -2124,7 +2126,77 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
                             string res = sr.ReadToEnd();
-                            var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryBySbtnResponse>(res);
+                            var des = JsonConvert.DeserializeObject<RootPayUBillQueryResponse>(res);
+                            sr.Close();
+                            if (des != null)
+                            {
+                                return des;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception(resp.StatusCode + "; " + resp.StatusDescription);
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError &&
+                    ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pLanguage"></param>
+        /// <param name="pCustomerId"></param>
+        /// <returns></returns>
+        public static RootPayUBillQueryResponse GetARecurringBillsByCustomerId(string pLanguage,
+            string pCustomerId)
+        {
+            try
+            {
+                string productionOrTestApiKey = ConfigurationManager.AppSettings["PAYU_API_KEY"];
+
+                string productionOrTestApiLogIn = ConfigurationManager.AppSettings["PAYU_API_LOGIN"];
+
+                string productionOrTestUrl = ConfigurationManager.AppSettings["PAYU_API_CONNECTION_URL"] + PayU_Constants.DefaultProductionRecurringPaymentsConnectionUrl;
+
+                if (!string.IsNullOrWhiteSpace(productionOrTestUrl))
+                {
+                    productionOrTestUrl = productionOrTestUrl + PayU_Constants.DefaultRecurringBillUrl +
+                        PayU_Constants.DefaultRecurringBillUrlCustomerParam + pCustomerId;
+
+                    string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
+                    string pBse64 = CryptoHelper.GetBase64Hash(source);
+
+                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                       pLanguage, pBse64, HttpMethod.GET);
+
+                    if (resp == null)
+                        return null;
+
+                    if (resp.StatusCode == HttpStatusCode.OK)
+                    {
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
+                        {
+                            string res = sr.ReadToEnd();
+                            var des = JsonConvert.DeserializeObject<RootPayUBillQueryResponse>(res);
                             sr.Close();
                             if (des != null)
                             {

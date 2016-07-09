@@ -39,6 +39,7 @@ namespace Tulpep.PayULibrary.Cross
         public const string DefaultAdditionalChargesRecurringPaymentsSubscriptionParam = "?subscriptionId=";
         public const string DefaultRecurringBillUrl = "/recurringBill/";
         public const string DefaultRecurringBillUrlSubscriptionParam = "?subscriptionId=";
+        public const string DefaultRecurringBillUrlCustomerParam = "?customerId=";
 
         public const string TestAPILogin = "11959c415b33d0c";
         public const string TestAPIKey = "6u39nqhq8ftd0hlvnjfs66eh8c";
