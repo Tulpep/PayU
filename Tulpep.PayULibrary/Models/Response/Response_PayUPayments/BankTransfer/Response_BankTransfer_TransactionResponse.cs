@@ -89,6 +89,6 @@ namespace Tulpep.PayULibrary.Models.Response.Response_PayUPayments.BankTransfer
         public string transactionDate { get; set; }
         public string transactionTime { get; set; }
         public string operationDate { get; set; }
-        public Response_ExtraParameters extraParameters { get; set; }
+        public dynamic extraParameters { get; set; }
     }
 }

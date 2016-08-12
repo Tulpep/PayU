@@ -20,6 +20,6 @@ namespace Tulpep.PayULibrary.Models.Response.Response_PayUQueries.QueryOrderByRe
         public string expirationDate { get; set; }
         public Response_QueryOrderByReference_Payer payer { get; set; }
         public Response_AdditionalValues additionalValues { get; set; }
-        public Response_ExtraParameters extraParameters { get; set; }
+        public dynamic extraParameters { get; set; }
     }
 }
