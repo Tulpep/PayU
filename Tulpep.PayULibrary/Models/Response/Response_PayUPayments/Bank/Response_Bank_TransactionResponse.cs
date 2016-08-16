@@ -72,6 +72,6 @@ namespace Tulpep.PayULibrary.Models.Response.Response_PayUPayments.Bank
                 }
             }
         }
-        public Response_ExtraParameters extraParameters { get; set; }
+        public dynamic extraParameters { get; set; }
     }
 }

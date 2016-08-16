@@ -131,7 +131,6 @@
     <Compile Include="Models\Request\Request_Tokenization\TokenRemoval\RootPayUTokenRemovalRequest.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_AdditionalValues.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_Entry.cs" />
-    <Compile Include="Models\Response\Response_Cross\Response_ExtraParameters.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_MERCHANTCOMMISSIONVALUE.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_MERCHANTINTERESTVALUE.cs" />
     <Compile Include="Models\Response\Response_Cross\Response_PAYERCOMMISSIONVALUE.cs" />
@@ -187,6 +186,8 @@
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Payload.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\Response_TransactionResponseQuery_Result.cs" />
     <Compile Include="Models\Response\Response_PayUQueries\TransactionResponseQuery\RootPayUTransactionResponseQueryResponse.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Bill\Query\Request_Recurring_Query_BillList.cs" />
+    <Compile Include="Models\Response\Response_RecurringPayments\Bill\Query\RootPayUBillQueryResponse.cs" />
     <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Creation\RootPayUCreditCardCreationResponse.cs" />
     <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Delete\RootPayUCreditCardDeleteResponse.cs" />
     <Compile Include="Models\Response\Response_RecurringPayments\CreditCard\Query\RootPayUCreditCardQueryResponse.cs" />
