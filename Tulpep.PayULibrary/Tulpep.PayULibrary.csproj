@@ -251,6 +251,7 @@
     <Compile Include="Services\RecurringPaymentsService\RecurringPaymentsService.cs" />
     <Compile Include="Services\ServicesHelpers\HtttpWebRequestHelper.cs" />
     <Compile Include="Services\ServicesHelpers\CryptoHelper.cs" />
+    <Compile Include="Services\ServicesHelpers\Tax_BaseReturnHelper.cs" />
     <Compile Include="Services\TokenizationService\TokenizationService.cs" />
   </ItemGroup>
   <ItemGroup>

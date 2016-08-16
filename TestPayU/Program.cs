@@ -22,7 +22,7 @@ namespace TestPayU
             {
                 var pLanguaje = PayU_Constants.LANGUAGE_ES;
                 var pCommand = PayU_Constants.COMMAND_SUBMIT_TRANSACTION;
-                var pReferenceCode = "TestCOlombia";
+                var pReferenceCode = "TestCOlombia07";
                 var pDescription = "Test order Panama";
                 var pNotifyUrl = "http://pruebaslap.xtrweb.com/lap/pruebconf.php";
                 var pShippingAddress = new Address()
@@ -104,7 +104,7 @@ namespace TestPayU
                 Console.WriteLine((await QueriesService.PingTheApi(pTest, PayU_Constants.METHOD_PING, pLanguaje)).code);
                 Console.WriteLine("Registering a Payment in the PayU system");
                 var payment = await PaymentsService.MakeACreditCardPayment(pTest, pCommand, pLanguaje, pCreditCard,
-                pTX_VALUE, pBuyer, pShippingAddress, pPayer, pExtraParameters, pPaymentCountry, pPaymentMethod, pType, pUserAgent,
+                pTX_VALUE, true, pBuyer, pShippingAddress, pPayer, pExtraParameters, pPaymentCountry, pPaymentMethod, pType, pUserAgent,
                 pDescription, pNotifyUrl, pReferenceCode, pCookie, pDeviceSessionId, pIpAddress);
                 Console.WriteLine(payment.code);
                 Console.WriteLine("Getting available list of bank ready in the PayU system");

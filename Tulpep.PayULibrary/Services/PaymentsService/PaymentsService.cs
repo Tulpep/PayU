@@ -43,7 +43,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
         public static async Task<RootPayUPaymentCreditCardResponse> MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage,
-            Request_CreditCard_CreditCard pCreditCard, Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer,
+            Request_CreditCard_CreditCard pCreditCard, Request_TXVALUE pTX_VALUE, bool calculateTaxes, Request_CreditCard_Buyer pBuyer,
             Address pOrderShippingAddress, Request_CreditCard_Payer pPayer, Request_ExtraParameters pExtraParameters,
             string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, string pDescription,
             string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId, string pIpAddress)
@@ -89,10 +89,20 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                             order = new Request_CreditCard_Order()
                             {
                                 accountId = productionOrTestAccountId,
-                                additionalValues = new Request_AdditionalValues()
+                                additionalValues = calculateTaxes ? new Request_AdditionalValues()
                                 {
-                                    TX_VALUE = pTX_VALUE
-                                },
+                                    TX_VALUE = pTX_VALUE,
+                                    TX_TAX = new Request_TXTAX()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateTaxValue(pTX_VALUE.value)
+                                    },
+                                    TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
+                                    }
+                                } : new Request_AdditionalValues() { TX_VALUE = pTX_VALUE },
                                 buyer = pBuyer,
                                 description = pDescription,
                                 language = pLanguage,
@@ -168,7 +178,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
         public static async Task<RootPayUPaymentBankTransferResponse> MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
-           Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer,
+           Request_TXVALUE pTX_VALUE, bool calculateTaxes, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer,
            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId,
            string pIpAddress)
@@ -216,10 +226,20 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                             order = new Request_BankTransfer_Order()
                             {
                                 accountId = productionOrTestAccountId,
-                                additionalValues = new Request_AdditionalValues()
+                                additionalValues = calculateTaxes ? new Request_AdditionalValues()
                                 {
-                                    TX_VALUE = pTX_VALUE
-                                },
+                                    TX_VALUE = pTX_VALUE,
+                                    TX_TAX = new Request_TXTAX()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateTaxValue(pTX_VALUE.value)
+                                    },
+                                    TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
+                                    }
+                                } : new Request_AdditionalValues() { TX_VALUE = pTX_VALUE },
                                 buyer = pBuyer,
                                 description = pDescription,
                                 language = pLanguage,

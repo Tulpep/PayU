@@ -189,7 +189,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
         public static async Task<RootPayUIndividualPaymentWithTokenResponse> IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage,
-            string pCreditCardTokenId, Request_TXVALUE pTX_VALUE,
+            string pCreditCardTokenId, Request_TXVALUE pTX_VALUE, bool calculateTaxes,
             Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress,
             Request_IndividualPaymentWithToken_Payer pPayer, Request_ExtraParameters pExtraParameters, string pPaymentCountry,
             string pPaymentMethod, string pType, string pUserAgent, string pDescription, string pNotifyUrl, string pReferenceCode,
@@ -244,10 +244,20 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                                 notifyUrl = pNotifyUrl,
                                 referenceCode = pReferenceCode,
                                 shippingAddress = pOrderShippingAddress,
-                                additionalValues = new Request_AdditionalValues()
+                                additionalValues = calculateTaxes ? new Request_AdditionalValues()
                                 {
                                     TX_VALUE = pTX_VALUE,
-                                },
+                                    TX_TAX = new Request_TXTAX()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateTaxValue(pTX_VALUE.value)
+                                    },
+                                    TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
+                                    }
+                                } : new Request_AdditionalValues() { TX_VALUE = pTX_VALUE },
                                 signature = pSignature
                             },
                             extraParameters = pExtraParameters

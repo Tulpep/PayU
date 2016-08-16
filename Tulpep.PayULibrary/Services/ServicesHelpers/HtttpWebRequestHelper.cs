@@ -23,7 +23,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
     public static class HtttpWebRequestHelper
     {
         private const int RetryAttempts = 3;
-        private const double RetryDelaySeconds = 5;
+        private const double RetryDelaySeconds = 2;
 
         public static async Task<HttpWebResponse> SendJSONToPayUGeneralApi(string url, string requestJson, HttpMethod httpMethod)
         {
