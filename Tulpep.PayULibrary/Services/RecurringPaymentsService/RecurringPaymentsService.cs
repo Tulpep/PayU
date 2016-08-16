@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
+using System.Threading.Tasks;
 #region Tulpep PayU Library
 using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_RecurringPayments.AdditionalCharges.Creation;
@@ -66,7 +67,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pPlanCode"></param>
         /// <param name="pAdditionalValues"></param>
         /// <returns></returns>
-        public static RootPayUPlanCreationResponse CreateAPlan(string pLanguage,
+        public static async Task<RootPayUPlanCreationResponse> CreateAPlan(string pLanguage,
             string pDescription, string pInterval, string pIntervalCount, string pMaxPaymentsAllowed,
             string pMaxPaymentAttempts, string pMaxPendingPayments, string pTrialDays,
             string pPaymentAttemptsDelay, string pPlanCode,
@@ -106,7 +107,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -116,7 +117,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPlanCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -129,7 +130,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPlanCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -166,7 +167,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pPlanCode"></param>
         /// <param name="pAdditionalValues"></param>
         /// <returns></returns>
-        public static RootPayUPlanUpdateResponse UpdateAPlan(string pLanguage, string pDescription, string pMaxPendingPayments,
+        public static async Task<RootPayUPlanUpdateResponse> UpdateAPlan(string pLanguage, string pDescription, string pMaxPendingPayments,
             string pMaxPaymentAttempts,
            string pPaymentAttemptsDelay, string pPlanCode, List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
@@ -197,7 +198,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
@@ -207,7 +208,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPlanUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -220,7 +221,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPlanUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -255,7 +256,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pPlanCode"></param>
         /// <returns></returns>
-        public static RootPayUPlanQueryResponse GetAPlan(string pLanguage, string pPlanCode)
+        public static async Task<RootPayUPlanQueryResponse> GetAPlan(string pLanguage, string pPlanCode)
         {
             try
             {
@@ -272,7 +273,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                                            pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -283,7 +284,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPlanQueryResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -324,7 +325,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pPlanCode"></param>
         /// <returns></returns>
-        public static bool DeleteAPlan(string pLanguage, string pPlanCode)
+        public static async Task<bool> DeleteAPlan(string pLanguage, string pPlanCode)
         {
             try
             {
@@ -342,7 +343,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
                     if (resp == null)
@@ -388,7 +389,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
         /// <returns></returns>
-        public static RootPayUCustomerCreationResponse CreateACustomer(string pLanguage, string pEnail, string pFullName)
+        public static async Task<RootPayUCustomerCreationResponse> CreateACustomer(string pLanguage, string pEnail, string pFullName)
         {
             try
             {
@@ -413,7 +414,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -424,7 +425,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -437,7 +438,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -471,7 +472,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pEnail"></param>
         /// <param name="pFullName"></param>
         /// <returns></returns>
-        public static RootPayUCustomerUpdateResponse UpdateACustomer(string pLanguage, string pCustomerId,
+        public static async Task<RootPayUCustomerUpdateResponse> UpdateACustomer(string pLanguage, string pCustomerId,
             string pEnail, string pFullName)
         {
             try
@@ -497,7 +498,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
@@ -508,7 +509,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -521,7 +522,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -557,7 +558,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCustomerId"></param>
         /// <returns></returns>
-        public static RootPayUCustomerQueryResponse GetACustomer(string pLanguage, string pCustomerId)
+        public static async Task<RootPayUCustomerQueryResponse> GetACustomer(string pLanguage, string pCustomerId)
         {
             try
             {
@@ -575,7 +576,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -586,7 +587,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerQueryResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -627,7 +628,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCustomerId"></param>
         /// <returns></returns>
-        public static RootPayUCustomerDeleteResponse DeleteACustomer(string pLanguage, string pCustomerId)
+        public static async Task<RootPayUCustomerDeleteResponse> DeleteACustomer(string pLanguage, string pCustomerId)
         {
             try
             {
@@ -645,7 +646,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
                     if (resp == null)
@@ -656,7 +657,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCustomerDeleteResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -707,7 +708,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pAddress"></param>
         /// <param name="pCustomerId"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardCreationResponse CreateACreditCard(
+        public static async Task<RootPayUCreditCardCreationResponse> CreateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pName, string pNumber, string pType,
             Request_Recurring_Address pAddress, string pCustomerId)
         {
@@ -740,7 +741,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -751,7 +752,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -764,7 +765,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -802,7 +803,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pAddress"></param>
         /// <param name="pCreditCardToken"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardUpdateResponse UpdateACreditCard(
+        public static async Task<RootPayUCreditCardUpdateResponse> UpdateACreditCard(
             string pLanguage, string pDocument, string pExpMonth, string pExpYearm, string pName,
             Request_Recurring_Address pAddress, string pCreditCardToken)
         {
@@ -832,7 +833,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
@@ -843,7 +844,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -857,7 +858,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -893,7 +894,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardQueryResponse GetACreditCard(string pLanguage, string pCreditCardToken)
+        public static async Task<RootPayUCreditCardQueryResponse> GetACreditCard(string pLanguage, string pCreditCardToken)
         {
             try
             {
@@ -910,7 +911,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -921,7 +922,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardQueryResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -962,7 +963,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCardToken"></param>
         /// <returns></returns>
-        public static RootPayUCreditCardDeleteResponse DeleteACreditCard(string pLanguage, string pCustomerId, string pCreditCardToken)
+        public static async Task<RootPayUCreditCardDeleteResponse> DeleteACreditCard(string pLanguage, string pCustomerId, string pCreditCardToken)
         {
             try
             {
@@ -980,7 +981,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
                     if (resp == null)
@@ -991,7 +992,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUCreditCardDeleteResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1039,7 +1040,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionCreationAllNewResponse CreateASubscriptionAllMew(string pLanguage, string pInstallments,
+        public static async Task<RootPayUSubscriptionCreationAllNewResponse> CreateASubscriptionAllMew(string pLanguage, string pInstallments,
             string pQuantity, string pTrialDays,
             Request_Subscription_Creation_AllNewItems_Customer pCustomer,
             Request_Subscription_Creation_AllNewItems_Plan pPlan)
@@ -1070,7 +1071,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1081,7 +1082,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllNewResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1094,7 +1095,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllNewResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1139,7 +1140,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionCreationAllExistingElementsResponse CreateASubscriptionAllExisting(string pLanguage,
+        public static async Task<RootPayUSubscriptionCreationAllExistingElementsResponse> CreateASubscriptionAllExisting(string pLanguage,
             string pInstallments, string pQuantity, string pTrialDays,
             Request_Subscription_Creation_AllExistingElements_Customer pCustomer,
             Request_Subscription_Creation_AllExistingElements_Plan pPlan)
@@ -1170,7 +1171,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1181,7 +1182,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllExistingElementsResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1194,7 +1195,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationAllExistingElementsResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1239,7 +1240,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionCreationNewCardResponse CreateASubscriptionNewCard(string pLanguage,
+        public static async Task<RootPayUSubscriptionCreationNewCardResponse> CreateASubscriptionNewCard(string pLanguage,
             string pInstallments, string pQuantity, string pTrialDays,
             Request_Subscription_Creation_NewCard_Customer pCustomer,
             Request_Subscription_Creation_NewCard_Plan pPlan)
@@ -1270,7 +1271,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1281,7 +1282,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewCardResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1294,7 +1295,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewCardResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1338,7 +1339,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCustomer"></param>
         /// <param name="pPlan"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionCreationNewPlanResponse CreateASubscriptionNewPlan(string pLanguage,
+        public static async Task<RootPayUSubscriptionCreationNewPlanResponse> CreateASubscriptionNewPlan(string pLanguage,
             string pInstallments, string pTrialDays,
             Request_Subscription_Creation_NewPlan_Customer pCustomer,
             Request_Subscription_Creation_NewPlan_Plan pPlan)
@@ -1368,7 +1369,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1379,7 +1380,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewPlanResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1392,7 +1393,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionCreationNewPlanResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1434,7 +1435,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pCreditCardToken"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionUpdateResponse UpdateASubscription(string pLanguage, string pCreditCardToken,
+        public static async Task<RootPayUSubscriptionUpdateResponse> UpdateASubscription(string pLanguage, string pCreditCardToken,
             string pSubscriptionId)
         {
             try
@@ -1457,7 +1458,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                         creditCardToken = pCreditCardToken
                     };
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
@@ -1468,7 +1469,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1509,7 +1510,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionQueryResponse GetASubscription(string pLanguage, string pSubscriptionId)
+        public static async Task<RootPayUSubscriptionQueryResponse> GetASubscription(string pLanguage, string pSubscriptionId)
         {
             try
             {
@@ -1527,7 +1528,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -1538,7 +1539,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionQueryResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1579,7 +1580,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUSubscriptionDeleteResponse DeleteASubscription(string pLanguage, string pSubscriptionId)
+        public static async Task<RootPayUSubscriptionDeleteResponse> DeleteASubscription(string pLanguage, string pSubscriptionId)
         {
             try
             {
@@ -1596,7 +1597,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                         pLanguage, pBse64, HttpMethod.DELETE);
 
                     if (resp == null)
@@ -1607,7 +1608,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUSubscriptionDeleteResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1653,7 +1654,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pDescription"></param>
         /// <param name="pAdditionalValues"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesCreationResponse CreateAnAdditionalCharge(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesCreationResponse> CreateAnAdditionalCharge(string pLanguage,
             string pSubscriptionId, string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues)
         {
             try
@@ -1680,7 +1681,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                         pLanguage, pBse64, HttpMethod.POST);
 
                     if (resp == null)
@@ -1691,7 +1692,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1705,7 +1706,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesCreationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1740,7 +1741,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pAdditionalValues"></param>
         /// <param name="pRecurringBillItemId"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesUpdateResponse UpdateAnAdditionalCharge(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesUpdateResponse> UpdateAnAdditionalCharge(string pLanguage,
             string pDescription, List<Request_Recurring_AdditionalValue> pAdditionalValues,
             string pRecurringBillItemId)
         {
@@ -1767,7 +1768,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, requestJson,
                        pLanguage, pBse64, HttpMethod.PUT);
 
                     if (resp == null)
@@ -1777,7 +1778,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesUpdateResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1814,7 +1815,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pRecurringBillItemId"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesQueryByIdResponse GetAnAdditionalChargeById(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesQueryByIdResponse> GetAnAdditionalChargeById(string pLanguage,
             string pRecurringBillItemId)
         {
             try
@@ -1833,7 +1834,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -1843,7 +1844,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByIdResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1884,7 +1885,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pDescription"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesQueryByDtnResponse GetAnAdditionalChargeByDescription(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesQueryByDtnResponse> GetAnAdditionalChargeByDescription(string pLanguage,
             string pDescription)
         {
             try
@@ -1904,7 +1905,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -1914,7 +1915,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryByDtnResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -1955,7 +1956,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesQueryBySbtnResponse GetAnAdditionalChargeBySubscriptionId(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesQueryBySbtnResponse> GetAnAdditionalChargeBySubscriptionId(string pLanguage,
             string pSubscriptionId)
         {
             try
@@ -1974,7 +1975,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -1984,7 +1985,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesQueryBySbtnResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -2025,7 +2026,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pRecurringBillItemId"></param>
         /// <returns></returns>
-        public static RootPayUAdditionalChargesDeleteResponse DeleteAnAdditionalCharge(string pLanguage,
+        public static async Task<RootPayUAdditionalChargesDeleteResponse> DeleteAnAdditionalCharge(string pLanguage,
             string pRecurringBillItemId)
         {
             try
@@ -2044,7 +2045,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.DELETE);
 
                     if (resp == null)
@@ -2054,7 +2055,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUAdditionalChargesDeleteResponse>(res);
                             sr.Close();
                             if (des != null)

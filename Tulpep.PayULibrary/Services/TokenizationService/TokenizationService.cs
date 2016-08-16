@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_Cross;
 using Tulpep.PayULibrary.Models.Request.Request_Tokenization.IndividualCreditCardRegistration;
@@ -24,7 +25,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pLanguage"></param>
         /// <param name="pCreditCard"></param>
         /// <returns></returns>
-        public static RootPayUIndividualCreditCardRegistrationResponse IndividualCreditCardRegistration(string pCommand, string pLanguage,
+        public async static Task<RootPayUIndividualCreditCardRegistrationResponse> IndividualCreditCardRegistration(string pCommand, string pLanguage,
             Request_IndividualCreditCardRegistration_CreditCardToken pCreditCard)
         {
             try
@@ -54,7 +55,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -63,7 +64,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUIndividualCreditCardRegistrationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -100,7 +101,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pLanguage"></param>
         /// <param name="pContentFilePath"></param>
         /// <returns></returns>
-        public static RootPayUMassiveCreditCardRegistrationResponse MassiveCreditCardRegistration(string pCommand, string pLanguage,
+        public static async Task<RootPayUMassiveCreditCardRegistrationResponse> MassiveCreditCardRegistration(string pCommand, string pLanguage,
             string pContentFilePath)
         {
             try
@@ -131,7 +132,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
 
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -140,7 +141,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUMassiveCreditCardRegistrationResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -187,7 +188,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
-        public static RootPayUIndividualPaymentWithTokenResponse IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage,
+        public static async Task<RootPayUIndividualPaymentWithTokenResponse> IndividualPaymentWithToken(bool isTest, string pCommand, string pLanguage,
             string pCreditCardTokenId, Request_TXVALUE pTX_VALUE,
             Request_IndividualPaymentWithToken_Buyer pBuyer, Address pOrderShippingAddress,
             Request_IndividualPaymentWithToken_Payer pPayer, Request_ExtraParameters pExtraParameters, string pPaymentCountry,
@@ -257,7 +258,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -266,7 +267,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUIndividualPaymentWithTokenResponse>(res);
                             sr.Close();
                             if (des != null)

@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Tulpep.PayULibrary.Cross;
 using Tulpep.PayULibrary.Models.Request.Request_Cross;
 using Tulpep.PayULibrary.Models.Request.Request_PayUPayments.ActivePaymentMethodsQuery;
@@ -41,7 +42,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
-        public static RootPayUPaymentCreditCardResponse MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage,
+        public static async Task<RootPayUPaymentCreditCardResponse> MakeACreditCardPayment(bool isTest, string pCommand, string pLanguage,
             Request_CreditCard_CreditCard pCreditCard, Request_TXVALUE pTX_VALUE, Request_CreditCard_Buyer pBuyer,
             Address pOrderShippingAddress, Request_CreditCard_Payer pPayer, Request_ExtraParameters pExtraParameters,
             string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent, string pDescription,
@@ -110,7 +111,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
 
                     if (resp == null)
                         return null;
@@ -120,7 +121,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPaymentCreditCardResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -166,7 +167,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pDeviceSessionId"></param>
         /// <param name="pIpAddress"></param>
         /// <returns></returns>
-        public static RootPayUPaymentBankTransferResponse MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
+        public static async Task<RootPayUPaymentBankTransferResponse> MakeABankTransferPayment(bool isTest, string pCommand, string pLanguage,
            Request_TXVALUE pTX_VALUE, Request_BankTransfer_Buyer pBuyer, Request_BankTransfer_Payer pPayer,
            Request_ExtraParameters pExtraParameters, string pPaymentCountry, string pPaymentMethod, string pType, string pUserAgent,
            string pDescription, string pNotifyUrl, string pReferenceCode, string pCookie, string pDeviceSessionId,
@@ -232,7 +233,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -241,7 +242,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPaymentBankTransferResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -272,7 +273,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pPaymentCountry"></param>
         /// <param name="pPaymentMethod"></param>
         /// <returns></returns>
-        public static RootPayUPaymentBankListResponse GetAvailableBankList(bool isTest, string pCommand, string pLanguage,
+        public static async Task<RootPayUPaymentBankListResponse> GetAvailableBankList(bool isTest, string pCommand, string pLanguage,
             string pPaymentCountry, string pPaymentMethod)
         {
             try
@@ -306,7 +307,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -315,7 +316,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUPaymentBankListResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -344,7 +345,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
         /// <param name="pCommand"></param>
         /// <param name="pLanguage"></param>
         /// <returns></returns>
-        public static RootPayUActivePaymentMethodResponse GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage)
+        public static async Task<RootPayUActivePaymentMethodResponse> GetActivePaymentMethods(bool isTest, string pCommand, string pLanguage)
         {
             try
             {
@@ -373,7 +374,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     string requestJson = JsonConvert.SerializeObject(jsonObject);
 
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayUGeneralApi(url, requestJson, HttpMethod.POST);
                     if (resp == null)
                         return null;
 
@@ -382,7 +383,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
 
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUActivePaymentMethodResponse>(res);
                             sr.Close();
                             if (des != null)
