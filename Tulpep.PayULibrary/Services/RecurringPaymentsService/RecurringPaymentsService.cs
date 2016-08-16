@@ -2097,7 +2097,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pSubscriptionId"></param>
         /// <returns></returns>
-        public static RootPayUBillQueryResponse GetARecurringBillBySubscriptionId(string pLanguage,
+        public static async Task<RootPayUBillQueryResponse> GetARecurringBillBySubscriptionId(string pLanguage,
             string pSubscriptionId)
         {
             try
@@ -2116,7 +2116,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -2126,7 +2126,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUBillQueryResponse>(res);
                             sr.Close();
                             if (des != null)
@@ -2167,7 +2167,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
         /// <param name="pLanguage"></param>
         /// <param name="pCustomerId"></param>
         /// <returns></returns>
-        public static RootPayUBillQueryResponse GetARecurringBillsByCustomerId(string pLanguage,
+        public static async Task<RootPayUBillQueryResponse> GetARecurringBillsByCustomerId(string pLanguage,
             string pCustomerId)
         {
             try
@@ -2186,7 +2186,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     string source = productionOrTestApiLogIn + ":" + productionOrTestApiKey;
                     string pBse64 = CryptoHelper.GetBase64Hash(source);
 
-                    HttpWebResponse resp = HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
+                    HttpWebResponse resp = await HtttpWebRequestHelper.SendJSONToPayURecurringPaymentsApi(productionOrTestUrl, null,
                        pLanguage, pBse64, HttpMethod.GET);
 
                     if (resp == null)
@@ -2196,7 +2196,7 @@ namespace Tulpep.PayULibrary.Services.RecurringPaymentsService
                     {
                         using (System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream()))
                         {
-                            string res = sr.ReadToEnd();
+                            string res = await sr.ReadToEndAsync();
                             var des = JsonConvert.DeserializeObject<RootPayUBillQueryResponse>(res);
                             sr.Close();
                             if (des != null)
