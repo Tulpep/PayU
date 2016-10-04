@@ -113,7 +113,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     /// <completionlist cref="SSL">
                     /// Add here the SSL certificate 
                     /// </completionlist>
-                    ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(delegate { return true; });
+                    ServicePointManager.ServerCertificateValidationCallback += ValidateServerCertficate;
                     req.ContentType = "application/json; charset=utf-8";
                     req.Accept = "application/json";
                     req.Headers[HttpRequestHeader.AcceptLanguage] = pLanguage;
