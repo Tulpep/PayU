@@ -654,28 +654,54 @@ namespace Tulpep.PayULibrary.Cross
         /// use POL_DESCRIPTION_[RESPONSE_CODE_POL_#] to get the code description
         /// </summary>
         public const string POL_DESCRIPTION_ = "POL_DESCRIPTION_";
-        public const string POL_DESCRIPTION_1 = "Transaction approved";
-        public const string POL_DESCRIPTION_4 = "Transaction rejected by financial institution";
-        public const string POL_DESCRIPTION_5 = "Transaction rejected by the bank";
-        public const string POL_DESCRIPTION_6 = "Insufficient funds";
-        public const string POL_DESCRIPTION_7 = "Invalid card";
-        public const string POL_DESCRIPTION_8 = "Contact the financial institution OR Automatic debit is not allowed";
-        public const string POL_DESCRIPTION_9 = "Expired card";
-        public const string POL_DESCRIPTION_10 = "Restricted card";
-        public const string POL_DESCRIPTION_12 = "Invalid expiration date or security code";
-        public const string POL_DESCRIPTION_13 = "Retry payment";
-        public const string POL_DESCRIPTION_14 = "Invalid transaction";
-        public const string POL_DESCRIPTION_17 = "The value exceeds the maximum allowed by the entity";
-        public const string POL_DESCRIPTION_19 = "Transaction abandoned by the payer";
-        public const string POL_DESCRIPTION_22 = "Card not authorized to buy online";
-        public const string POL_DESCRIPTION_23 = "Transaction refused because of suspected fraud";
-        public const string POL_DESCRIPTION_9995 = "Digital certificate not found";
-        public const string POL_DESCRIPTION_9996 = "Error trying to communicate with the bank OR Unable to communicate with the financial institution OR No response was received from the financial institution";
-        public const string POL_DESCRIPTION_9997 = "Error communicating with the financial institution";
-        public const string POL_DESCRIPTION_9998 = "Transaction not permitted";
-        public const string POL_DESCRIPTION_9999 = "Error";
-        public const string POL_DESCRIPTION_20 = "Expired transaction";
-
+        /// <summary>
+        /// LANGUAGE_EN
+        /// </summary>
+        public const string POL_DESCRIPTION_1en = "Transaction approved";
+        public const string POL_DESCRIPTION_4en = "Transaction rejected by financial institution";
+        public const string POL_DESCRIPTION_5en = "Transaction rejected by the bank";
+        public const string POL_DESCRIPTION_6en = "Insufficient funds";
+        public const string POL_DESCRIPTION_7en = "Invalid card";
+        public const string POL_DESCRIPTION_8en = "Contact the financial institution OR Automatic debit is not allowed";
+        public const string POL_DESCRIPTION_9en = "Expired card";
+        public const string POL_DESCRIPTION_10en = "Restricted card";
+        public const string POL_DESCRIPTION_12en = "Invalid expiration date or security code";
+        public const string POL_DESCRIPTION_13en = "Retry payment";
+        public const string POL_DESCRIPTION_14en = "Invalid transaction";
+        public const string POL_DESCRIPTION_17en = "The value exceeds the maximum allowed by the entity";
+        public const string POL_DESCRIPTION_19en = "Transaction abandoned by the payer";
+        public const string POL_DESCRIPTION_22en = "Card not authorized to buy online";
+        public const string POL_DESCRIPTION_23en = "Transaction refused because of suspected fraud";
+        public const string POL_DESCRIPTION_9995en = "Digital certificate not found";
+        public const string POL_DESCRIPTION_9996en = "Error trying to communicate with the bank OR Unable to communicate with the financial institution OR No response was received from the financial institution";
+        public const string POL_DESCRIPTION_9997en = "Error communicating with the financial institution";
+        public const string POL_DESCRIPTION_9998en = "Transaction not permitted";
+        public const string POL_DESCRIPTION_9999en = "Error";
+        public const string POL_DESCRIPTION_20en = "Expired transaction";
+        /// <summary>
+        /// LANGUAGE_ES
+        /// </summary>
+        public const string POL_DESCRIPTION_1es = "Transacción aprobada";
+        public const string POL_DESCRIPTION_4es = "Transacción rechazada por entidad financiera";
+        public const string POL_DESCRIPTION_5es = "Transacción rechazada por el banco";
+        public const string POL_DESCRIPTION_6es = "Fondos insuficientes";
+        public const string POL_DESCRIPTION_7es = "Tarjeta inválida";
+        public const string POL_DESCRIPTION_8es = "Contactar entidad financiera o Débito automático no permitido";
+        public const string POL_DESCRIPTION_9es = "Tarjeta vencida";
+        public const string POL_DESCRIPTION_10es = "Tarjeta restringida";
+        public const string POL_DESCRIPTION_12es = "Fecha de expiración o código de seguridadinválidos";
+        public const string POL_DESCRIPTION_13es = "Reintentar pago";
+        public const string POL_DESCRIPTION_14es = "Transacción inválida";
+        public const string POL_DESCRIPTION_17es = "El valor excede el máximo permitido por la entidad";
+        public const string POL_DESCRIPTION_19es = "Transacción abandonada por el pagador";
+        public const string POL_DESCRIPTION_22es = "Tarjeta no autorizada para comprar por internet";
+        public const string POL_DESCRIPTION_23es = "Transacción rechazada por sospecha de fraude";
+        public const string POL_DESCRIPTION_9995es = "Certificado digital no encotnrado";
+        public const string POL_DESCRIPTION_9996es = "Error tratando de cominicarse con el banco o No fue posible establecer comunicación con la entidad financiera o No se recibió respuesta de la entidad financiera";
+        public const string POL_DESCRIPTION_9997es = "Error comunicándose con la entidad financiera";
+        public const string POL_DESCRIPTION_9998es = "	Transacción no permitida";
+        public const string POL_DESCRIPTION_9999es = "Error";
+        public const string POL_DESCRIPTION_20es = "Transacción expirada";
         #endregion
 
         #endregion
