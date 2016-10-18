@@ -102,7 +102,19 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                                         currency = pTX_VALUE.currency,
                                         value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
                                     }
-                                } : new Request_AdditionalValues() { TX_VALUE = pTX_VALUE },
+                                } : new Request_AdditionalValues() {
+                                    TX_VALUE = pTX_VALUE,
+                                    TX_TAX = new Request_TXTAX()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = 0
+                                    },
+                                    TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = 0
+                                    }
+                                },
                                 buyer = pBuyer,
                                 description = pDescription,
                                 language = pLanguage,
@@ -239,7 +251,19 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                                         currency = pTX_VALUE.currency,
                                         value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
                                     }
-                                } : new Request_AdditionalValues() { TX_VALUE = pTX_VALUE },
+                                } : new Request_AdditionalValues() {
+                                    TX_VALUE = pTX_VALUE,
+                                    TX_TAX = new Request_TXTAX()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = 0
+                                    },
+                                    TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
+                                    {
+                                        currency = pTX_VALUE.currency,
+                                        value = 0
+                                    }
+                                },
                                 buyer = pBuyer,
                                 description = pDescription,
                                 language = pLanguage,
