@@ -15,13 +15,13 @@ namespace Tulpep.PayULibrary.Models.Request.Request_Cross
             }
             set
             {
-                if (value.ToString().Length > 1 && value.ToString().Length < 20)
+                if (value.ToString().Length > 0 && value.ToString().Length < 20)
                 {
                     tx_value = value;
                 }
                 else
                 {
-                    throw new Exception("The MAX length of tx_value is 19 MIN 2");
+                    throw new Exception("The MAX length of tx_value is 19 MIN 1");
                 }
             }
         }
