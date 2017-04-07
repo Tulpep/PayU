@@ -79,7 +79,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -156,7 +156,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -304,7 +304,7 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }

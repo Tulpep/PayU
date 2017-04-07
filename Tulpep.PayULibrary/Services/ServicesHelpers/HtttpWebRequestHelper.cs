@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Tulpep.PayULibrary.Models.PayU_Exception;
 
 namespace Tulpep.PayULibrary.Services.ServicesHelpers
 {
@@ -89,12 +91,19 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
 
                     return (HttpWebResponse)await req.GetResponseAsync();
                 }
-                catch
+                catch (WebException e)
                 {
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
-                        throw;
-                    Task.Delay(new System.TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                        throw new PayU_ExceptionManager(e.Message, ExceptionType.ConnectionException);
+                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                }
+                catch (Exception e)
+                {
+                    RetryCount++;
+                    if (RetryCount >= RetryAttempts)
+                        throw new PayU_ExceptionManager(e.Message, ExceptionType.GeneralException);
+                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
                 }
             }
         }
@@ -131,12 +140,19 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     }
                     return (HttpWebResponse)await req.GetResponseAsync();
                 }
-                catch
+                catch (WebException e)
                 {
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
-                        throw;
-                    Task.Delay(new System.TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                        throw new PayU_ExceptionManager(e.Message, ExceptionType.ConnectionException);
+                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                }
+                catch (Exception e)
+                {
+                    RetryCount++;
+                    if (RetryCount >= RetryAttempts)
+                        throw new PayU_ExceptionManager(e.Message, ExceptionType.GeneralException);
+                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
                 }
             }
         }

@@ -158,7 +158,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -301,7 +301,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -375,7 +375,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -442,7 +442,7 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }

@@ -75,7 +75,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -146,7 +146,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -218,7 +218,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -290,7 +290,7 @@ namespace Tulpep.PayULibrary.Services.QueriesService
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
