@@ -26,8 +26,8 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
 
     public static class HtttpWebRequestHelper
     {
-        private const int RetryAttempts = 3;
-        private const int RetryDelaySeconds = 4;
+        private static readonly int RetryAttempts = int.Parse(ConfigurationManager.AppSettings["PAYU_API_HTTP_RETRY_ATTEMPTS"]);
+        private static readonly int RetryDelaySeconds = int.Parse(ConfigurationManager.AppSettings["PAYU_API_HTTP_RETRY_DELAY_SECONDS"]);
         private static readonly bool TestEnvironment = bool.Parse(ConfigurationManager.AppSettings["PAYU_API_TESTSWITCH"]);
         private static readonly byte[] ApiCertHash = { 0x71, 0x0c, 0x0a, 0x75, 0xc4, 0x88, 0xb4, 0x09, 0x35, 0x20, 0x12, 0x42, 0x05, 0xd0, 0x35, 0xe4, 0x90, 0x35, 0x97, 0x6f };
 
