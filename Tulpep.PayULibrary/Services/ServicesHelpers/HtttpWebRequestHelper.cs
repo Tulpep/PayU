@@ -96,14 +96,14 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
                         throw new PayU_ExceptionManager(e.Message, ExceptionType.ConnectionException);
-                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                    await Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds));
                 }
                 catch (Exception e)
                 {
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
                         throw new PayU_ExceptionManager(e.Message, ExceptionType.GeneralException);
-                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                    await Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds));
                 }
             }
         }
@@ -145,14 +145,14 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
                         throw new PayU_ExceptionManager(e.Message, ExceptionType.ConnectionException);
-                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                    await Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds));
                 }
                 catch (Exception e)
                 {
                     RetryCount++;
                     if (RetryCount >= RetryAttempts)
                         throw new PayU_ExceptionManager(e.Message, ExceptionType.GeneralException);
-                    Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds)).Wait();
+                    await Task.Delay(new TimeSpan(0, 0, RetryDelaySeconds));
                 }
             }
         }
