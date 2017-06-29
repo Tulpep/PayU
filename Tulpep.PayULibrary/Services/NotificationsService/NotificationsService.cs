@@ -15,46 +15,45 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         /// <returns></returns>
         public static bool ModelIsTrustlySigned(RootPayUNotificationWebHookViewModel model)
         {
-            double val = 0;
-            if (double.TryParse(model.value, out val))
+            if (double.TryParse(model.value, out double val))
             {
                 string subVal = model.value;
                 if (IsDecimalZeros(val))
                 {
                     subVal = subVal.Substring(0, model.value.Length - 1);
                 }
-                string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.merchant_id + "~" + model.reference_sale + "~" + subVal + "~" +
-                                        model.currency + "~" + model.state_pol;
-                MD5 md5Hash = MD5.Create();
-                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
-                if (pSignature.Equals(model.sign))
-                {
-                    return true;
-                }
+                return ValidateSign(new SignModel {
+                    Currency = model.currency,
+                    Reference = model.reference_sale,
+                    MerchantId = model.merchant_id,
+                    Sign = model.sign,
+                    State = model.state_pol,
+                    SubVal = subVal
+                });
             }
             return false;
         }
 
         public static bool ModelResponsePageIsTrustlySigned(RootPayUResponsePageViewModel model)
         {
-            double val = 0;
-            if (double.TryParse(model.TX_VALUE, out val))
+            if (double.TryParse(model.TX_VALUE, out double val))
             {
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
                 {
                     subVal = Math.Round(val, 1).ToString();
                 }
-                string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.merchantId + "~" + model.referenceCode + "~" + subVal + "~" +
-                                        model.currency + "~" + model.transactionState;
-                MD5 md5Hash = MD5.Create();
-                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
 
-                if (pSignature.Equals(model.signature))
+                return ValidateSign(new SignModel
                 {
-                    return true;
-                }
+                    Currency = model.currency,
+                    Reference = model.referenceCode,
+                    MerchantId = model.merchantId,
+                    Sign = model.signature,
+                    State = model.transactionState,
+                    SubVal = subVal
+                });
             }
             return false;
         }
@@ -68,6 +67,26 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         {
             double result = ((dec - (int)dec) * 10);
             return result == Math.Floor(result);
+        }
+
+        private static bool ValidateSign(SignModel model)
+        {
+            string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.MerchantId + "~" + model.Reference + "~" + model.SubVal + "~" +
+                                        model.Currency + "~" + model.State;
+            MD5 md5Hash = MD5.Create();
+            string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+
+            return pSignature.Equals(model.Sign);
+        }
+
+        private sealed class SignModel
+        {
+            public string MerchantId { get; set; }
+            public string Reference { get; set; }
+            public string SubVal { get; set; }
+            public string Currency { get; set; }
+            public string State { get; set; }
+            public string Sign { get; set; }
         }
     }
 }
