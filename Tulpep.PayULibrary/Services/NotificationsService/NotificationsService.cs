@@ -36,6 +36,29 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
             return false;
         }
 
+        public static bool ModelResponsePageIsTrustlySigned(RootPayUResponsePageViewModel model)
+        {
+            double val = 0;
+            if (double.TryParse(model.TX_VALUE, out val))
+            {
+                string subVal = model.TX_VALUE;
+                if (IsDecimalZeros(val))
+                {
+                    subVal = Math.Round(val, 1).ToString();
+                }
+                string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.merchantId + "~" + model.referenceCode + "~" + subVal + "~" +
+                                        model.currency + "~" + model.transactionState;
+                MD5 md5Hash = MD5.Create();
+                string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+
+                if (pSignature.Equals(model.signature))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// 
         /// </summary>
