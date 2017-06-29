@@ -11,7 +11,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
         {
             get
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Number, CultureInfo.InvariantCulture, out taxPercentage))
+                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_TAX_PERCENTAGE in web.config");
                 }
@@ -19,7 +19,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             }
             private set
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Number, CultureInfo.InvariantCulture, out taxPercentage))
+                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_TAX_PERCENTAGE in web.config");
                 }
@@ -30,7 +30,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
         {
             get
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Number, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
+                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_RETURNBASE_PERCENTAGE in web.config");
                 }
@@ -38,7 +38,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             }
             private set
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Number, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
+                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_RETURNBASE_PERCENTAGE in web.config");
                 }
