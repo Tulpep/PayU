@@ -7,6 +7,7 @@
         public string risk { get; set; }
         public string polResponseCode { get; set; }
         public string referenceCode { get; set; }
+        public string reference_pol { get; set; }
         public string signature { get; set; }
         public string polPaymentMethod { get; set; }
         public string polPaymentMethodType { get; set; }
