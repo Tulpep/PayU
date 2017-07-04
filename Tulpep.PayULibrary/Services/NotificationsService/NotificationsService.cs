@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Globalization;
 using System.Security.Cryptography;
 using Tulpep.PayULibrary.Models.Notification;
 using Tulpep.PayULibrary.Services.ServicesHelpers;
@@ -15,7 +16,7 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         /// <returns></returns>
         public static bool ModelIsTrustlySigned(RootPayUNotificationWebHookViewModel model)
         {
-            if (double.TryParse(model.value, out double val))
+            if (double.TryParse(model.value, NumberStyles.Any, CultureInfo.InvariantCulture, out double val))
             {
                 string subVal = model.value;
                 if (IsDecimalZeros(val))
@@ -37,7 +38,7 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
 
         public static bool ModelResponsePageIsTrustlySigned(RootPayUResponsePageViewModel model)
         {
-            if (double.TryParse(model.TX_VALUE, out double val))
+            if (double.TryParse(model.TX_VALUE, NumberStyles.Any, CultureInfo.InvariantCulture, out double val))
             {
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
