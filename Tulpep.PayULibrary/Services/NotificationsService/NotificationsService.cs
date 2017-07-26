@@ -16,7 +16,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         /// <returns></returns>
         public static bool ModelIsTrustlySigned(RootPayUNotificationWebHookViewModel model)
         {
-            if (double.TryParse(model.value, NumberStyles.Any, CultureInfo.InvariantCulture, out double val))
+            double val = 0;
+            if (double.TryParse(model.value, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
             {
                 string subVal = model.value;
                 if (IsDecimalZeros(val))
@@ -24,7 +25,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
                     subVal = subVal.Substring(0, model.value.Length - 1);
                 }
 
-                return ValidateSign(new SignModel {
+                return ValidateSign(new SignModel
+                {
                     Currency = model.currency,
                     Reference = model.reference_sale,
                     MerchantId = model.merchant_id,
@@ -38,7 +40,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
 
         public static bool ModelResponsePageIsTrustlySigned(RootPayUResponsePageViewModel model)
         {
-            if (double.TryParse(model.TX_VALUE, NumberStyles.Any, CultureInfo.InvariantCulture, out double val))
+            double val = 0;
+            if (double.TryParse(model.TX_VALUE, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
             {
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
