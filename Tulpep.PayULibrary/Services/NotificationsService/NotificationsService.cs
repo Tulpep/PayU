@@ -43,11 +43,7 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
                 {
-                    double subValInt = Math.Round(val, 1);
-                    if (subValInt % 1 == 0)
-                        subVal = subValInt.ToString() + ".0";
-                    else
-                        subVal = subValInt.ToString();
+                    subVal = string.Format("{0:0.0}", Math.Round(val, 1));
                 }
 
                 return ValidateSign(new SignModel
