@@ -44,7 +44,11 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
                 {
-                    subVal = Math.Round(val, 1).ToString();
+                    double subValInt = Math.Round(val, 1);
+                    if (subValInt % 1 == 0)
+                        subVal = subValInt.ToString() + ".0";
+                    else
+                        subVal = subValInt.ToString();
                 }
                 string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.merchantId + "~" + model.referenceCode + "~" + subVal + "~" +
                                         model.currency + "~" + model.transactionState;
