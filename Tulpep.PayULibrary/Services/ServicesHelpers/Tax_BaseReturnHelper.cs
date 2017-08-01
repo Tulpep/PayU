@@ -47,13 +47,13 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
 
         public static double CalculateTaxValue(double price)
         {
-            double result = Math.Round(CalculateBaseReturnValue(price) * TaxPercentage, 2);
+            double result = Math.Round((price / TaxBaseReturnPercentage) * TaxPercentage, 2, MidpointRounding.ToEven);
             return result;
         }
 
         public static double CalculateBaseReturnValue(double price)
         {
-            double result = Math.Round(price / TaxBaseReturnPercentage, 2);
+            double result = Math.Round(price / TaxBaseReturnPercentage, 2, MidpointRounding.ToEven);
             return result;
         }
     }
