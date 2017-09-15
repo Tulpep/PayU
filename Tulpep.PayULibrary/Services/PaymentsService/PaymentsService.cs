@@ -256,12 +256,12 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                                     TX_TAX = new Request_TXTAX()
                                     {
                                         currency = pTX_VALUE.currency,
-                                        value = 0.0
+                                        value = 0.0m
                                     },
                                     TX_TAX_RETURN_BASE = new Request_TXTAXRETURNBASE()
                                     {
                                         currency = pTX_VALUE.currency,
-                                        value = 0.0
+                                        value = 0.0m
                                     }
                                 },
                                 buyer = pBuyer,

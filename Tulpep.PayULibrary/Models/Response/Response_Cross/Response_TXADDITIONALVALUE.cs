@@ -2,7 +2,7 @@
 {
     public class Response_TXADDITIONALVALUE
     {
-        public double value { get; set; }
+        public decimal value { get; set; }
         public string currency { get; set; }
     }
 }

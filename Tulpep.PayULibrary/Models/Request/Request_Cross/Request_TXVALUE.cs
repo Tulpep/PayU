@@ -6,8 +6,8 @@ namespace Tulpep.PayULibrary.Models.Request.Request_Cross
     {
         //Format: Numeric Size: Max: 19 Min: 2
         //Description: Buyer’s contact phone.
-        private double tx_value;
-        public double value
+        private decimal tx_value;
+        public decimal value
         {
             get
             {
