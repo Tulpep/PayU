@@ -16,8 +16,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         /// <returns></returns>
         public static bool ModelIsTrustlySigned(RootPayUNotificationWebHookViewModel model)
         {
-            double val = 0;
-            if (double.TryParse(model.value, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
+            decimal val = 0;
+            if (decimal.TryParse(model.value, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
             {
                 string subVal = model.value;
                 if (IsDecimalZeros(val))
@@ -40,8 +40,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
 
         public static bool ModelResponsePageIsTrustlySigned(RootPayUResponsePageViewModel model)
         {
-            double val = 0;
-            if (double.TryParse(model.TX_VALUE, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
+            decimal val = 0;
+            if (decimal.TryParse(model.TX_VALUE, NumberStyles.Any, CultureInfo.InvariantCulture, out val))
             {
                 string subVal = model.TX_VALUE;
                 if (IsDecimalZeros(val))
@@ -67,9 +67,9 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
         /// </summary>
         /// <param name="dec"></param>
         /// <returns></returns>
-        private static bool IsDecimalZeros(double dec)
+        private static bool IsDecimalZeros(decimal dec)
         {
-            double result = ((dec - (int)dec) * 10);
+            decimal result = ((dec - (int)dec) * 10);
             return result == Math.Floor(result);
         }
 

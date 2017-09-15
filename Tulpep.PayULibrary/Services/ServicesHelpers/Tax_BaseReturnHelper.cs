@@ -6,12 +6,12 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
 {
     public static class Tax_BaseReturnHelper
     {
-        private static double taxPercentage;
-        public static double TaxPercentage
+        private static decimal taxPercentage;
+        public static decimal TaxPercentage
         {
             get
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
+                if (!decimal.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_TAX_PERCENTAGE in web.config");
                 }
@@ -19,18 +19,18 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             }
             private set
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
+                if (!decimal.TryParse(ConfigurationManager.AppSettings["PAYU_API_TAX_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_TAX_PERCENTAGE in web.config");
                 }
             }
         }
-        private static double taxBaseReturnPercentage;
-        public static double TaxBaseReturnPercentage
+        private static decimal taxBaseReturnPercentage;
+        public static decimal TaxBaseReturnPercentage
         {
             get
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
+                if (!decimal.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_RETURNBASE_PERCENTAGE in web.config");
                 }
@@ -38,22 +38,22 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             }
             private set
             {
-                if (!double.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
+                if (!decimal.TryParse(ConfigurationManager.AppSettings["PAYU_API_RETURNBASE_PERCENTAGE"], NumberStyles.Any, CultureInfo.InvariantCulture, out taxBaseReturnPercentage))
                 {
                     throw new InvalidOperationException("Invalid PAYU_API_RETURNBASE_PERCENTAGE in web.config");
                 }
             }
         }
 
-        public static double CalculateTaxValue(double price)
+        public static decimal CalculateTaxValue(decimal price)
         {
-            double result = Math.Round((price / TaxBaseReturnPercentage) * TaxPercentage, 2, MidpointRounding.ToEven);
+            decimal result = Math.Round((price / TaxBaseReturnPercentage) * TaxPercentage, 2, MidpointRounding.ToEven);
             return result;
         }
 
-        public static double CalculateBaseReturnValue(double price)
+        public static decimal CalculateBaseReturnValue(decimal price)
         {
-            double result = Math.Round(price / TaxBaseReturnPercentage, 2, MidpointRounding.ToEven);
+            decimal result = Math.Round(price / TaxBaseReturnPercentage, 2, MidpointRounding.ToEven);
             return result;
         }
     }
