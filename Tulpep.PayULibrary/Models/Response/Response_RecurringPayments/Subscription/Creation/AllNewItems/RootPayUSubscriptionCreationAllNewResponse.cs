@@ -14,7 +14,7 @@ namespace Tulpep.PayULibrary.Models.Response.Response_RecurringPayments.Subscrip
         public int quantity { get; set; }
         public int installments { get; set; }
         public string trialDays { get; set; }
-        public long currentPeriodStart { get; set; }
-        public long currentPeriodEnd { get; set; }
+        public double currentPeriodStart { get; set; }
+        public double currentPeriodEnd { get; set; }
     }
 }
