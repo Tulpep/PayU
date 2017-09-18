@@ -1,4 +1,5 @@
 ﻿using System;
+using Tulpep.PayULibrary.Services.ServicesHelpers;
 
 namespace Tulpep.PayULibrary.Models.Request.Request_Cross
 {
@@ -17,7 +18,7 @@ namespace Tulpep.PayULibrary.Models.Request.Request_Cross
             {
                 if (value.ToString().Length > 1 && value.ToString().Length < 20)
                 {
-                    tx_value = value;
+                    tx_value = MathHelper.RoundDecimal(value);
                 }
                 else
                 {
