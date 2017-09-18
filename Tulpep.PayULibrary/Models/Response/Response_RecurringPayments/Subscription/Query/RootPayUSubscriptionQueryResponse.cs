@@ -8,8 +8,8 @@
         public string trialDays { get; set; }
         public string quantity { get; set; }
         public string installments { get; set; }
-        public long currentPeriodStart { get; set; }
-        public long currentPeriodEnd { get; set; }
+        public double currentPeriodStart { get; set; }
+        public double currentPeriodEnd { get; set; }
         public string creditCardToken { get; set; }
     }
 }
