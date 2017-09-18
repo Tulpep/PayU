@@ -64,11 +64,14 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 var url = productionOrTestUrl;
                 if (url != null)
                 {
-                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                        pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                    MD5 md5Hash = MD5.Create();
-                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
-
+                    string pSignature = CryptoHelper.RequestSignature(new RequestSignatureModel
+                    {
+                        ApiKey = productionOrTestApiKey,
+                        MerchantId = productionOrTestMerchantId,
+                        Currency = pTX_VALUE.currency,
+                        ReferenceCode = pReferenceCode,
+                        Value = pTX_VALUE.value
+                    });
                     var jsonObject = new RootPayUPaymentCreditCardRequest()
                     {
                         command = pCommand,
@@ -102,7 +105,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                                         currency = pTX_VALUE.currency,
                                         value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
                                     }
-                                } : new Request_AdditionalValues() {
+                                } : new Request_AdditionalValues()
+                                {
                                     TX_VALUE = pTX_VALUE,
                                     TX_TAX = new Request_TXTAX()
                                     {
@@ -210,10 +214,14 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                 var url = productionOrTestUrl;
                 if (url != null)
                 {
-                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                        pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                    MD5 md5Hash = MD5.Create();
-                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+                    string pSignature = CryptoHelper.RequestSignature(new RequestSignatureModel
+                    {
+                        ApiKey = productionOrTestApiKey,
+                        MerchantId = productionOrTestMerchantId,
+                        Currency = pTX_VALUE.currency,
+                        ReferenceCode = pReferenceCode,
+                        Value = pTX_VALUE.value
+                    });
 
                     var jsonObject = new RootPayUPaymentBankTransferRequest()
                     {
@@ -251,7 +259,8 @@ namespace Tulpep.PayULibrary.Services.PaymentsService
                                         currency = pTX_VALUE.currency,
                                         value = Tax_BaseReturnHelper.CalculateBaseReturnValue(pTX_VALUE.value)
                                     }
-                                } : new Request_AdditionalValues() {
+                                } : new Request_AdditionalValues()
+                                {
                                     TX_VALUE = pTX_VALUE,
                                     TX_TAX = new Request_TXTAX()
                                     {

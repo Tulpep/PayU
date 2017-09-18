@@ -210,10 +210,14 @@ namespace Tulpep.PayULibrary.Services.TokenizationService
                 var url = productionOrTestUrl;
                 if (url != null)
                 {
-                    string source = productionOrTestApiKey + "~" + productionOrTestMerchantId + "~" + pReferenceCode + "~" +
-                       pTX_VALUE.value + "~" + pTX_VALUE.currency;
-                    MD5 md5Hash = MD5.Create();
-                    string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+                    string pSignature = CryptoHelper.RequestSignature(new RequestSignatureModel
+                    {
+                        ApiKey = productionOrTestApiKey,
+                        MerchantId = productionOrTestMerchantId,
+                        Currency = pTX_VALUE.currency,
+                        ReferenceCode = pReferenceCode,
+                        Value = pTX_VALUE.value
+                    });
 
                     var jsonObject = new RootPayUIndividualPaymentWithTokenRequest()
                     {

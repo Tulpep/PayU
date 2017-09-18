@@ -75,10 +75,8 @@ namespace Tulpep.PayULibrary.Services.NotificationsService
 
         private static bool ValidateSign(SignModel model)
         {
-            string source = ConfigurationManager.AppSettings["PAYU_API_KEY"] + "~" + model.MerchantId + "~" + model.Reference + "~" + model.SubVal + "~" +
-                                        model.Currency + "~" + model.State;
-            MD5 md5Hash = MD5.Create();
-            string pSignature = CryptoHelper.GetMd5Hash(md5Hash, source);
+            string source = $"{ConfigurationManager.AppSettings["PAYU_API_KEY"]}~{model.MerchantId}~{model.Reference}~{model.SubVal}~{model.Currency}~{model.State}";
+            string pSignature = CryptoHelper.GetMd5Hash(MD5.Create(), source);
 
             return pSignature.Equals(model.Sign);
         }

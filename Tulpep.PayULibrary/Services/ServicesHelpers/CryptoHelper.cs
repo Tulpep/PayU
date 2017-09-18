@@ -1,10 +1,18 @@
-﻿using System.Security.Cryptography;
+﻿using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Tulpep.PayULibrary.Services.ServicesHelpers
 {
     public static class CryptoHelper
     {
+        public static string RequestSignature(RequestSignatureModel model)
+        {
+            string source = $"{model.ApiKey}~{model.MerchantId}~{model.ReferenceCode}~{model.Value.ToString(CultureInfo.InvariantCulture)}~{model.Currency}";
+
+            return GetMd5Hash(MD5.Create(), source);
+        }
+
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {
 
@@ -32,5 +40,14 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
             var plainTextBytes = Encoding.UTF8.GetBytes(input);
             return System.Convert.ToBase64String(plainTextBytes);
         }
+    }
+
+    public class RequestSignatureModel
+    {
+        public string ApiKey { get; set; }
+        public string MerchantId { get; set; }
+        public string ReferenceCode { get; set; }
+        public decimal Value { get; set; }
+        public string Currency { get; set; }
     }
 }
