@@ -72,6 +72,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     /// <completionlist cref="SSL">
                     /// Add here the SSL certificate 
                     /// </completionlist>
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     ServicePointManager.ServerCertificateValidationCallback += TestEnvironment ? new RemoteCertificateValidationCallback(delegate { return true; }) : ValidateServerCertficate;
                     req.ContentType = "application/json; charset=utf-8";
                     req.Accept = "application/json";
@@ -120,6 +121,7 @@ namespace Tulpep.PayULibrary.Services.ServicesHelpers
                     /// <completionlist cref="SSL">
                     /// Add here the SSL certificate 
                     /// </completionlist>
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     ServicePointManager.ServerCertificateValidationCallback += TestEnvironment ? new RemoteCertificateValidationCallback(delegate { return true; }) : ValidateServerCertficate;
                     req.ContentType = "application/json; charset=utf-8";
                     req.Accept = "application/json";
